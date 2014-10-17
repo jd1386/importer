@@ -1,4 +1,4 @@
-require "./importio"
+require "./importio.rb"
 require "json" 
 
 # To use an API key for authentication, use the following code:
@@ -24,7 +24,7 @@ callback = lambda do |query, message|
       # In this case, we received a message, but it was an error from the external service
       puts "Got an error!"
       puts JSON.pretty_generate(message["data"])
-  	else
+    else
       # We got a message and it was not an error, so we can process the data
       puts "Got data!"
       puts JSON.pretty_generate(message["data"])
@@ -39,11 +39,20 @@ end
 
 # Issue queries to your data sources with your specified inputs
 # You can modify the inputs and connectorGuids so as to query your own sources
-# Query for tile amazon recently published children's books
-client.query({"input"=>{"fielddateyear"=>"2014"},"connectorGuids"=>["3efe3726-50ae-438f-a6d2-c3bbd20f141d"]}, callback )
 
-# Query for tile amazon recently published children's books
-client.query({"input"=>{"fielddateyear"=>"2013"},"connectorGuids"=>["3efe3726-50ae-438f-a6d2-c3bbd20f141d"]}, callback )
+# Define the total number of pages you want to scrape
+# Query for tile amazon new chlidren
+
+# Query for tile amazon new chlidren page 1
+client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/s/ref=sr_pg_1?rh=n%3A283155%2Cn%3A%211000%2Cn%3A4%2Cp_n_feature_browse-bin%3A2656020011%2Cp_47%3A2014%2Cp_45%3A1%2Cp_46%3AAfter&sort=relevanceexprank&unfiltered=1&ie=UTF8&qid=1413530721"},"connectorGuids"=>["e6af9838-ddae-4313-b09d-cf5fa0aaafe2"]}, callback )
+
+
+# Query for tile amazon new chlidren page 2 to 3
+(1..3).each do |page|
+
+client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/s/rh=n%3A283155%2Cn%3A%211000%2Cn%3A4%2Cp_n_feature_browse-bin%3A2656020011%2Cp_47%3A2014%2Cp_45%3A1%2Cp_46%3AAfter&page=#{page}&sort=relevanceexprank&unfiltered=1&ie=UTF8&qid=1413526634"},"connectorGuids"=>["e6af9838-ddae-4313-b09d-cf5fa0aaafe2"]}, callback )
+
+end
 
 puts "Queries dispatched, now waiting for results"
 

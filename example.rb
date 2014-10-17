@@ -20,7 +20,7 @@ require "json"
 # http://import.io/data/account
 
 # To use an API key for authentication, use the following code:
-client = Importio::new("YOUR_USER_GUID", "YOUR_API_KEY")
+client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283", "93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==")
 # If you wish, you may configure HTTP proxies that ruby can use to connect
 # to import.io. If you need to do this, uncomment the following line and fill in the
 # correct details to specify an HTTP proxy:

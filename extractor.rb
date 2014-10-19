@@ -44,6 +44,10 @@ client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Heroes-Olympus-Boo
 
 client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Diary-Wimpy-Kid-Long-Haul/dp/141971189X/ref=pd_sim_b_3?ie=UTF8&refRID=0QTR0321E49SFC3X86ZH"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
 
+client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Big-Nate-Crowd-Goes-Wild/dp/144943634X/ref=pd_sim_b_3?ie=UTF8&refRID=1Z17YF6XP7M2GW79BTYA"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
+
+client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Rush-Revere-American-Revolution-Time-Travel/dp/1476789878/ref=sr_1_3?s=books&ie=UTF8&qid=1413706589&sr=1-3"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
+
 puts "Queries dispatched, now waiting for results"
 
 # Now we have issued all of the queries, we can wait for all of the threads to complete meaning the queries are done

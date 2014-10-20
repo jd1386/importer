@@ -72,7 +72,7 @@ results_file = File.new('data/taiwan_results.json', 'a') unless File.exists?('da
 
 # Open the file and append the data results to results_file
 # data_rows is now in hash. Need to change it to array compatible 
-File.open(results_file, 'a') do |f|
+JSON.open(results_file, 'a') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 

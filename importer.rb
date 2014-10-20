@@ -70,10 +70,10 @@ puts "All data received:"
 puts JSON.pretty_generate(data_rows)
 
 # Create a new json file unless it already exists
-results_file = File.new('importer_results.json', 'a') unless File.exists?('importer_results.json')
+File.new('data/importer_results.json', 'a') unless File.exists?('importer_results.json')
 
 # Open the file and append the data results to results_file.json
-File.open(results_file, 'a') do |f|
+File.open('data/importer_results.json', 'a') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 

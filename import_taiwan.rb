@@ -68,11 +68,12 @@ puts "All data received:"
 puts JSON.pretty_generate(data_rows)
 
 # Create a new CSV file to apply data_rows
-results_file = File.new('data/taiwan_results.json', 'a') unless File.exists?('data/taiwan_results.json')
+File.new('data/taiwan_results.json', 'a') unless File.exists?('data/taiwan_results.json')
 
 # Open the file and append the data results to results_file
 # data_rows is now in hash. Need to change it to array compatible 
-JSON.open(results_file, 'a') do |f|
+
+File.open('data/taiwan_results.json', 'a') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 

@@ -42,8 +42,9 @@ end
 # Page 1
 client.query({"input"=>{"webpage/url"=>"http://category.dangdang.com/cp01.41.00.00.00.00-srsort_pubdate_desc.html"},"connectorGuids"=>["d8a0e518-a9f2-4bd9-8d25-1fc5835ee590"]}, callback )
 
-# Page 2 and above
-(1..3).each do |page|
+# Dangdang's last page num is 100
+# Loop from page 2 to 4
+(1..99).each do |page|
   client.query({"input"=>{"webpage/url"=>"http://category.dangdang.com/pg#{page}-cp01.41.00.00.00.00-srsort_pubdate_desc.html"},"connectorGuids"=>["d8a0e518-a9f2-4bd9-8d25-1fc5835ee590"]}, callback )
 end
 

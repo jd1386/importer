@@ -1,12 +1,39 @@
 require "./importio.rb"
-require "json"
-require 'csv' 
+require "json" 
+require 'rubygems'
+
+### Begin to extract only book_page_url from the results of
+# search_dangdang.rb
+
+# Read the raw file
+raw = File.read( 'data/search_dangdang_results.json' )
+
+# Convert and clean up the file
+converted = JSON.parse( raw )
+
+num_of_pages = converted.count
+puts "num_of_pages: #{num_of_pages} \n"
+
+i = 0
+num_of_books = 0
+book_page_url_collection = []
+
+until i == num_of_pages 
+  until num_of_books == 60 # each page has 60 books
+    book_page_url_collection << converted[i][num_of_books]['book_page_url']
+
+    num_of_books += 1
+  end
+# puts "\n Finished page #{i} \n"
+  i += 1
+  
+  # Reset num_of_books
+  num_of_books = 0
+end
+### End 
 
 # To use an API key for authentication, use the following code:
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
-
-@query_total = CSV.readlines('data/books.com.tw.csv').size
-@query_num = 0
 
 # Once we have started the client and authenticated, we need to connect it to the server:
 client.connect
@@ -37,20 +64,17 @@ callback = lambda do |query, message|
     end
   end
   if query.finished
-    @query_num += 1
-
-    puts "Query #{@query_num} / #{@query_total} finished"
+    puts "Query finished"
   end
 end
 
+# Issue queries to your data sources with your specified inputs
+# You can modify the inputs and connectorGuids so as to query your own sources
+# Query for tile extract_dangdang
 
-# Read CSV file that contains urls to scrape
-options = { encoding: 'UTF-8', skip_blanks: true, headers: true}
-
-CSV.foreach('data/books.com.tw.csv', options) do |row|
-  client.query({"input"=>{"webpage/url"=>row},"connectorGuids"=>["607b0e2e-c8a2-47c9-966f-0107ede09f25"]}, callback )
+book_page_url_collection.each do |url|
+  client.query({"input"=>{"webpage/url"=>url},"connectorGuids"=>["b4818f61-89dc-4cfd-9d6f-5550c413fbd5"]}, callback )
 end
-
 
 puts "Queries dispatched, now waiting for results"
 
@@ -67,15 +91,13 @@ client.disconnect
 puts "All data received:"
 puts JSON.pretty_generate(data_rows)
 
-# Create a new CSV file to apply data_rows
-File.new('data/taiwan_results.json', 'a') unless File.exists?('data/taiwan_results.json')
+# Create a new json file unless it already exists
+File.new('data/extract_dangdang_results.json', 'w+') unless File.exists?('data/extract_dangdang_results.json')
 
-# Open the file and append the data results to results_file
-# data_rows is now in hash. Need to change it to array compatible 
-
-File.open('data/taiwan_results.json', 'a') do |f|
+# Open the file and write the data results to results_file.json
+File.open('data/extract_dangdang_results.json', 'w+') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 
 # Now we have the results file in json format.
-puts "The data is appended to the data/taiwan_results.json file."
+puts "The data is written to the extract_dangdang_results.json file."

@@ -1,5 +1,37 @@
+require 'rubygems'
+require 'json'
 require "./importio.rb"
-require "json" 
+
+### Begin to extract only book_page_url from the results of
+# search_amazon_us.rb
+
+# Read the raw file
+raw = File.read( 'data/search_amazon_us_results.json' )
+
+# Convert and clean up the file
+converted = JSON.parse( raw )
+
+num_of_pages = converted.count
+puts "num_of_pages: #{num_of_pages} \n"
+
+i = 0
+num_of_books = 0
+book_page_url_collection = []
+
+until i == num_of_pages 
+  until num_of_books == 12 # each page has 12 books
+    book_page_url_collection << converted[i][num_of_books]['book_page_url']
+  # pp book_page_url_collection
+    num_of_books += 1
+  end
+# puts "\n Finished page #{i} \n"
+  i += 1
+  
+  # Reset num_of_books
+  num_of_books = 0
+end
+### End 
+
 
 # To use an API key for authentication, use the following code:
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
@@ -40,13 +72,11 @@ end
 # Issue queries to your data sources with your specified inputs
 # You can modify the inputs and connectorGuids so as to query your own sources
 # Query for tile amazon book page extractor
-client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Heroes-Olympus-Book-Five-Blood/dp/1423146735/ref=sr_1_1/192-0139312-9690157?s=books&ie=UTF8&qid=1413533215&sr=1-1"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
 
-client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Diary-Wimpy-Kid-Long-Haul/dp/141971189X/ref=pd_sim_b_3?ie=UTF8&refRID=0QTR0321E49SFC3X86ZH"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
+book_page_url_collection.each do |url|
+  client.query({"input"=>{"webpage/url"=>url},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
+end
 
-client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Big-Nate-Crowd-Goes-Wild/dp/144943634X/ref=pd_sim_b_3?ie=UTF8&refRID=1Z17YF6XP7M2GW79BTYA"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
-
-client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/Rush-Revere-American-Revolution-Time-Travel/dp/1476789878/ref=sr_1_3?s=books&ie=UTF8&qid=1413706589&sr=1-3"},"connectorGuids"=>["e5da6a99-322e-444a-b7b4-a00553548d9d"]}, callback )
 
 puts "Queries dispatched, now waiting for results"
 

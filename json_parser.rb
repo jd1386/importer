@@ -3,7 +3,7 @@ require 'json'
 require 'pp'
 
 # Read the raw file
-raw = File.read( 'raw.json' )
+raw = File.read( 'data/search_amazon_us_results.json' )
 
 # Convert and clean up the file to JSON
 converted = JSON.parse( raw )
@@ -14,15 +14,19 @@ puts "num_of_pages: #{num_of_pages} \n"
 
 i = 0
 num_of_books = 0
+book_page_url_collection = []
 
 until i == num_of_pages 
 	until num_of_books == 12 # each page has 12 books
-		puts converted[i][num_of_books]['title'] + " | " + converted[i][num_of_books]['author'] + " | " + converted[i][num_of_books]["book_page_url"]
+		book_page_url_collection << converted[i][num_of_books]['book_page_url']
+	#	pp book_page_url_collection
 		num_of_books += 1
 	end
-	puts "\n Finished page #{i} \n"
+#	puts "\n Finished page #{i} \n"
 	i += 1
 	
 	# Reset num_of_books
 	num_of_books = 0
 end
+
+puts book_page_url_collection.count

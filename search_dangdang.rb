@@ -1,5 +1,6 @@
 require "./importio.rb"
 require "json"
+require "fastercsv"
 
 # To use an API key for authentication, use the following code:
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
@@ -43,8 +44,8 @@ end
 client.query({"input"=>{"webpage/url"=>"http://category.dangdang.com/cp01.41.00.00.00.00-srsort_pubdate_desc.html"},"connectorGuids"=>["d8a0e518-a9f2-4bd9-8d25-1fc5835ee590"]}, callback )
 
 # Dangdang's last page num is 100
-# Loop from page 2 to 4
-(1..99).each do |page|
+# Loop from page 2 to 30
+(1..29).each do |page|
   client.query({"input"=>{"webpage/url"=>"http://category.dangdang.com/pg#{page}-cp01.41.00.00.00.00-srsort_pubdate_desc.html"},"connectorGuids"=>["d8a0e518-a9f2-4bd9-8d25-1fc5835ee590"]}, callback )
 end
 

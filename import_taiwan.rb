@@ -67,7 +67,7 @@ client.disconnect
 puts "All data received:"
 puts JSON.pretty_generate(data_rows)
 
-# Create a new CSV file to apply data_rows
+# Create a new json file to apply data_rows
 File.new('data/taiwan_results.json', 'a') unless File.exists?('data/taiwan_results.json')
 
 # Open the file and append the data results to results_file

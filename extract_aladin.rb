@@ -6,8 +6,12 @@ require 'csv'
 # search_dangdang.rb
 
 # Read the raw file and save it to array
+file = 'data/ISBN_Aladin.csv'
 book_page_url_collection = []
-book_page_url_collection = CSV.parse(File.read('data/ISBN_Aladin.csv'))
+
+CSV.foreach(file, headers: false, encoding: 'UTF-8') do |row|
+  book_page_url_collection += row
+end
 
 # To use an API key for authentication, use the following code:
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==")
@@ -67,4 +71,18 @@ client.disconnect
 
 # Now we can print out the data we got
 puts "All data received:"
-puts data_rows
+puts JSON.pretty_generate(data_rows)
+
+# Create a new json file to apply data_rows
+File.new('data/extract_aladin_results.json', 'a') unless File.exists?('data/extract_aladin_results.json')
+
+# Open the file and append the data results to results_file
+# data_rows is now in hash. Need to change it to array compatible 
+
+File.open('data/extract_aladin_results.json', 'a') do |f|
+  f << JSON.pretty_generate(data_rows)
+end
+
+# Now we have the results file in json format.
+puts "The data is appended to the data/extract_aladin_results.json file."
+

@@ -12,6 +12,7 @@ raw = File.read( 'data/search_dangdang_results.json' )
 converted = JSON.parse( raw )
 
 num_of_pages = converted.count
+@query_num = 0
 puts "num_of_pages: #{num_of_pages} \n"
 
 i = 0
@@ -64,7 +65,8 @@ callback = lambda do |query, message|
     end
   end
   if query.finished
-    puts "Query finished"
+    @query_num += 1
+    puts "Query #{@query_num} finished"
   end
 end
 

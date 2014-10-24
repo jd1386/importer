@@ -48,7 +48,7 @@ client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/s/ref=sr_pg_1?rh=n
 
 
 # Query for tile amazon new chlidren page 2 to 3
-(1..3).each do |page|
+(2..3).each do |page|
 
 client.query({"input"=>{"webpage/url"=>"http://www.amazon.com/s/rh=n%3A283155%2Cn%3A%211000%2Cn%3A4%2Cp_n_feature_browse-bin%3A2656020011%2Cp_47%3A2014%2Cp_45%3A1%2Cp_46%3AAfter&page=#{page}&sort=relevanceexprank&unfiltered=1&ie=UTF8&qid=1413526634"},"connectorGuids"=>["e6af9838-ddae-4313-b09d-cf5fa0aaafe2"]}, callback )
 

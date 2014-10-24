@@ -2,8 +2,7 @@ require "./importio.rb"
 require "json" 
 require 'csv'
 
-### Begin to extract only book_page_url from the results of
-# search_dangdang.rb
+### Begin to extract only book_page_url from the results
 
 # Read the raw file and save it to array
 file = 'data/ISBN_Aladin.csv'

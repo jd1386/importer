@@ -9,9 +9,9 @@ require "json"
 ######### PART 1: GET BOOK PAGE URL #########
 
 #GLOBAL SETTINGS---------------------------------
-START_PAGE = 1
-LAST_PAGE = 4
-# Each list page has 0 to 49 titles
+START_PAGE = 81
+LAST_PAGE = 100
+# Each list page has 0 to 49 titles: 50 totals
 TITLES_PER_PAGE = 49
 #------------------------------------------------
 
@@ -140,8 +140,8 @@ File.open('data/korea_results.json', 'w') do |f|
 end
 
 # Save urls_and_isbns
-File.new('data/urls_and_isbns.json', 'w') unless File.exists?('data/urls_and_isbns.json')
-File.open('data/urls_and_isbns.json', 'w') do |f|
+File.new('data/korea_urls_and_isbns.json', 'w') unless File.exists?('data/korea_urls_and_isbns.json')
+File.open('data/korea_urls_and_isbns.json', 'w') do |f|
   f << JSON.pretty_generate(urls_and_isbns)
 end
 

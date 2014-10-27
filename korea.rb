@@ -11,7 +11,8 @@ require "json"
 # GLOBAL SETTINGS
 #------------------------------------------------
 START_PAGE = 1
-LAST_PAGE = 100
+LAST_PAGE = 3
+LAST_PAGE -= 1
 # Each list page has 0 to 49 titles
 TITLES_PER_PAGE = 49
 #------------------------------------------------

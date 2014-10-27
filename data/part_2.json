@@ -33,13 +33,13 @@
   ],
   [
     {
-      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/40520/4052040007.jpg",
-      "author": "谷口 孝介【監修】",
-      "isbn": "商品コード 9784052040009",
-      "image/_source": "../images/goods/ar2/web/imgdata2/40520/4052040007.jpg",
-      "title": "学研まんが日本の古典 まんがで読む竹取物語・宇治拾遺物語",
+      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/40520/4052039912.jpg",
+      "author": "横山 洋子【監修】/かろくこうぼう/こふじた はなえ【絵】",
+      "isbn": "商品コード 9784052039911",
+      "image/_source": "../images/goods/ar2/web/imgdata2/40520/4052039912.jpg",
+      "title": "はっけんずかんプチ もののなまえ",
       "company_pub_date": "学研教育出版（2014/11発売）",
-      "image/_alt": "学研まんが日本の古典<br> まんがで読む竹取物語・宇治拾遺物語"
+      "image/_alt": "はっけんずかんプチ<br> もののなまえ"
     }
   ],
   [
@@ -55,13 +55,12 @@
   ],
   [
     {
-      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/40520/4052039912.jpg",
-      "author": "横山 洋子【監修】/かろくこうぼう/こふじた はなえ【絵】",
-      "isbn": "商品コード 9784052039911",
-      "image/_source": "../images/goods/ar2/web/imgdata2/40520/4052039912.jpg",
-      "title": "はっけんずかんプチ もののなまえ",
-      "company_pub_date": "学研教育出版（2014/11発売）",
-      "image/_alt": "はっけんずかんプチ<br> もののなまえ"
+      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/48054/480544052X.jpg",
+      "author": "薫くみこ/かとうようこ",
+      "isbn": "商品コード 9784805440520",
+      "image/_source": "../images/goods/ar2/web/imgdata2/48054/480544052X.jpg",
+      "title": "チャイルドブックアップル つみつみでんしゃ",
+      "image/_alt": "チャイルドブックアップル<br> つみつみでんしゃ"
     }
   ],
   [
@@ -77,6 +76,17 @@
   ],
   [
     {
+      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/40520/4052040007.jpg",
+      "author": "谷口 孝介【監修】",
+      "isbn": "商品コード 9784052040009",
+      "image/_source": "../images/goods/ar2/web/imgdata2/40520/4052040007.jpg",
+      "title": "学研まんが日本の古典 まんがで読む竹取物語・宇治拾遺物語",
+      "company_pub_date": "学研教育出版（2014/11発売）",
+      "image/_alt": "学研まんが日本の古典<br> まんがで読む竹取物語・宇治拾遺物語"
+    }
+  ],
+  [
+    {
       "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/48002/4800233305.jpg",
       "author": "サクセスストーリー研究会【著】",
       "isbn": "商品コード 9784800233301",
@@ -88,23 +98,13 @@
   ],
   [
     {
-      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/40520/4052040341.jpg",
-      "author": "レヴィ，ヤネッツ【作】〈Ｌｅｖｉ，Ｙａｎｎｅｔｓ〉/もたい なつう【訳】/たかい よしかず【絵】",
-      "isbn": "商品コード 9784052040344",
-      "image/_source": "../images/goods/ar2/web/imgdata2/40520/4052040341.jpg",
-      "title": "ぼくのレオおじさん―ルーマニア・アルノカ平原のぼうけん",
-      "company_pub_date": "学研教育出版（2014/11発売）",
-      "image/_alt": "ぼくのレオおじさん―ルーマニア・アルノカ平原のぼうけん"
-    }
-  ],
-  [
-    {
-      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/48054/4805440511.jpg",
-      "author": "中野弘隆",
-      "isbn": "商品コード 9784805440513",
-      "image/_source": "../images/goods/ar2/web/imgdata2/48054/4805440511.jpg",
-      "title": "チャイルドブックアップル つなひきばけくらべ",
-      "image/_alt": "チャイルドブックアップル<br> つなひきばけくらべ"
+      "image": "http://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/40334/4033482903.jpg",
+      "author": "クラウス，ルース【文】〈Ｋｒａｕｓｓ，Ｒｕｔｈ〉/センダック，モーリス【絵】〈Ｓｅｎｄａｋ，Ｍａｕｒｉｃｅ〉/江國 香織【訳】",
+      "isbn": "商品コード 9784033482903",
+      "image/_source": "../images/goods/ar2/web/imgdata2/40334/4033482903.jpg",
+      "title": "ぼくはきみできみはぼく",
+      "company_pub_date": "偕成社（2014/11発売）",
+      "image/_alt": "ぼくはきみできみはぼく"
     }
   ]
 ]

@@ -8,11 +8,9 @@ require "json"
 
 ######### PART 1: GET BOOK PAGE URL #########
 
-# GLOBAL SETTINGS
-#------------------------------------------------
+#GLOBAL SETTINGS---------------------------------
 START_PAGE = 1
-LAST_PAGE = 3
-LAST_PAGE -= 1
+LAST_PAGE = 4
 # Each list page has 0 to 49 titles
 TITLES_PER_PAGE = 49
 #------------------------------------------------
@@ -75,6 +73,17 @@ end
 # Urls are now stored in book_page_url_collection
 puts "Urls are now stored in book_page_url_collection. Jumping to PART 2..."
 
+# Extract and save only isbns from book_page_url_colection
+isbns = []
+book_page_url_collection.each do |a|
+  isbns << a.gsub("http://www.aladin.co.kr/shop/wproduct.aspx?ISBN=","")
+end
+
+# Join book_page_url_collection and isbns into one single array called urls_and_isbns
+
+urls_and_isbns = book_page_url_collection | isbns
+
+
 
 ############### PART 2 ###############
 
@@ -94,14 +103,11 @@ callback = lambda do |query, message|
   end
   if message["type"] == "MESSAGE"
     if message["data"].key?("errorType")
-      # In this case, we received a message, but it was an error from the external service
       puts "Got an error!"
       puts JSON.pretty_generate(message["data"])
     else
-      # We got a message and it was not an error, so we can process the data
       puts "Got data!"
       puts JSON.pretty_generate(message["data"])
-      # Save the data we got in our dataRows variable for later
       data_rows_extracted << message["data"]["results"]
     end
   end
@@ -126,21 +132,17 @@ client.disconnect
 puts "All data received:"
 puts data_rows_extracted
 
-puts "Total page completed: #{page_queried_num * title_queried_num}"
 
-# Create a new json file unless it already exists
+# Save data_rows_extracted
 File.new('data/korea_results.json', 'w') unless File.exists?('data/korea_results.json')
-
-# Open the file and append the data results to results_file.json
 File.open('data/korea_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows_extracted)
 end
 
-File.new('data/korea_url_list.json', 'w') unless File.exists?('data/korea_url_list.json')
-
-# Open the file and append the data results to results_file.json
-File.open('data/korea_url_list.json', 'w') do |f|
-  f << JSON.pretty_generate(book_page_url_collection)
+# Save urls_and_isbns
+File.new('data/urls_and_isbns.json', 'w') unless File.exists?('data/urls_and_isbns.json')
+File.open('data/urls_and_isbns.json', 'w') do |f|
+  f << JSON.pretty_generate(urls_and_isbns)
 end
 
 # Now we have the results file in json format.

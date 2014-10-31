@@ -42,10 +42,10 @@ data_rows = []
   end
 
 # Page 1
-client.query({"input"=>{"webpage/url"=>"http://www.kinokuniya.co.jp/f/dsd-001001020-01-"},"connectorGuids"=>["16bc6faf-f894-40fe-a1b9-2fb4d388fb52"]}, callback )
+# client.query({"input"=>{"webpage/url"=>"http://www.kinokuniya.co.jp/f/dsd-001001020-01-"},"connectorGuids"=>["16bc6faf-f894-40fe-a1b9-2fb4d388fb52"]}, callback )
 
 # Page 2 and above
-(2..50).each do |page|
+(31..180).each do |page|
 	client.query({"input"=>{"webpage/url"=>"http://www.kinokuniya.co.jp/f/dsd-001001020-01-?p=#{page}"},"connectorGuids"=>["16bc6faf-f894-40fe-a1b9-2fb4d388fb52"]}, callback )
 end
 
@@ -90,8 +90,6 @@ until i == data_rows.size
 	# Reset num_of_books
 	n = 0
 end
-
-puts "\nBook page url count: #{book_page_url_count}"
 
 book_page_url_collection.each do |url|
 	puts "Success: #{url}"
@@ -261,7 +259,7 @@ data_rows_4 = []
       if message["data"].key?("errorType")
         puts "Got an error!"
         puts JSON.pretty_generate(message["data"])
-        data_rows_4 << message["results"]
+        data_rows_4 << message["data"]["results"]
       else
         puts "Got data!"
         puts JSON.pretty_generate(message["data"])

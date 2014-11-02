@@ -43,11 +43,11 @@ callback = lambda do |query, message|
 end
 
 # Page 1
-# client.query({"input"=>{"webpage/url"=>"http://www.amazon.it/s/ref=sr_st_date-desc-rankhttp://www.amazon.it/s/ref=sr_adv_b?page_nav_name=Libri+in+italiano&search-alias=stripbooks&unfiltered=1&__mk_it_IT=%C5M%C5Z%D5%D1&field-keywords=&field-author=&field-title=&field-isbn=&field-publisher=&node=508715031&field-binding_browse-bin=&field-dateop=After&field-datemod=1&field-dateyear=2014&sort=-pubdate&Adv-Srch-Books-Submit.x=43&Adv-Srch-Books-Submit.y=8"},"connectorGuids"=>["cbe042bf-7d40-4a98-b1f8-2c58a89b8e09"]}, callback )
+client.query({"input"=>{"webpage/url"=>"http://www.amazon.it/s/ref=sr_st_date-desc-rankhttp://www.amazon.it/s/ref=sr_adv_b?page_nav_name=Libri+in+italiano&search-alias=stripbooks&unfiltered=1&__mk_it_IT=%C5M%C5Z%D5%D1&field-keywords=&field-author=&field-title=&field-isbn=&field-publisher=&node=508715031&field-binding_browse-bin=&field-dateop=After&field-datemod=1&field-dateyear=2014&sort=-pubdate&Adv-Srch-Books-Submit.x=43&Adv-Srch-Books-Submit.y=8"},"connectorGuids"=>["cbe042bf-7d40-4a98-b1f8-2c58a89b8e09"]}, callback )
 sleep 2
 
 # Page 2 and above
-(21..75).each do |page|
+(2..75).each do |page|
   client.query({"input"=>{"webpage/url"=>"http://www.amazon.it/s/ref=sr_pg_#{page}?rh=n%3A411663031%2Cn%3A%21411664031%2Cn%3A508715031%2Cp_47%3A2014%2Cp_45%3A1%2Cp_46%3AAfter&page=#{page}&sort=-pubdate&unfiltered=1&ie=UTF8"},"connectorGuids"=>["cbe042bf-7d40-4a98-b1f8-2c58a89b8e09"]}, callback )
   sleep 2
 end

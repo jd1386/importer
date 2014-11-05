@@ -1,3 +1,12 @@
+### To-Do's 
+# 1. 문제: data_rows, data_rows_2와 data_rows_3 대조시 줄이 밀림
+# 원인: 아마존 검색 결과에서 책이 2권이상 (보통은 하드/소프트커버 1권 + 이북 1권)이 있는 경우
+# 2권 모두를 긁고 있음.
+# 이런 경우 이북이 아닌 것만 긁거나, 긁더라도 array에서 빼야함.
+
+# 2. 문제: italy_part_2.json 에서 null 이 뜨는 경우 null을 [{}]로 교체해줘야 함.
+
+
 require "./importio.rb"
 require "json" 
 
@@ -15,6 +24,7 @@ callback = lambda do |query, message|
     if message["data"].key?("errorType")
       puts "Got an error!"
       puts JSON.pretty_generate(message["data"])
+      data_rows << message["data"]["results"]
   	else
       puts "Got data!"
       puts JSON.pretty_generate(message["data"])
@@ -27,7 +37,7 @@ callback = lambda do |query, message|
 end
 
 # Query for tile it_extract_feltrinelli
-(1..1).each do |page|
+(66..80).each do |page|
   client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/libri-ragazzi/c-1045/0/#{page}/?cat2=1045&cat1=1&type=1&sort=0&pageSize=80"},"connectorGuids"=>["77373f6c-6584-427e-aa18-c542aa8e52f5"]}, callback )
 end
 
@@ -46,6 +56,7 @@ File.new('data/italy_feltrinelli.json', 'w') unless File.exists?('data/italy_fel
 File.open('data/italy_feltrinelli.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows)
 end
+
 
 # Extract isbn from data_rows
 isbns = []
@@ -93,7 +104,7 @@ callback = lambda do |query, message|
   end
   if query.finished
     i += 1
-    puts "Query #{i} finished"
+    puts "Amazon Search #{i} finished"
   end
 end
 
@@ -116,16 +127,13 @@ File.open('data/italy_part_1.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows_2)
 end
 
-puts "data_rows.size: #{data_rows[0].size}"
-puts "data_rows_2.size: #{data_rows_2.size}"
-abort "data_rows.size and data_rows_2.size mismatch. aborted!!!" if data_rows[0].size != data_rows_2.size
 
 # Extract book page urls from data_rows_2
 book_page_urls = []
 i = 0
 
 until i == data_rows_2.size
-  if data_rows_2[i].empty?
+  if data_rows_2[i][0].nil?
     book_page_urls << 'emptyyy'
   else
     book_page_urls << data_rows_2[i][0]['book_page_url']
@@ -139,7 +147,7 @@ end
 # name: it_amazon_book_ext
 # With given urls in book_page_urls, we now query for each url and extract meta data.
 
-puts "\n... ENTERING PARTS 3 ...\n"
+puts "\n... ENTERING PART 3 ...\n"
 
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==")
 client.connect
@@ -163,7 +171,7 @@ callback = lambda do |query, message|
   end
   if query.finished
     query_num += 1
-    puts "Book #{query_num} finished"
+    puts "Amazon Extract #{query_num} finished"
   end
 end
 
@@ -184,24 +192,4 @@ File.open('data/italy_part_2.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows_3)
 end
 
-# Clean up
-# Add 'emptyyy' 
-i = 0
-italy_part_2 = []
-
-until i == data_rows_3.size
-  if data_rows_3[i][0].empty?
-    italy_part_2 << 'emptyyy'
-  else
-    italy_part_2 << data_rows_3[i][0]
-  end
-i += 1
-end
-
-# Create a new json file unless it already exists
-File.new('data/italy_part_2.json', 'w') unless File.exists?('data/italy_part_2.json')
-# Open the file and write the data results to results_file.json
-File.open('data/italy_part_2.json', 'w') do |f|
-  f << JSON.pretty_generate(italy_part_2)
-end
 puts "All done! You can see the results in data/italy_part_2.json."

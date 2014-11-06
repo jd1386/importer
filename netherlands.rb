@@ -35,10 +35,10 @@ end
 
 # Query all children's books sorted by pub date
 # Page 1
-client.query({"input"=>{"webpage/url"=>"http://www.bol.com/nl/l/nederlandse-boeken/nederlandse-boeken-kind-jeugd/N/60+8293/index.html?sort=product_datum1"},"connectorGuids"=>["c6837050-1b39-458e-bb5c-cae606923f4c"]}, callback )
+# client.query({"input"=>{"webpage/url"=>"http://www.bol.com/nl/l/nederlandse-boeken/nederlandse-boeken-kind-jeugd/N/60+8293/index.html?sort=product_datum1"},"connectorGuids"=>["c6837050-1b39-458e-bb5c-cae606923f4c"]}, callback )
 
 # Page 2 and above
-(26..30).each do |page|
+(51..70).each do |page|
   client.query({"input"=>{"webpage/url"=>"http://www.bol.com/nl/l/nederlandse-boeken/nederlandse-boeken-kind-jeugd/N/60+8293/No/#{books_per_page * page}/index.html?sort=product_datum1"},"connectorGuids"=>["c6837050-1b39-458e-bb5c-cae606923f4c"]}, callback )
 end
 

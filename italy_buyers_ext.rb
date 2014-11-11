@@ -5,7 +5,7 @@
 
 ### SETTINGS ##################
 publisher = 'De-Agostini'   
-LAST_PAGE = 63
+LAST_PAGE = 15
 books_per_page = 40
 ###############################
 
@@ -58,8 +58,7 @@ client.join
 puts "Join completed, all results returned"
 client.disconnect
 
-puts "All data received:"
-puts JSON.pretty_generate(data_rows)
+puts "All data received"
 
 
 # Create a new json file unless it already exists
@@ -92,7 +91,7 @@ puts 'Examine ISBNS now. If satisfied, press ENTER, otherwise press anything els
 abort 'Terminated. Retry.' unless gets.chomp.empty?
 
 
-## STEP 2
+##### Step 2
 
 # Go to Amazon.it and search for isbn
 puts "\n... ENTERING STEP 2 ...\n"
@@ -134,8 +133,7 @@ end
 puts "Queries dispatched, now waiting for results"
 client.join
 puts "Join completed, all results returned"
-puts "All data received:"
-puts JSON.pretty_generate(data_rows_2)
+puts "All data received"
 
 # Create a new json file unless it already exists
 File.new('data/italy_buyers_part_1.json', 'w') unless File.exists?('data/italy_buyers_part_1.json')
@@ -188,7 +186,7 @@ callback = lambda do |query, message|
   end
   if query.finished
     query_id += 1
-    puts "Amazon Extract #{query_id} / #{book_page_urls} finished"
+    puts "Amazon Extract #{query_id} / #{book_page_urls.size} finished"
   end
 end
 

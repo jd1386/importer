@@ -1,17 +1,17 @@
 ﻿Dedalo
 Mondadori
 Usborne-Publishing
-Giunti-Junior
+Giunti-Junior	//DONE
 Edizioni-del-Borgo
 Giuntina
 Babalibri
 Fabbri
 Salani
 Lapis
-De-Agostini
+De-Agostini //DONE
 Guanda
 White-Star
-Il-Castoro
+Il-Castoro	//DONE
 Ape-Junior
 Sillabe
 Crealibri
@@ -30,12 +30,12 @@ Editoriale-Scienza
 Terre-di-Mezzo
 Edicart
 Donzelli
-Nord-Sud
+Nord-Sud //DONE
 Bao-Publishing
 Sinnos
 La-Nuova-Frontiera-Junior
 Franco-Cosimo-Panini
-Sperling%26Kupfer
+Sperling-Kupfer
 Edizioni-BD
 Uovonero
 Beisler
@@ -43,21 +43,21 @@ Walt-Disney-Company-Italia
 Logos
 Gallucci
 Einaudi-Ragazzi
-Nord
+Nord //DONE -> Nord Sud
 AMZ
 EL
 Giunti-Kids
-Feltrinelli
+Feltrinelli //DONE
 Gribaudo
 Sassi
 Pon-Pon-Edizioni
 Clichy
 Emme-Edizioni
 Motta-Junior
-La-Coccinella
+La-Coccinella	//DONE
 TEA
 Valentina-Edizioni
-Fanucci
+Fanucci	//DONE
 Jaca-Book
 Einaudi
 Bompiani
@@ -67,7 +67,7 @@ Orecchio-Acerbo
 Isbn-Edizioni
 Tunué
 Sonda
-Baldini%26Castoldi
+Baldini-Castoldi
 Kappalab
 Kalandraka-Italia
 EDB

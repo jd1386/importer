@@ -4,8 +4,8 @@
 
 
 ### SETTINGS ##################
-publisher = 'De-Agostini'   
-LAST_PAGE = 15
+publisher = 'Giunti'   
+LAST_PAGE = 26
 books_per_page = 40
 ###############################
 
@@ -45,11 +45,11 @@ end
 
 # Query for tile it_f_books_per_publisher
 # Page 1
-client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=80&page=1"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
+client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=#{books_per_page}&page=1"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
 
 # Page 2 and above
 (2..LAST_PAGE).each do |page|
-  client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=80&page=#{page}"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
+  client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=#{books_per_page}&page=#{page}"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
 end
 
 

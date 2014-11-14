@@ -1,6 +1,7 @@
 require "./importio.rb"
 require "json" 
 
+<<<<<<< HEAD
 # Open up file storing isbns and save them into an array
 isbns = []
 File.readlines('data/it_age_group_resource.txt').each do |line|
@@ -11,6 +12,16 @@ client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz
 
 client.connect
 
+=======
+client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
+
+isbns = []
+File.readlines('data/it_age_group_source.txt').each do |line|
+  isbns << line
+end
+
+client.connect
+>>>>>>> 11313f4111c606c54a06979ba60f56ee66fcd978
 data_rows = []
 query_id = 0
 
@@ -51,4 +62,10 @@ puts JSON.pretty_generate(data_rows)
 File.new('data/it_age_group_results.json', 'w') unless File.exists?('data/it_age_group_results.json')
 File.open('data/it_age_group_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows)
+<<<<<<< HEAD
 end
+=======
+end
+
+puts "All done! See data/it_age_group_results.json."
+>>>>>>> 11313f4111c606c54a06979ba60f56ee66fcd978

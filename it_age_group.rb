@@ -3,7 +3,7 @@ require "json"
 
 # Open up file storing isbns and save them into an array
 isbns = []
-File.readlines('data/it_age_group_resource.txt').each do |line|
+File.readlines('data/it_age_group_source.txt').each do |line|
   isbns << line
 end
 

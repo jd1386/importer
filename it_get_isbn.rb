@@ -5,8 +5,8 @@
 
 ### SETTINGS ##################
 
-publisher = 'Giunti'   
-LAST_PAGE = 26
+publisher = 'Gallucci'   
+LAST_PAGE = 13
 
 ###############################
 books_per_page = 40

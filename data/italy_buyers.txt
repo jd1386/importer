@@ -42,12 +42,12 @@ Beisler
 Walt-Disney-Company-Italia
 Logos
 Gallucci
-Einaudi-Ragazzi
+Einaudi-Ragazzi // DONE
 Nord //DONE -> Nord Sud
 AMZ
 EL
-Giunti-Kids
-Feltrinelli //DONE
+Giunti-Kids // DONE
+Feltrinelli // DONE
 Gribaudo
 Sassi
 Pon-Pon-Edizioni

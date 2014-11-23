@@ -1,64 +1,64 @@
-﻿Dedalo
+Dedalo
 Mondadori
 Usborne-Publishing
-Giunti-Junior	//DONE
+Giunti-Junior	// Done
 Edizioni-del-Borgo
-Giuntina
-Babalibri
-Fabbri
-Salani
-Lapis
-De-Agostini //DONE
-Guanda
-White-Star
-Il-Castoro	//DONE
-Ape-Junior
-Sillabe
-Crealibri
-Touring-Junior
+Giuntina	// Less than 10 titles
+Babalibri	// Done
+Fabbri	// Done
+Salani 	// Done
+Lapis	// Done
+De-Agostini	// Done
+Guanda	// Less than 10 titles
+White-Star	// Done
+Il-Castoro	// Done
+Ape-Junior // Done but retry
+Sillabe	// Done
+Crealibri	// Done
+Touring-Junior	// Less than 10 titles
 Mondadori-Electa
 Rizzoli
-Piemme
-Giunti-Demetra
-Magazzini-Salani
-Giunti-Editore
-Newton-Compton
-ABraCadabra
-EDT-Giralangolo
-BUR-Biblioteca-Univ.-Rizzoli
-Editoriale-Scienza
-Terre-di-Mezzo
-Edicart
-Donzelli
-Nord-Sud //DONE
-Bao-Publishing
-Sinnos
-La-Nuova-Frontiera-Junior
-Franco-Cosimo-Panini
+Piemme // Done
+Giunti-Demetra	// Done
+Magazzini-Salani	// Done
+Giunti-Editore	// Done
+Newton-Compton	// Done
+ABraCadabra	// Done
+EDT-Giralangolo	// Done
+BUR-Biblioteca-Univ.-Rizzoli	// Done
+Editoriale-Scienza	// Done
+Terre-di-Mezzo	// Done
+Edicart	// Done
+Donzelli	// Too few titles
+Nord-Sud // Done
+Bao-Publishing	// Done
+Sinnos	// Done
+La-Nuova-Frontiera-Junior	// Done
+Franco-Cosimo-Panini => 'Panini' on Feltrinelli // Done
 Sperling-Kupfer
 Edizioni-BD
 Uovonero
-Beisler
+Beisler // Less than 1 page
 Walt-Disney-Company-Italia
-Logos
-Gallucci
+Logos	// Done
+Gallucci	// Done
 Einaudi-Ragazzi // DONE
-Nord //DONE -> Nord Sud
+Nord // Done -> Nord Sud
 AMZ
 EL
 Giunti-Kids // DONE
 Feltrinelli // DONE
-Gribaudo
-Sassi
+Gribaudo // DONE
+Sassi	// DONE
 Pon-Pon-Edizioni
 Clichy
 Emme-Edizioni
 Motta-Junior
-La-Coccinella	//DONE
+La-Coccinella	// Done
 TEA
-Valentina-Edizioni
-Fanucci	//DONE
-Jaca-Book
+Valentina-Edizioni	// DONE
+Fanucci	// Done
+Jaca-Book	// Done
 Einaudi
 Bompiani
 Adelphi
@@ -90,4 +90,4 @@ Camelozampa
 Lion
 Centro-Ambrosiano
 Settenove
-Robin
+Robin // Done

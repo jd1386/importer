@@ -5,8 +5,8 @@
 
 ### SETTINGS ##################
 
-publisher = 'Gallucci'   
-LAST_PAGE = 13
+publisher = 'Jaca Book'   
+LAST_PAGE = 9
 
 ###############################
 books_per_page = 40
@@ -82,9 +82,9 @@ puts "ISBNS size: #{isbns.size}"
 sleep 1
 
 # Create a new json file unless it already exists
-File.new('data/italy_buyers_' + publisher + '_part_0.txt', 'w') unless File.exists?('data/italy_buyers_' + publisher + '_part_0.txt')
+File.new('data/italy_buyers_' + publisher.gsub(" ", "_") + '_part_0.txt', 'w') unless File.exists?('data/italy_buyers_' + publisher.gsub(" ", "_") + '_part_0.txt')
 # Open the file and write the data results to results_file.json
-File.open('data/italy_buyers_' + publisher + '_part_0.txt', 'w') do |f|
+File.open('data/italy_buyers_' + publisher.gsub(" ", "_") + '_part_0.txt', 'w') do |f|
   isbns.each { |isbn| f.puts(isbn) }
 end
 

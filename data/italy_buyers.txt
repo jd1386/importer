@@ -36,9 +36,9 @@ Sinnos	// Done
 La Nuova Frontiera Junior	// Done
 Franco Cosimo Panini => 'Panini' on Feltrinelli // Done
 Sperling Kupfer	// Done
-Edizioni BD 	// Less than 1 page
-Uovonero	// Less than 1 page
-Beisler // Less than 1 page
+Edizioni BD 	// Done
+Uovonero	// Done
+Beisler // Done
 Walt Disney Company Italia	// Done
 Logos	// Done
 Gallucci	// Done
@@ -51,7 +51,7 @@ Feltrinelli // DONE
 Gribaudo // DONE
 Sassi	// DONE
 Pon Pon Edizioni // Not searchable
-Clichy // 1 page
+Clichy // Done
 Emme Edizioni	// Done
 Motta Junior	// Done
 La Coccinella	// Done
@@ -61,10 +61,9 @@ Fanucci	// Done
 Jaca Book	// Done
 Einaudi Ragazzi // Done
 Bompiani // Done
-Adelphi // 1 page
-Officina Libraria	// 1 page
-Orecchio Acerbo	// Done
-Isbn Edizioni	// 1 page
+Adelphi // Done
+Officina Libraria	// Done
+Isbn Edizioni	// Done
 Tunué // 1 page
 Sonda	// Done
 Baldini Castoldi // 1 page

@@ -1,6 +1,6 @@
-Dedalo
-Mondadori
-Mondadori Electa
+Dedalo	// Done
+Mondadori	// Done
+Mondadori Electa	// Done
 Usborne Publishing	// Done
 Giunti Junior	// Done
 Edizioni del Borgo	// Done
@@ -64,29 +64,29 @@ Bompiani // Done
 Adelphi // Done
 Officina Libraria	// Done
 Isbn Edizioni	// Done
-Tunué // 1 page
+Tunué // Done but retry
 Sonda	// Done
-Baldini Castoldi // 1 page
-Kappalab	// 1 page
+Baldini Castoldi // Done but retry
+Kappalab	// Done
 Kalandraka Italia	// Not searchable
-EDB // 2 page
+EDB // Done
 Coccole Books	// Done
-Sironi	// 1 page
+Sironi	// Done
 San Paolo Edizioni	// Done
 SeB Editori	// Not searchable
-La Vita Felice	// 1 page
-Mine edition // 1 page
-24 Ore Cultura // 1 page
-Emons // 1 page
-2M	// 3 page
-Biancoenero	// 2 page
-Maria Margherita Bulgarini	// 1 page
-Nuova Editrice Berti	// 1 page
-Lindau // 1 page
-EGA Edizioni Gruppo Abele	// 1 page
+La Vita Felice	// Done
+Mine edition // Done
+24 Ore Cultura // Done
+Emons // Done
+2M	// Done
+Biancoenero	// Done
+Maria Margherita Bulgarini	// Done
+Nuova Editrice Berti	// Done
+Lindau // Done
+EGA Edizioni Gruppo Abele	// Done
 SE // Not searchable
-Camelozampa	// 1 page
+Camelozampa	// Done
 Lion // Not searchable
-Centro Ambrosiano	// 1 page
-Settenove	// 1 page
+Centro Ambrosiano	// Done
+Settenove	// Done
 Robin // Done

@@ -5,8 +5,8 @@
 
 ### SETTINGS ##################
 
-publisher = 'Tunue'   
-LAST_PAGE = 1
+publisher = 'Fabbri'   
+LAST_PAGE = 10
 
 ###############################
 books_per_page = 40
@@ -49,9 +49,9 @@ end
 client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=#{books_per_page}&page=1"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
 
 # Page 2 and above
-# (2..LAST_PAGE).each do |page|
-#  client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=#{books_per_page}&page=#{page}"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
-# end
+(2..LAST_PAGE).each do |page|
+ client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/fcom/it/home/pages/catalogo/searchresults.html?prkw=#{publisher}&cat2=1045&cat1=1&type=1&sort=0&pageSize=#{books_per_page}&page=#{page}"},"connectorGuids"=>["375c7738-1c30-4aea-aaae-988580fbbc2f"]}, callback )
+end
 
 
 puts "Queries dispatched, now waiting for results"

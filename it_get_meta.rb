@@ -1,5 +1,5 @@
-require "./importio.rb"
-require "json" 
+require "importio"
+
 
 book_page_urls = []
 File.readlines('data/it_get_meta_source.txt').each do |line|
@@ -22,7 +22,7 @@ callback = lambda do |query, message|
       data_rows << message["data"]["results"]
     else
       puts "Got data!"
-      puts JSON.pretty_generate(message["data"])
+      puts JSON.pretty_generate(message["data"]["results"])
       data_rows << message["data"]["results"]
     end
   end

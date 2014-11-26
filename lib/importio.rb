@@ -17,6 +17,18 @@ require "cgi"
 require "json"
 require "securerandom"
 
+# Lengthen timeout in Net::HTTP
+module Net
+    class HTTP
+        alias old_initialize initialize
+
+        def initialize(*args)
+            old_initialize(*args)
+            @read_timeout = 1*60     # 1 minutes
+        end
+    end
+end
+
 class Query
   # This class represents a single query to the import.io platform
   

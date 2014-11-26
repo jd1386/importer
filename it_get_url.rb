@@ -7,7 +7,7 @@ client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz
 
 isbns = []
 File.readlines('data/it_get_url_source.txt').each do |line|
-  isbns << line
+  isbns << line.gsub(' ', '')
 end
 
 client.connect

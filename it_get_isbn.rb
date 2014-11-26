@@ -5,8 +5,8 @@
 
 ### SETTINGS ##################
 
-publisher = 'Fabbri'   
-LAST_PAGE = 10
+publisher = 'Touring'   
+LAST_PAGE = 4
 
 ###############################
 books_per_page = 40

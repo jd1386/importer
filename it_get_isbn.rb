@@ -5,8 +5,8 @@
 
 ### SETTINGS ##################
 
-publisher = 'Touring'   
-LAST_PAGE = 4
+publisher = 'Ape'   
+LAST_PAGE = 6
 
 ###############################
 books_per_page = 40

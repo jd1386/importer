@@ -1,2 +1,7 @@
 # Ignore the DS_Store file
 *.DS_Store
+
+data/it_get_meta_results.json
+data/it_get_meta_source.txt
+data/it_get_url_results.json
+data/it_get_url.source.txt

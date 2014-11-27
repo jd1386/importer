@@ -1,677 +1,258 @@
 [
   [
     {
-      "pub_date": "– 20 nov 2014",
-      "series": "Collana: I MiniMammut",
-      "isbn": "ISBN-13: 978-8854173873",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (20 novembre 2014)",
-      "page": "Copertina rigida: 3392 pagine",
-      "title": "Le grandi fiabe",
-      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 8 nov 2012",
-      "author": "di Giovanna Mantegazza (Autore)",
-      "isbn": "ISBN-13: 978-8875487966",
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487287",
       "format": "Copertina flessibile",
-      "publisher": "Editore: La Coccinella (8 novembre 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 8 pagine",
-      "title": "Mucca Mù conta con me! Soffici amici",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Spazzaneve. Con 4 ruote",
       "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 11 set 2014",
-      "series": "Collana: Anagramma",
-      "author": "di Sara Shepard (Autore), F. Noto (Traduttore)",
-      "isbn": "ISBN-13: 978-8854162235",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Newton Compton (11 settembre 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 279 pagine",
-      "title": "Giovani, carine e bugiarde. Cattive",
-      "category": "Libri > Letteratura e narrativa > Narrativa contemporanea Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 19 lug 2012",
-      "author": "di Galeb Monroe (Autore), L. Favia (Traduttore)",
-      "isbn": "ISBN-13: 978-8865431023",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Bao Publishing (19 luglio 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 32 pagine",
-      "title": "Giochi da brivido. L'era glaciale: 2",
-      "category": "Libri > Fumetti e manga Libri > Libri per bambini e ragazzi > Humor Libri > Libri per bambini e ragazzi > Libri illustrati"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 29 gen 2014",
-      "series": "Collana: Anch'io so leggere!",
-      "author": "di John Yeoman (Autore), Quentin Blake (Autore), G. Maneri (Traduttore) & 0 altro",
-      "isbn": "ISBN-13: 978-8880337782",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Il Castoro (29 gennaio 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 32 pagine",
-      "title": "Attenti al gatto!",
-      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 11 mag 2014",
-      "series": "Collana: Kids",
-      "author": "di G. Morganti (Traduttore)",
-      "isbn": "ISBN-13: 978-8866347736",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Edizioni BD (11 maggio 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 80 pagine",
-      "title": "Le microavventure. My little pony: 1",
-      "category": "Libri > Libri per bambini e ragazzi > Fumetti e manga Libri > Libri per bambini e ragazzi > Libri illustrati"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 30 ago 2012",
-      "series": "Collana: Nuova narrativa Newton",
-      "author": "di Lisa J. Smith (Autore), M. Amodio (Traduttore)",
-      "isbn": "ISBN-13: 978-8854141605",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (30 agosto 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 201 pagine",
-      "title": "Fantasmi. Il diario del vampiro",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 28 nov 2013",
-      "author": "di G. Morganti (Traduttore)",
-      "isbn": "ISBN-13: 978-8866347859",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Edizioni BD (28 novembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 32 pagine",
-      "title": "Leoni e aquile. Legends of Chima. Lego Brickmaster. Con gadget",
-      "category": "Libri > Libri per bambini e ragazzi > Giochi, giocattoli e attività ricreativa Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 3 ott 2013",
-      "series": "Collana: Creainventa",
-      "author": "di Lili Chantilly (Autore)",
-      "isbn": "ISBN-13: 978-8883289910",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Crealibri (3 ottobre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 40 pagine",
-      "title": "Disegna e vesti le ballerine. Con adesivi",
-      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 21 mar 2013",
-      "series": "Collana: Apri le finestrine",
-      "author": "di Cristina Mesturini (Autore)",
-      "isbn": "ISBN-13: 978-8875488369",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (21 marzo 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 24 pagine",
-      "title": "Che verso fa?",
-      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi Libri > Libri per bambini e ragazzi > Primo apprendimento Libri > Libri per bambini e ragazzi > Scienze, natura e tecnologia"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 19 gen 2012",
-      "series": "Collana: Grandi tascabili contemporanei",
-      "author": "di Lisa J. Smith (Autore), V. Gorla (Traduttore), D. Di Falco (Traduttore) & 0 altro",
-      "isbn": "ISBN-13: 978-8854135499",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Newton Compton (19 gennaio 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 625 pagine",
-      "title": "Il diario del vampiro: Il risveglio-La lotta-La furia-La messa nera",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Letteratura e narrativa > Antologie Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 30 ott 2014",
-      "author": "di Guido Van Genechten (Autore), Giovanna Mantegazza (Autore)",
-      "isbn": "ISBN-13: 978-8868900823",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (30 ottobre 2014)",
-      "page": "Copertina rigida: 40 pagine",
-      "title": "Chi sono io?",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 8 nov 2012",
-      "author": "di Aa.Vv (Autore)",
-      "isbn": "ISBN-13: 978-8865430774",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Bao Publishing (8 novembre 2012)",
-      "page": "Copertina flessibile: 128 pagine",
-      "title": "Le filastroccole",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 22 mag 2012",
-      "series": "Collana: Super bestseller",
-      "author": "di Aprilynne Pike (Autore), M. Bonetti (Traduttore)",
-      "isbn": "ISBN-13: 978-8860618139",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Sperling & Kupfer (22 maggio 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 314 pagine",
-      "title": "Wings",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Fantasy Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Fantasy"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 28 ago 2014",
-      "author": "di C. Alberto Michelini (Autore), Giovanna Mantegazza (Autore)",
-      "isbn": "ISBN-13: 978-8868900137",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (28 agosto 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 24 pagine",
-      "title": "Tarta Rughina cerca casa. I buchini",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 ott 2013",
-      "series": "Collana: Illustrati",
-      "author": "di Emmanuelle Houdart (Autore), Marie Desplechin (Autore)",
-      "isbn": "ISBN-13: 978-8857606682",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Logos (1 ottobre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 56 pagine",
-      "title": "Il denaro",
-      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa Libri > Libri per bambini e ragazzi > Soldi e lavoro"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 11 set 2013",
-      "series": "Collana: Anch'io so leggere!",
-      "author": "di Gilles Tibo (Autore), Bruno St-Aubin (Autore), L. Bortoluzzi (Traduttore) & 0 altro",
-      "isbn": "ISBN-13: 978-8880337102",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Il Castoro (11 settembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 32 pagine",
-      "title": "Sono un campione!",
-      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 14 nov 2013",
-      "series": "Collana: Kids",
-      "author": "di G. Morganti (Traduttore)",
-      "isbn": "ISBN-13: 978-8866347729",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Edizioni BD (14 novembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 104 pagine",
-      "title": "L'amicizia è magica. My little pony: 1",
-      "category": "Libri > Libri per bambini e ragazzi > Fumetti e manga Libri > Libri per bambini e ragazzi > Libri illustrati"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 29 mag 2014",
-      "series": "Collana: Libro giocattolo",
-      "author": "di Elena Gornati (Autore)",
-      "isbn": "ISBN-13: 978-8875489861",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (29 maggio 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 30 pagine",
-      "title": "La baita degli orsetti. Con adesivi",
-      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi"
     }
   ],
   [
     {
       "pub_date": "– 14 feb 2013",
-      "series": "Collana: Vivo perché c'è",
-      "author": "di Emanuela Bussolati (Autore), Anna Curti (Autore)",
-      "isbn": "ISBN-13: 978-8875488253",
-      "format": "Copertina rigida",
+      "isbn": "ISBN-13: 978-8875487294",
+      "format": "Copertina flessibile",
       "publisher": "Editore: La Coccinella (14 febbraio 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 14 pagine",
-      "title": "La luna",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Primo apprendimento Libri > Libri per bambini e ragazzi > Scienze, natura e tecnologia"
+      "page": "Copertina flessibile",
+      "title": "Camion della spazzatura. Con 4 ruote",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
     }
   ],
   [
     {
-      "pub_date": "– 25 ott 2013",
-      "isbn": "ISBN-13: 978-8866347606",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Edizioni BD (25 ottobre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 77 pagine",
-      "title": "La battaglia per i cristalli rubati. Star Wars. Lego Brickmaster. Con gadget",
-      "category": "Libri > Libri per bambini e ragazzi > Giochi, giocattoli e attività ricreativa Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 set 2013",
-      "series": "Collana: Vangelo. Nuovo Testamento. Testi",
-      "author": "di Andrea Ciucci (Autore), Matteo Fossati (Autore), Paolo Sartor (Autore) & 0 altro",
-      "isbn": "ISBN-13: 978-8821579325",
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487300",
       "format": "Copertina flessibile",
-      "publisher": "Editore: San Paolo Edizioni (1 settembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 144 pagine",
-      "title": "Vangelo secondo Matteo. Una «bella notizia» da leggere insieme",
-      "category": "Libri > Libri per bambini e ragazzi > Religione"
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Muletto. Con 4 ruote",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
     }
   ],
   [
     {
-      "pub_date": "– 20 set 2012",
-      "series": "Collana: Creainventa",
-      "author": "di Lili Chantilly (Autore), E. Mugellini (Traduttore)",
-      "isbn": "ISBN-13: 978-8883288371",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Crealibri (20 settembre 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 48 pagine",
-      "title": "Moda chic. La boutique. Con adesivi",
-      "category": "Libri > Libri per bambini e ragazzi > Hobby e tempo libero Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 ago 2013",
-      "author": "di E. Careltti (Illustratore)",
-      "isbn": "ISBN-13: 978-8883289644",
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487324",
       "format": "Copertina flessibile",
-      "publisher": "Editore: Crealibri (1 agosto 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 128 pagine",
-      "title": "Giochi & passatempi in fattoria",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Gli angeli. Gira e scopri",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487317",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "I santi. Gira e scopri",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487348",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Nella giungla misteriosa. Gira e scopri",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487355",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Migliori amiche. Camilla fata dei dolcetti",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487362",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Magici zuccherini. Camilla fata dei dolcetti",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487379",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Un invito per il tè. Camilla fata dei dolcetti",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 14 feb 2013",
+      "isbn": "ISBN-13: 978-8875487386",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (14 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Le bacchette magiche. Camilla fata dei dolcetti",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 8 feb 2013",
+      "series": "Collana: Libri casetta",
+      "isbn": "ISBN-13: 978-8875487737",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (8 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "La casetta in città",
       "category": "Libri > Libri per bambini e ragazzi > Libri interattivi"
     }
   ],
   [
     {
-      "pub_date": "– 1 ott 2013",
-      "series": "Collana: Narrativa San Paolo ragazzi",
-      "author": "di Marjolijn Hof (Autore)",
-      "isbn": "ISBN-13: 978-8821579110",
-      "format": "Copertina rigida",
-      "publisher": "Editore: San Paolo Edizioni (1 ottobre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 120 pagine",
-      "title": "Tutta questione di probabilità",
-      "category": "Cancelleria e prodotti per ufficio > Penne, matite, scrittura e correzione > Penne e ricariche > Penne a scatto Libri > Libri per bambini e ragazzi > Famiglia, problemi personali e sociali Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 28 nov 2013",
-      "author": "di A. Repossi (Traduttore)",
-      "isbn": "ISBN-13: 978-8866347880",
+      "pub_date": "– 8 feb 2013",
+      "isbn": "ISBN-13: 978-8875487850",
       "format": "Copertina flessibile",
-      "publisher": "Editore: Edizioni BD (28 novembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 32 pagine",
-      "title": "Inseguimento sulla neve. Lego City. Con gadget",
-      "category": "Libri > Libri per bambini e ragazzi > Giochi, giocattoli e attività ricreativa Libri > Libri per bambini e ragazzi > Libri interattivi"
+      "publisher": "Editore: La Coccinella (8 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Il camion dei pompieri. Maxi auto",
+      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi Libri > Libri per bambini e ragazzi > Scienze, natura e tecnologia"
     }
   ],
   [
     {
-      "pub_date": "– 14 nov 2013",
-      "author": "di E. Riva (Traduttore)",
-      "isbn": "ISBN-13: 978-8868370084",
+      "pub_date": "– 12 feb 2013",
+      "isbn": "ISBN-13: 978-8875488192",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (12 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Gioca con le fate. Con adesivi",
+      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 5 nov 2013",
+      "isbn": "ISBN-13: 978-8875489038",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (5 novembre 2013)",
+      "page": "Copertina flessibile",
+      "title": "Cucciolotto gioca a palla. Occhietti",
+      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 31 mar 2014",
+      "author": "di Knister (Autore)",
+      "isbn": "ISBN-13: 978-8871066912",
       "format": "Copertina rigida",
-      "publisher": "Editore: Crealibri (14 novembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 10 pagine",
-      "title": "Caccia al tesoro. SpongeBob. Con gadget",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Libri interattivi"
+      "publisher": "Editore: Sonda (31 marzo 2014)",
+      "page": "Copertina rigida: 136 pagine",
+      "title": "Arabesk. Torna il cavallo coraggioso: 2",
+      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 31 gen 2014",
+      "author": "di Erin Hunter (Autore)",
+      "isbn": "ISBN-13: 978-8871066820",
+      "format": "Copertina rigida",
+      "publisher": "Editore: Sonda (31 gennaio 2014)",
+      "page": "Copertina rigida: 320 pagine",
+      "title": "La città abbandonata. Survivors",
+      "category": "Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Fantasy"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 31 mag 2012",
+      "series": "Collana: Illustrati",
+      "author": "di Bruno Heitz (Autore)",
+      "isbn": "ISBN-13: 978-8871066370",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: Sonda (31 maggio 2012)",
+      "page": "Copertina flessibile: 48 pagine",
+      "title": "Il circo come piace a noi",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 30 apr 2012",
+      "series": "Collana: Ragazze come te",
+      "author": "di Bianka Minte-König (Autore)",
+      "isbn": "ISBN-13: 978-8871065489",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: Sonda (30 aprile 2012)",
+      "page": "Copertina flessibile: 192 pagine",
+      "title": "Promesse d'amore e altre catastrofi",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
+    }
+  ],
+  [
+    {
+      "pub_date": "– 8 feb 2013",
+      "isbn": "ISBN-13: 978-8875487805",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: La Coccinella (8 febbraio 2013)",
+      "page": "Copertina flessibile",
+      "title": "Aria. Piccola scienza",
+      "category": "Libri > Libri per bambini e ragazzi > Scienze, natura e tecnologia"
+    }
+  ],
+  [
+    {
+      "pub_date": "Copertina flessibile",
+      "series": "Collana: Così cosà",
+      "author": "di Nella Bosnia (Autore), Marinella Nava (Autore)",
+      "isbn": "ISBN-13: 978-8877030115",
+      "format": "(Spagnolo)",
+      "publisher": "Editore: La Coccinella (1 gennaio 2013)",
+      "page": "Copertina flessibile: 8 pagine",
+      "title": "Che fifa nel castello",
+      "category": "Libri > Libri per bambini e ragazzi"
     }
   ],
   [
     {
       "pub_date": "– 25 ott 2012",
-      "author": "di E. Riva (Traduttore)",
-      "isbn": "ISBN-13: 978-8883288555",
+      "author": "di Elena Riva (Autore)",
+      "isbn": "ISBN-13: 978-8883288531",
       "format": "Copertina rigida",
       "publisher": "Editore: Crealibri (25 ottobre 2012)",
       "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 8 pagine",
-      "title": "Avventure a Bikini Bottom. SpongeBob. Con magneti",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Libri interattivi"
+      "page": "Copertina rigida: 22 pagine",
+      "title": "I miei amici. Quadrottino. SpongeBob",
+      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati"
     }
   ],
   [
     {
-      "pub_date": "– 2 mag 2013",
-      "author": "di aa.vv. (Autore)",
-      "isbn": "ISBN-13: 978-8875488673",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (2 maggio 2013)",
+      "pub_date": "– 31 mag 2012",
+      "series": "Collana: Teadue",
+      "author": "di Elena P. Melodia (Autore)",
+      "isbn": "ISBN-13: 978-8850226511",
+      "format": "Copertina flessibile",
+      "publisher": "Editore: TEA (31 maggio 2012)",
       "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 20 pagine",
-      "title": "Il mio corpo. Mondo bebè",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Primo apprendimento"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 2 mag 2013",
-      "series": "Collana: Gli insuperabili",
-      "author": "di Lisa J. Smith (Autore), M. Amodio (Traduttore)",
-      "isbn": "ISBN-13: 978-8854150836",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (2 maggio 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 285 pagine",
-      "title": "L'incantesimo. Il diario del vampiro",
+      "page": "Copertina flessibile: 414 pagine",
+      "title": "Buio. My land",
       "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 20 nov 2014",
-      "author": "di Carmela Cipriani (Autore), F. Carabelli (Illustratore)",
-      "isbn": "ISBN-13: 978-8868900687",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (20 novembre 2014)",
-      "page": "Copertina rigida: 48 pagine",
-      "title": "I menu delle feste di Berry Blu. Con magneti",
-      "category": "Libri > Libri per bambini e ragazzi > Hobby e tempo libero Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 ott 2014",
-      "series": "Collana: Se non diventerete come bambini",
-      "author": "di Gianfranco Ravasi (Autore), S. Colombo (Illustratore)",
-      "isbn": "ISBN-13: 978-8821593208",
-      "format": "Copertina rigida",
-      "publisher": "Editore: San Paolo Edizioni (1 ottobre 2014)",
-      "page": "Copertina rigida: 72 pagine",
-      "title": "Il viaggio di Abramo",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Religione"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 31 gen 2013",
-      "author": "di Dawn Sirett (Autore), G. Mantegazza (Traduttore)",
-      "isbn": "ISBN-13: 978-8875488260",
-      "format": "Copertina rigida",
-      "publisher": "Editore: La Coccinella (31 gennaio 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 12 pagine",
-      "title": "I colori dell'arcobaleno. Chi fa cucù?",
-      "category": "Libri > Libri per bambini e ragazzi > Libri interattivi Libri > Libri per bambini e ragazzi > Primo apprendimento"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 7 mag 2013",
-      "series": "Collana: Super bestseller",
-      "author": "di Lissa Price (Autore), G. Pastorino (Traduttore)",
-      "isbn": "ISBN-13: 978-8860619075",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Sperling & Kupfer (7 maggio 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 352 pagine",
-      "title": "Starters",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Fantascienza Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Fantascienza"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 29 mag 2014",
-      "series": "Collana: Nuova narrativa Newton",
-      "author": "di Lisa J. Smith (Autore)",
-      "isbn": "ISBN-13: 978-8854164444",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (29 maggio 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 236 pagine",
-      "title": "La tentazione. I diari delle streghe",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 28 mar 2013",
-      "series": "Collana: Creainventa",
-      "author": "di Lili Chantilly (Autore), E. Mugellini (Traduttore)",
-      "isbn": "ISBN-13: 978-8883289026",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Crealibri (28 marzo 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 24 pagine",
-      "title": "Moda mare. La boutique. Con adesivi",
-      "category": "Libri > Libri per bambini e ragazzi > Hobby e tempo libero Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 19 apr 2012",
-      "series": "Collana: Vertigo",
-      "author": "di Heather Terrell (Autore), M. Ricci (Traduttore)",
-      "isbn": "ISBN-13: 978-8854137219",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (19 aprile 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 242 pagine",
-      "title": "La guerra degli angeli. Eternità",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 31 gen 2013",
-      "author": "di Antoine De Saint Exupery (Autore)",
-      "isbn": "ISBN-13: 978-8865430910",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Bao Publishing (31 gennaio 2013)",
-      "page": "Copertina rigida: 56 pagine",
-      "title": "Il pianeta dei carapodi. Il piccolo principe",
-      "category": "Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Fantasy"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 7 giu 2012",
-      "series": "Collana: Nuova narrativa Newton",
-      "author": "di Lisa J. Smith (Autore), M. Amodio (Traduttore)",
-      "isbn": "ISBN-13: 978-8854137837",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (7 giugno 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 199 pagine",
-      "title": "La maschera. Il diario del vampiro",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 23 gen 2014",
-      "series": "Collana: Nuova narrativa Newton",
-      "author": "di Lisa J. Smith (Autore), M. L. Martini (Traduttore)",
-      "isbn": "ISBN-13: 978-8854161061",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Newton Compton (23 gennaio 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 236 pagine",
-      "title": "La caccia. I diari delle streghe",
-      "category": "Libri > Fantascienza, Horror e Fantasy > Horror Libri > Gialli e Thriller Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Horror"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 3 apr 2012",
-      "series": "Collana: Paperback",
-      "author": "di Anne Plichota (Autore), Cendrine Wolf (Autore), M. Magrì (Traduttore) & 0 altro",
-      "isbn": "ISBN-13: 978-8860617880",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Sperling & Kupfer (3 aprile 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 498 pagine",
-      "title": "Oksa Pollock e il mondo invisibile",
-      "category": "Libri > Libri per bambini e ragazzi > Fantascienza, Horror e Fantasy > Fantasy"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 26 apr 2012",
-      "series": "Collana: Idrogeno",
-      "author": "di Marie Gray (Autore), C. Ortenzi (Traduttore)",
-      "isbn": "ISBN-13: 978-8871066219",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Sonda (26 aprile 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 183 pagine",
-      "title": "La prima volta di SaJa",
-      "category": "Libri > Letteratura e narrativa > Narrativa contemporanea Libri > Libri per bambini e ragazzi > Famiglia, problemi personali e sociali Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 14 set 2011",
-      "series": "Collana: Avventure 3D",
-      "author": "di Aa.Vv. (Autore)",
-      "isbn": "ISBN-13: 978-8883287176",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Crealibri (Edicart) (14 settembre 2011)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 9 pagine",
-      "title": "Cavalieri!",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Libri interattivi"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 15 nov 2012",
-      "series": "Collana: Illustrati",
-      "author": "di Inés Almagro (Autore), Mikel Mardones (Autore)",
-      "isbn": "ISBN-13: 978-8857600437",
-      "format": "Copertina rigida",
-      "publisher": "Editore: Logos (15 novembre 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 48 pagine",
-      "title": "Le muffole di Cappuccetto",
-      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 dic 2012",
-      "series": "Collana: Bimbi e Gesù",
-      "author": "di Thereza Ameal (Autore), R. Pinheiro (Illustratore)",
-      "isbn": "ISBN-13: 978-8821576386",
-      "format": "Copertina rigida",
-      "publisher": "Editore: San Paolo Edizioni (1 dicembre 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 50 pagine",
-      "title": "Le mie prime preghiere",
-      "category": "Libri > Libri per bambini e ragazzi > Religione"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 13 nov 2013",
-      "author": "di Mario Lodi (Autore), Daniele Novara (Autore), Pia Valentinis (Autore) & 0 altro",
-      "isbn": "ISBN-13: 978-8871067131",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Sonda (13 novembre 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 175 pagine",
-      "title": "Alice nel paese dei diritti",
-      "category": "Libri > Libri per bambini e ragazzi > Famiglia, problemi personali e sociali"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 gen 2013",
-      "series": "Collana: Mondo bambino",
-      "author": "di Chiara M. (Autore), M. Carraro (Illustratore)",
-      "isbn": "ISBN-13: 978-8821576393",
-      "format": "Copertina rigida",
-      "publisher": "Editore: San Paolo Edizioni (1 gennaio 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina rigida: 28 pagine",
-      "title": "La perla",
-      "category": "Libri > Libri per bambini e ragazzi > Letteratura e narrativa"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 8 mag 2013",
-      "author": "di Claudio Vercelli (Autore), M. Teresa Milano (Autore), Giorgio Sommacal (Autore), R. Mantegazza (a cura di) & 1 altro",
-      "isbn": "ISBN-13: 978-8871067032",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: Sonda (8 maggio 2013)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 126 pagine",
-      "title": "Come (non) si diventa razzisti?",
-      "category": "Libri > Libri per bambini e ragazzi > Famiglia, problemi personali e sociali Libri > Libri per bambini e ragazzi > Letteratura e narrativa > Antologie"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 1 lug 2014",
-      "series": "Collana: Vangelo. Nuovo Testamento. Testi",
-      "author": "di Andrea Ciucci (Autore), Paolo Sartor (Autore), Matteo Fossati (Autore) & 0 altro",
-      "isbn": "ISBN-13: 978-8821592638",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: San Paolo Edizioni (1 luglio 2014)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 80 pagine",
-      "title": "Vangelo secondo Marco. Una «bella notizia» da leggere insieme",
-      "category": "Libri > Libri per bambini e ragazzi > Religione"
-    }
-  ],
-  [
-    {
-      "pub_date": "– 22 mar 2012",
-      "series": "Collana: Prime parole",
-      "author": "di Gabriele Clima (Autore)",
-      "isbn": "ISBN-13: 978-8875487119",
-      "format": "Copertina flessibile",
-      "publisher": "Editore: La Coccinella (22 marzo 2012)",
-      "language": "Lingua: Italiano",
-      "page": "Copertina flessibile: 12 pagine",
-      "title": "Al mare",
-      "category": "Libri > Libri per bambini e ragazzi > Libri illustrati Libri > Libri per bambini e ragazzi > Primo apprendimento"
     }
   ]
 ]

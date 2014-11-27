@@ -1,0 +1,35 @@
+[
+  [
+    {
+      "related_authors/_source": [
+        "/s/ref=sr_nr_p_lbr_books_authors__0/279-0682856-2476537?fst=as%3Aoff&rh=n%3A433842031%2Cp_27%3ALisa+J.+Smith%2Cp_lbr_books_authors_browse-bin%3AL.+J.+Smith&bbn=433842031&ie=UTF8&qid=1417078083&rnid=2150412031",
+        "/s/ref=sr_nr_p_lbr_books_authors__1/279-0682856-2476537?fst=as%3Aoff&rh=n%3A433842031%2Cp_27%3ALisa+J.+Smith%2Cp_lbr_books_authors_browse-bin%3AJ.+M.+Smith&bbn=433842031&ie=UTF8&qid=1417078083&rnid=2150412031"
+      ],
+      "related_authors/_text": [
+        "L. J. Smith (57)",
+        "J. M. Smith (1)"
+      ],
+      "language": "Inglese (14) Tedesco (36)",
+      "category": "Biografie, diari e memorie  (8)      Economia, affari e finanza  (1)      Famiglia, salute e benessere  (1)      Fantascienza, Horror e Fantasy  (3)      Gialli e Thriller  (1)      Informatica, Web e Digital Media  (1)      Letteratura e narrativa  (1)      Letteratura erotica  (3)      Libri per bambini e ragazzi  (12)      Lingua, linguistica e scrittura  (1)      Romanzi rosa  (1)      Scienze, tecnologia e medicina  (4)      Società e scienze sociali  (2)      Storia  (1)      Tempo libero  (2)",
+      "related_authors": [
+        "http://www.amazon.it/s/ref=sr_nr_p_lbr_books_authors__0/279-0682856-2476537?fst=as%3Aoff&rh=n%3A433842031%2Cp_27%3ALisa+J.+Smith%2Cp_lbr_books_authors_browse-bin%3AL.+J.+Smith&bbn=433842031&ie=UTF8&qid=1417078083&rnid=2150412031",
+        "http://www.amazon.it/s/ref=sr_nr_p_lbr_books_authors__1/279-0682856-2476537?fst=as%3Aoff&rh=n%3A433842031%2Cp_27%3ALisa+J.+Smith%2Cp_lbr_books_authors_browse-bin%3AJ.+M.+Smith&bbn=433842031&ie=UTF8&qid=1417078083&rnid=2150412031"
+      ]
+    }
+  ],
+  [
+    {
+      "language": "Francese (1) Spagnolo (4)",
+      "category": "Fumetti e manga  (2)      Libri per bambini e ragazzi  (1)"
+    }
+  ],
+  [
+    {
+      "related_authors/_source": "/s/ref=sr_nr_p_lbr_books_authors__0/277-0421015-2844653?fst=as%3Aoff&rh=n%3A433842031%2Cp_27%3ADawn+Sirett%2Cp_lbr_books_authors_browse-bin%3ADawn+Sirett&bbn=433842031&ie=UTF8&qid=1417078085&rnid=2150412031",
+      "related_authors/_text": "Dawn Sirett (10)",
+      "language": "Francese (61) Inglese (136) Olandese (44) Spagnolo (25) Svedese (24) + Vedi altri",
+      "category": "Arte, cinema e fotografia  (1)      Libri per bambini e ragazzi  (211)      Religione  (1)",
+      "related_authors": "http://www.amazon.it/s/ref=sr_nr_p_lbr_books_authors__0/277-0421015-2844653?fst=as%3Aoff&rh=n%3A433842031%2Cp_27%3ADawn+Sirett%2Cp_lbr_books_authors_browse-bin%3ADawn+Sirett&bbn=433842031&ie=UTF8&qid=1417078085&rnid=2150412031"
+    }
+  ]
+]

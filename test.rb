@@ -16,44 +16,71 @@ module Net
 end
 
 
-mechanize = Mechanize.new
+agent = Mechanize.new
 
 book_page_urls = []
 File.readlines('data/it_get_meta_source.txt').each do |line|
   book_page_urls << line.gsub(' ', '')
 end
 
+data_row = []
+
 book_page_urls.each do |url|
-  page = mechanize.get(url)
+  page = agent.get(url)
+  
+  # Url
   puts url
+  data_row << url
   
   # Title
-  puts page.at("#productTitle").text.strip
+  title = page.at("#productTitle").text.strip
+  puts title
+  data_row << title
+
+  # Author
+  author = page.at(".//div[not(@style)][@id=\"byline\"][contains(concat(' ',normalize-space(@class),' '),\" a-section a-spacing-micro bylineHidden feature \")]").text.gsub('di ', '')
+  puts author
+  data_row << author
   
   # Publisher
-  puts page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Editore:')]").text.gsub('Editore: ', '')
+  publisher = page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Editore:')]").text.gsub('Editore: ', '')
+  puts publisher
+  data_row << publisher
   
   # Pub Date
-  puts page.at(".a-size-medium.a-color-secondary.a-text-normal").text.strip
-  
+  pub_date = page.at(".a-size-medium.a-color-secondary.a-text-normal").text.strip
+  puts pub_date
+  data_row << pub_date
+
   # ISBN-13
-  puts page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'ISBN-13:')]").text.gsub('ISBN-13: 978-', '978')
-  
+  isbn = page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'ISBN-13:')]").text.gsub('ISBN-13: 978-', '978')
+  puts isbn
+  data_row << isbn
+
   # Series
   if page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Collana:')]")
-    puts page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Collana:')]").text.strip
+    series = page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Collana:')]").text.strip
+    puts series
+    data_row << series
   end
   
   # Language
-  if puts page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Lingua:')]")
-    puts page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Lingua:')]").text.strip
+  if page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Lingua:')]")
+    language = page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Lingua:')]").text.strip.gsub('Lingua: ', '')
+    puts language
+    data_row << language
+  end
+
+  # Page
+  if page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Copertina ')]")
+    page = page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Copertina ')]").content
+    puts page
+    data_row << page
   end
 
   # Category
-  puts page.at(".//div[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" bucket \")]/div[1][not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" content \")]/ul[1][not(@id)][not(@class)][not(@style)]").text.strip
+ 
 
   puts "\n"
 
 end
-
-

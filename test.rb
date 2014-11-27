@@ -38,9 +38,11 @@ book_page_urls.each do |url|
   data_row << title
 
   # Author
-  author = page.at(".//div[not(@style)][@id=\"byline\"][contains(concat(' ',normalize-space(@class),' '),\" a-section a-spacing-micro bylineHidden feature \")]").text.gsub('di ', '')
-  puts author
-  data_row << author
+  if page.at(".//div[not(@style)][@id=\"byline\"][contains(concat(' ',normalize-space(@class),' '),\" a-section a-spacing-micro bylineHidden feature \")]")
+    author = page.at(".//div[not(@style)][@id=\"byline\"][contains(concat(' ',normalize-space(@class),' '),\" a-section a-spacing-micro bylineHidden feature \")]").text.gsub('di ', '')
+    puts author
+    data_row << author
+  end
   
   # Publisher
   publisher = page.at("//*[contains(@class, 'content')]/ul[not(contains(@class,'qpUL'))]/li[contains(., 'Editore:')]").text.gsub('Editore: ', '')

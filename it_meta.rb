@@ -2,7 +2,7 @@ require "importio"
 
 
 book_page_urls = []
-File.readlines('data/it_get_meta_source.txt').each do |line|
+File.readlines('data/it_meta_source.txt').each do |line|
   book_page_urls << line
 end
 
@@ -43,9 +43,9 @@ puts "Join completed, all results returned"
 client.disconnect
 
 
-File.new('data/it_get_meta_results.json', 'w') unless File.exists?('data/it_get_meta_results.json')
-File.open('data/it_get_meta_results.json', 'w') do |f|
+File.new('data/it_meta_results.json', 'w') unless File.exists?('data/it_meta_results.json')
+File.open('data/it_meta_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 
-puts "All done! See data/it_get_meta_results.json."
+puts "All done! See data/it_meta_results.json."

@@ -50,7 +50,7 @@ Giunti Kids // DONE
 Feltrinelli // DONE
 Gribaudo // DONE
 Sassi	// DONE
-Pon Pon Edizioni // Not searchable
+Pon Pon Edizioni // La Fabbrica delle Idee on Feltrinelli //	Done
 Clichy // Done
 Emme Edizioni	// Done
 Motta Junior	// Done
@@ -68,12 +68,12 @@ Tunué // Done but retry
 Sonda	// Done
 Baldini Castoldi // Done but retry
 Kappalab	// Done
-Kalandraka Italia	// Not searchable
+Kalandraka Italia	// => Kalandraka on Feltrinelli	//	Done
 EDB // Done
 Coccole Books	// Done
 Sironi	// Done
 San Paolo Edizioni	// Done
-SeB Editori	// Not searchable
+SeB Editori	// => Salvietti & Barabuffi Editori on Feltrinelli	// Done
 La Vita Felice	// Done
 Mine edition // Done
 24 Ore Cultura // Done
@@ -84,9 +84,15 @@ Maria Margherita Bulgarini	// Done
 Nuova Editrice Berti	// Done
 Lindau // Done
 EGA Edizioni Gruppo Abele	// Done
-SE // Not searchable
+SE // Done
 Camelozampa	// Done
-Lion // Not searchable
+Lion // Done
 Centro Ambrosiano	// Done
 Settenove	// Done
 Robin // Done
+Terra Nuova Edizioni	// Done
+Elliot	// Done
+E/Ore// Done
+L'Ippocampo	// Done
+Casa Musicale Eco	// Done
+Garzanti Libri 	// Done

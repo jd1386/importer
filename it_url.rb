@@ -6,7 +6,7 @@ require "json"
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
 
 isbns = []
-File.readlines('data/it_get_url_source.txt').each do |line|
+File.readlines('data/it_url_source.txt').each do |line|
   isbns << line.gsub(' ', '')
 end
 
@@ -47,11 +47,11 @@ client.disconnect
 puts "All data received"
 
 # Create a new json file unless it already exists
-File.new('data/it_get_url_results.json', 'w') unless File.exists?('data/it_get_url_results.json')
+File.new('data/it_url_results.json', 'w') unless File.exists?('data/it_url_results.json')
 # Open the file and write the data results to results_file.json
-File.open('data/it_get_url_results.json', 'w') do |f|
+File.open('data/it_url_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows_2)
 end
 
 
-puts "All done! See the results in data/it_get_url_results.json"
+puts "All done! See the results in data/it_url_results.json"

@@ -4,7 +4,7 @@ require "json"
 # Open up file storing isbns and save them into an array
 isbns = []
 File.readlines('data/it_age_group_source.txt').each do |line|
-  isbns << line
+  isbns << line.gsub(' ', '')
 end
 
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
@@ -45,8 +45,6 @@ client.join
 puts "Join completed, all results returned"
 client.disconnect
 
-puts "All data received:"
-puts JSON.pretty_generate(data_rows)
 
 File.new('data/it_age_group_results.json', 'w') unless File.exists?('data/it_age_group_results.json')
 File.open('data/it_age_group_results.json', 'w') do |f|

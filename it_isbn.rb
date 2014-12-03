@@ -5,7 +5,7 @@
 
 ### SETTINGS ##################
 
-publisher = "La Fabbrica delle Idee"
+publisher = "Feltrinelli"
 LAST_PAGE = 1
 
 ###############################

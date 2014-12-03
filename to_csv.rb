@@ -1,8 +1,7 @@
+require 'rubygems'
 require 'csv'
 require 'json'
 
-file = 'data/italy_buyers_part_1.json'
-
-json = JSON.parse(File.open(file).read)
-puts json.first.collect {|k,v| k}.join(',')
-puts json.collect {|node| "#{node.collect{|k,v| v}.join(',')}\n"}.join
+input = JSON.parse(File.open("data/it_url_results.json").read)
+writer = CSV.open("data/it_url_results.csv", "w")
+writer << input.flatten.to_csv

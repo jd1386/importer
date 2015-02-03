@@ -31,18 +31,18 @@ puts isbns
 puts "ISBNS size: #{isbns.size}"
 
 
-puts "Loaded book_page_urls size: #{book_page_urls_size} urls.
+puts "Loaded: #{book_page_urls_size} destinations.
 		\nExtracted isbns from source file and saved them to data/fr_meta_results_isbns.txt.
-		\nNow starting to make queries..."
+		\nNow deploying the pigeon..."
 puts "...in 3..." 
 sleep 1
 puts "...in 2..."
 sleep 1
 puts "...in 1..."
-sleep 1
-
 
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
+
+client.disconnect
 
 client.connect
 
@@ -58,14 +58,25 @@ callback = lambda do |query, message|
       puts "Got an error!"
       puts JSON.pretty_generate(message["data"])
   	else
-      puts "Got data!"
-      puts JSON.pretty_generate(message["data"])
-      data_rows << message["data"]["results"]
+      if message["data"]["results"].length == 0
+        puts "Oops. No data found!"
+        data_rows << [{"title" => "N/A"}]
+        sleep 2
+      else
+        #puts "Got data!"
+        #puts JSON.pretty_generate(message["data"])
+        data_rows << message["data"]["results"]
+      end
     end
   end
   if query.finished
   	q += 1
-    puts "Query #{q} / #{book_page_urls_size} finished"
+    puts "The pigeon picked #{q} / #{book_page_urls_size} berries. #{book_page_urls_size - q} remaining."
+    if book_page_urls_size - q == 100
+      system('say "100 remaining" ')
+    elsif book_page_urls_size - q == 10
+      system('say "10 remaining" ')
+    end
   end
 end
 
@@ -118,4 +129,8 @@ puts "The results saved to data/fr_meta_results.csv"
 
 
 # All done!
-puts "와우! 이번 미션은 성공적이었네. 축하하네."
+puts "와우! 비둘기가 성공적으로 돌아왔다!"
+2.times.each do
+  system('say "The pigeon has come back master" ')
+  sleep 1
+end

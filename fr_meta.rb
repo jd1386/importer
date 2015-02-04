@@ -34,6 +34,7 @@ puts "ISBNS size: #{isbns.size}"
 puts "Loaded: #{book_page_urls_size} destinations.
 		\nExtracted isbns from source file and saved them to data/fr_meta_results_isbns.txt.
 		\nNow deploying the pigeon..."
+      system('say "Now deploying the pigeon" ')
 puts "...in 3..." 
 sleep 1
 puts "...in 2..."
@@ -73,9 +74,9 @@ callback = lambda do |query, message|
   	q += 1
     puts "The pigeon picked #{q} / #{book_page_urls_size} berries. #{book_page_urls_size - q} remaining."
     if book_page_urls_size - q == 100
-      system('say "100 remaining" ')
+      system('say "Hello, 100 remaining" ')
     elsif book_page_urls_size - q == 10
-      system('say "10 remaining" ')
+      system('say "Hello, 10 remaining" ')
     end
   end
 end

@@ -10,7 +10,7 @@ end
 book_page_urls_size = book_page_urls.size
 
 puts "Loaded: #{book_page_urls_size} destinations.
-    \nNow deploying the pigeon..."
+    \nDeploying the pigeon..."
       system('say "Now deploying the pigeon" ')
 puts "...in 3..." 
 sleep 1

@@ -12,19 +12,20 @@ File.open('data/to_hash_source.txt', encoding: 'UTF-8').each_line do |line|
 	new_line = new_line.gsub("Kategorie ", "Category => ")
 	new_line = new_line.gsub("Altersfreigabe ", "Age_Group => ")
 
-new_line = new_line.split("|| ")
+new_line = new_line.split("||")
 new_line.delete_if { new_line[0].length == 0 }
 
 puts new_line
+puts "\n"
 meta_all << new_line
 
-h = Hash[new_line.each_slice(2).to_a]
+#h = Hash[new_line.each_slice(2).to_a]
 #puts h
 #puts h.class
   
 end
 
-puts meta_all
+puts meta_all.size
 puts meta_all[0]
 puts meta_all[1]
 

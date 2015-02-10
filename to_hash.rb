@@ -1,41 +1,74 @@
-# Read source file and hash-fy each line
+require "csv"
+
+
+# Read source file and clean up each line
 meta_all = []
-File.open('data/to_hash_source.txt', encoding: 'UTF-8').each_line do |line|
-	new_line = line.gsub("Edition ", "Edition => ")
-  new_line = new_line.gsub("AutorIn ", "Author => ")
- 	new_line = new_line.gsub("Übersetzung ", "Translator => ")
-	new_line = new_line.gsub("Seiten ", "Page => ")
-	new_line = new_line.gsub("EAN ", "ISBN => ")
-	new_line = new_line.gsub("Sprache ", "Language => ")
-	new_line = new_line.gsub("erschienen bei ", "Publisher => ")
-	new_line = new_line.gsub("Erscheinungsdatum ", "Pub_Date => ")
-	new_line = new_line.gsub("Kategorie ", "Category => ")
-	new_line = new_line.gsub("Altersfreigabe ", "Age_Group => ")
+hashed = Hash.new
 
-new_line = new_line.split("||")
-new_line.delete_if { new_line[0].length == 0 }
+File.readlines('data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
+ ## Pre-process
 
-puts new_line
-puts "\n"
-meta_all << new_line
+  # Author (AutorIn)
+  new_line = line.gsub("AutorIn ", "Author=> ")  	
+  # Translator (Übersetzung)
+ 	new_line = new_line.gsub("Übersetzung ", "Translator=> ")
+ 	# Edition (Edition)
+  new_line = new_line.gsub("Edition ", "Edition=> ")
+ 	# Page (Seiten)
+	new_line = new_line.gsub("Seiten ", "Page=> ")
+	# ISBN (EAN)
+	new_line = new_line.gsub("EAN ", "ISBN=> ")
+	# Language (Sprache)
+	new_line = new_line.gsub("Sprache ", "Language=> ")
+	# Publisher (erschienen bei)
+	new_line = new_line.gsub("erschienen bei ", "Publisher=> ")
+	# Pub Date (Erscheinungsdatum)
+	new_line = new_line.gsub("Erscheinungsdatum ", "Pub_Date=> ")
+	# Category (Kategorie)
+	new_line = new_line.gsub("Kategorie ", "Category=> ")
+	# Age Group (Altersfreigabe)
+	new_line = new_line.gsub("Altersfreigabe ", "Age_Group=> ")
+	# Original Title(Ursprungstitel)
+	new_line = new_line.gsub("Ursprungstitel ", "Original_Title=> ")
 
-#h = Hash[new_line.each_slice(2).to_a]
-#puts h
-#puts h.class
+ 
+ ## Process 
+
+# Split each line with a delimitor and make it an array
+splitted_line = new_line.split(" || ") 
+
+book_array = []
+hash = Hash.new
+
+# After splitted, make a hash with key and value
+splitted_line.each do |e|
+	k = e.split("=> ").first
+	v = e.split("=> ").last.chomp('')
+	hash[k] = v
+end
+
+# Save the hash to a book_array
+book_array << hash
+
+
+meta_all << book_array
+
+
   
 end
 
-puts meta_all.size
-puts meta_all[0]
-puts meta_all[1]
 
-abort
+## Save meta_all to CSV file
+CSV.open("data/to_hash_results.csv", "w") do |csv|
+	# Write header
+  csv << ["Author", "Translator", "Edition", "Page", "ISBN", "Language", "Publisher", "Pub_Date", "Category", "Age_Group", "Original_Title"]
 
-# Try to convert each line to hash
-hash_all = []
+  # Write rows
+  i = 0
 
-meta_all.each do |meta|
-	hash_all << Hash.try_convert(meta)
+  (0...meta_all.length).each do 
+  	csv << meta_all[i][0].values_at("Author", "Translator", "Edition", "Page", "ISBN", "Language", "Publisher", "Pub_Date", "Category", "Age_Group", "Original_Title")
+  	i += 1
+  end
+
 end
-
-puts hash_all

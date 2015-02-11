@@ -24,7 +24,7 @@ client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz
 client.connect
 
 data_rows = []
-q= 0
+q = 0
 
 callback = lambda do |query, message|
   if message["type"] == "DISCONNECT"
@@ -62,10 +62,12 @@ book_page_urls.each do |url|
   client.query({"input"=>{"webpage/url"=>url},"connectorGuids"=>["c4008e16-06b7-4d9e-89d4-8c841ac5eddc"]}, callback )
 end
 
-puts "Queries dispatched, now waiting for results"
-client.join
-puts "Join completed, all results returned"
-client.disconnect
+if book_page_urls_size > 100
+  puts "Queries dispatched, now waiting for results"
+  client.join
+  puts "Join completed, all results returned"
+  client.disconnect
+end
 
 # Now we can print out the data we got
 puts "All data received! Writing the results to the file."

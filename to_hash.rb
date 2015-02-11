@@ -11,8 +11,11 @@ File.readlines('data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
   new_line = line.gsub("AutorIn ", " || Author=> ")  	
   # Translator (Übersetzung)
  	new_line = new_line.gsub("Übersetzung ", " || Translator=> ")
+ 	
  	# Edition (Edition)
-  new_line = new_line.gsub("Edition ", " || Edition=> ")
+ 	# The following logic causes a bug when Publisher contains string 'Edition'
+  # new_line = new_line.gsub("Edition ", " || Edition=> ")
+
  	# Page (Seiten)
 	new_line = new_line.gsub("Seiten ", " || Page=> ")
 	# ISBN (EAN)
@@ -59,20 +62,19 @@ meta_all << book_array
 end
 
 # Print the results 
-puts meta_all
 puts "\nSuccess! Converted #{ meta_all.size } lines"
 
 
 ## Save meta_all to CSV file
 CSV.open("data/to_hash_results.csv", "w") do |csv|
 	# Write header
-  csv << ["Author", "Translator", "Edition", "Page", "ISBN", "Language", "Publisher", "Pub_Date", "Category", "Age_Group", "Original_Title"]
+  csv << ["Author", "Translator", "Page", "ISBN", "Language", "Publisher", "Pub_Date", "Category", "Age_Group", "Original_Title"]
 
   # Write rows
   i = 0
 
   (0...meta_all.length).each do 
-  	csv << meta_all[i][0].values_at("Author", "Translator", "Edition", "Page", "ISBN", "Language", "Publisher", "Pub_Date", "Category", "Age_Group", "Original_Title")
+  	csv << meta_all[i][0].values_at("Author", "Translator", "Page", "ISBN", "Language", "Publisher", "Pub_Date", "Category", "Age_Group", "Original_Title")
   	i += 1
   end
 

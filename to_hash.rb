@@ -7,34 +7,18 @@ meta_all = []
 File.readlines('data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
  ## Pre-process
 
-  # Author (Auteur)
-  new_line = line.gsub("Auteur ", " || Author=> ")  	
-  # Illustrator (Illustrator)
- 	new_line = new_line.gsub("Illustrator ", " || Illustrator=> ")
-  # Other Stakeholders (Overige betrokkenen)
- 	new_line = new_line.gsub("Overige betrokkenen ", " || Other Stakeholders=> ")
- 	# Kind (Soort)
- 	new_line = new_line.gsub("Soort ", " || Kind=> ") 	
- 	# Language (Taal)
-	new_line = new_line.gsub("Taal ", " || Language=> ")
-	# Original Title (Oorspronkelijke titel)
-	new_line = new_line.gsub("Oorspronkelijke titel ", " || Original Title=> ")
-	# Language Translated from (EAN)
-	new_line = new_line.gsub("Vertaald uit het ", " || Language Translated From=> ")
-	# Translator (Vertaald door)
-	new_line = new_line.gsub("Vertaald door ", " || Translator=> ")
-	# Size (Afmetingen)
-	new_line = new_line.gsub("Afmetingen ", " || Size=> ")
-	# Weight (Gewicht)
-	new_line = new_line.gsub("Gewicht ", " || Weight=> ")
-	# Age Group (Geschikt voor)
-	new_line = new_line.gsub("Geschikt voor ", " || Age Group=> ")
-	# Druk (Druk)
-	new_line = new_line.gsub("Druk ", " || Druk=> ")
-	# ISBN10 (ISBN10)
-	new_line = new_line.gsub("ISBN10 ", " || ISBN10=> ")
-	# ISBN (ISBN13)
-	new_line = new_line.gsub("ISBN13 ", " || ISBN13=> ")
+  new_line = line.gsub("Utgitt: ", " || Pub_Date=> ")  	
+  new_line = new_line.gsub("Forlag: ", " || Publisher=> ")
+  new_line = new_line.gsub("Innb: ", " || Format=> ")
+ 	new_line = new_line.gsub("Språk: ", " || Language=> ")
+ 	new_line = new_line.gsub("Sider: ", " || Sider=> ")
+	new_line = new_line.gsub("Format: ", " || Size=> ")
+	new_line = new_line.gsub("Utgave: ", " || Edition=> ")
+	new_line = new_line.gsub("Genre: ", " || Category=> ")
+	new_line = new_line.gsub("Emne: ", " || Topic=> ")
+	new_line = new_line.gsub("Alder: ", " || Age_Group=> ")
+	new_line = new_line.gsub("Serie: ", " || Series=> ")
+	new_line = new_line.gsub("ISBN: ", " || ISBN=> ")
 
  ## Process 
 
@@ -50,7 +34,7 @@ hash = Hash.new
 # After splitted, make a hash with key-value pairs with corresponding values
 splitted_line.each do |e|
 		k = e.split("=> ").first
-		v = e.split("=> ").last.chomp('')#.chop
+		v = e.split("=> ").last.chomp('').rstrip
 		hash[k] = v
 		puts hash
 end
@@ -72,13 +56,13 @@ puts "\nSuccess! Converted #{ meta_all.size } lines"
 ## Save meta_all to CSV file
 CSV.open("data/to_hash_results.csv", "w") do |csv|
 	# Write header
-  csv << ["Author", "Illustrator", "Other Stakeholders", "Kind", "Language", "Original Title", "Language Translated From", "Translator", "Size", "Weight", "Age Group", "Druk", "ISBN10", "ISBN13"]
+  csv << ["Pub_Date", "Publisher", "Format", "Language", "Size", "Edition", "Category", "Topic", "Age_Group", "Series", "ISBN"]
 
   # Write rows
   i = 0
 
   (0...meta_all.length).each do 
-  	csv << meta_all[i][0].values_at("Author", "Illustrator", "Other Stakeholders", "Kind", "Language", "Original Title", "Language Translated From", "Translator", "Size", "Weight", "Age Group", "Druk", "ISBN10", "ISBN13")
+  	csv << meta_all[i][0].values_at("Pub_Date", "Publisher", "Format", "Language", "Size", "Edition", "Category", "Topic", "Age_Group", "Series", "ISBN")
   	i += 1
   end
 

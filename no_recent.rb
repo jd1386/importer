@@ -29,8 +29,14 @@ callback = lambda do |query, message|
   end
 end
 
-(501..620).each do |page|
-  client.query({"input"=>{"webpage/url"=>"http://busqueda.libros.fnac.es/n1867/Libros-infantiles?sl=-1.0&PageIndex=#{page}&ItemPerPage=15&ssi=2&sso=2"},"connectorGuids"=>["065f0956-b4fa-42c2-883d-a1a0d6d881de"]}, callback )
+# Page 1
+client.query({"input"=>{"webpage/url"=>"http://www.bokkilden.no/SamboWeb/utvalg.do?term=format%3ABadebok&profil=firepaarad_MP&sort=popularitet&order=DESC&side=4&antall=40&rom=Barn&overskrift=Badebok&nyside=0"},"connectorGuids"=>["99ed470a-e2e8-403a-a251-0e4808009395"]}, callback )
+
+# Page 2 and above
+# Page n params == n - 1 
+
+(1..4).each do |page|
+  client.query({"input"=>{"webpage/url"=>"http://www.bokkilden.no/SamboWeb/utvalg.do?term=format%3ABadebok&profil=firepaarad_MP&sort=popularitet&order=DESC&side=0&antall=40&rom=Barn&overskrift=Badebok&nyside=#{page}"},"connectorGuids"=>["99ed470a-e2e8-403a-a251-0e4808009395"]}, callback )
 end
 
 
@@ -42,14 +48,14 @@ client.disconnect
 puts "All data received!"
 
 # Write the results to the file
-File.new('data/es_recent_results.json', 'w') unless File.exists?('data/es_recent_results.json')
-File.open('data/es_recent_results.json', 'w') do |f|
+File.new('data/no_recent_results.json', 'w') unless File.exists?('data/no_recent_results.json')
+File.open('data/no_recent_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 
-puts "Done! The results saved to data/es_recent_results.json."
+puts "Done! The results saved to data/no_recent_results.json."
 
-json_file = JSON.parse(File.open("data/es_recent_results.json").read)
+json_file = JSON.parse(File.open("data/no_recent_results.json").read)
 json_page_length = json_file.length
 json_book_per_page_length = json_file[0].length
 
@@ -70,9 +76,9 @@ i += 1
 end
 
 # If all the books are successfully scraped, convert JSON to CSV
-CSV.open("data/es_recent_results.csv", "w") do |csv|
+CSV.open("data/no_recent_results.csv", "w") do |csv|
   # Write header
-  csv << ["cover_image", "link_to_book"]
+  csv << ["cover_image", "link_to_book", "link_to_book/_text"]
   
   # Write rows
   i = 0
@@ -80,7 +86,7 @@ CSV.open("data/es_recent_results.csv", "w") do |csv|
 
   (i...json_page_length).each do 
     (n...json_file[i].length).each do 
-      csv << json_file[i][n].values_at("cover_image", "link_to_book")
+      csv << json_file[i][n].values_at("cover_image", "link_to_book", "link_to_book/_text")
       n += 1
     end
     n = 0
@@ -88,4 +94,4 @@ CSV.open("data/es_recent_results.csv", "w") do |csv|
   end
 
 end
-puts "The results saved to data/es_recent_results.csv"
+puts "The results saved to data/no_recent_results.csv"

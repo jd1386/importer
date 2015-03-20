@@ -1,15 +1,18 @@
 require "importio"
+require "json"
 
 
-book_page_urls = []
+isbns = []
 File.readlines('data/it_meta_source.txt').each do |line|
-  book_page_urls << line
+  isbns << line
 end
 
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==")
 client.connect
 
 data_rows = []
+pageUrls = []
+
 query_id = 0
 callback = lambda do |query, message|
   if message["type"] == "DISCONNECT"
@@ -20,21 +23,23 @@ callback = lambda do |query, message|
       puts "Got an error!"
       puts JSON.pretty_generate(message["data"])
       data_rows << message["data"]["results"]
+      pageUrls << message["data"]["pageUrl"]
     else
       puts "Got data!"
       puts JSON.pretty_generate(message["data"]["results"])
       data_rows << message["data"]["results"]
+      pageUrls << message["data"]["pageUrl"]
     end
   end
   if query.finished
     query_id += 1
-    puts "Amazon Extract #{query_id} / #{book_page_urls.size} finished"
+    puts "Extracting meta #{query_id} / #{isbns.size} finished"
   end
 end
 
 # Query for tile it_amazon_book_ext
-book_page_urls.each do |url|
-  client.query({"input"=>{"webpage/url"=>url},"connectorGuids"=>["320d7136-ea26-46e3-b3c1-eb7427993f8c"]}, callback )
+isbns.each do |isbn|
+  client.query({"input"=>{"isbn"=>isbn},"connectorGuids"=>["98591cc3-b936-4c10-980e-b61e72540e14"]}, callback )
 end
 
 puts "Queries dispatched, now waiting for results"
@@ -48,4 +53,5 @@ File.open('data/it_meta_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 
-puts "All done! See data/it_meta_results.json."
+
+puts "All done! See data/it_meta_results.json and data/it_meta_results_url.json"

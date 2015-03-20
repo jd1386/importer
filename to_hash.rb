@@ -7,22 +7,16 @@ meta_all = []
 File.readlines('data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
  ## Pre-process
 
-  new_line = line.gsub("Format: ", " || Format=> ")  	
-  new_line = new_line.gsub("Språk: ", " || Language=> ")
-  new_line = new_line.gsub("Serie: ", " || Series=> ")
-  new_line = new_line.gsub("Läsålder: ", " || Age_Group=> ")
-  new_line = new_line.gsub("Inläsare: ", " || Scanner=> ")
-  new_line = new_line.gsub("Antal sidor: ", " || Page=> ")
- 	new_line = new_line.gsub("Utg.datum: ", " || Pub_Date=> ")
-	new_line = new_line.gsub("Utmärkelser: ", " || Awards=> ")
- 	new_line = new_line.gsub("Upplaga: ", " || Edition=> ")
- 	new_line = new_line.gsub("Förlag: ", " || Publisher=> ")
- 	new_line = new_line.gsub("Illustratör/Fotograf: ", " || Illustration/Photograph=> ")
-	new_line = new_line.gsub("Översättare: ", " || Translator=> ")
-	new_line = new_line.gsub("Originaltitel: ", " || Original_Title=> ")
-	new_line = new_line.gsub("Medarbetare: ", " || Contributors=> ")
-	new_line = new_line.gsub("SAB: ", " || SAB=> ")
-	new_line = new_line.gsub("ISBN: ", " || ISBN=> ")
+  new_line = line.gsub("Pub_Year: ", " || Pub_Year=> ")  	
+  new_line = new_line.gsub("|Publisher: ", " || Publisher=> ")
+  new_line = new_line.gsub("|Pub_Date: ", " || Pub_Date=> ")
+  new_line = new_line.gsub(" Colectia ", " || Series=> ")
+  new_line = new_line.gsub("|Translator: ", " || Translator=> ")
+  new_line = new_line.gsub("|Cover_Type: ", " || Cover_Type=> ")
+  new_line = new_line.gsub("|Format: ", " || Format=> ")
+  new_line = new_line.gsub("|Page: ", " || Page=> ")
+  new_line = new_line.gsub("|ISBN: ", " || ISBN=> ")
+  new_line = new_line.gsub("|Bestseller_Ranking: ", " || Bestseller_Ranking=> ")
 
  ## Process 
 
@@ -60,13 +54,13 @@ puts "\nSuccess! Converted #{ meta_all.size } lines"
 ## Save meta_all to CSV file
 CSV.open("data/to_hash_results.csv", "w") do |csv|
 	# Write header
-  csv << ["Format", "Language", "Series", "Age_Group", "Scanner", "Page", "Pub_Date", "Awards", "Edition", "Publisher", "Illustration/Photograph", "Translator", "Original_Title", "Contributors", "SAB", "ISBN"]
+  csv << [ "Pub_Year", "Publisher", "Pub_Date", "Series", "Translator", "Cover_Type", "Format", "Page", "ISBN", "Bestseller_Ranking" ]
 
   # Write rows
   i = 0
 
   (0...meta_all.length).each do 
-  	csv << meta_all[i][0].values_at("Format", "Language", "Series", "Age_Group", "Scanner", "Page", "Pub_Date", "Awards", "Edition", "Publisher", "Illustration/Photograph", "Translator", "Original_Title", "Contributors", "SAB", "ISBN")
+  	csv << meta_all[i][0].values_at( "Pub_Year", "Publisher", "Pub_Date", "Series", "Translator", "Cover_Type", "Format", "Page", "ISBN", "Bestseller_Ranking" ) 
   	i += 1
   end
 

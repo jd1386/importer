@@ -1,10 +1,14 @@
 require "./importio.rb"
 require "json" 
+require "csv"
+
 
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
 
 client.connect
+
 data_rows = []
+q = 1
 
 callback = lambda do |query, message|
   if message["type"] == "DISCONNECT"
@@ -12,50 +16,69 @@ callback = lambda do |query, message|
   end
   if message["type"] == "MESSAGE"
     if message["data"].key?("errorType")
-      # In this case, we received a message, but it was an error from the external service
       puts "Got an error!"
       puts JSON.pretty_generate(message["data"])
-  	else
-      # We got a message and it was not an error, so we can process the data
+      data_rows << message["data"]["results"]
+    else
       puts "Got data!"
       puts JSON.pretty_generate(message["data"])
-      # Save the data we got in our dataRows variable for later
       data_rows << message["data"]["results"]
     end
   end
   if query.finished
-    puts "Query finished"
+    puts "Query #{q} finished"
+    q += 1
   end
 end
 
-# Query for tile grp_search_extract
-client.query({"input"=>{"keys"=>"97888"}, "additionalInput"=>{"2b7bcd4e-3af5-4154-8153-83bb8741a83e"=>{"cookies"=>["SESS75a43650f19a0a9283d3e69ac0373322=\"OLBT233wL7E8XYpmaEBxuhaQO2QrzW5dVWXpAG1wfKY\";Path=\"/\";Domain=\"grp.isbn-international.org\";Port=\"443\"",
-                "has_js=\"1\";Path=\"/\";Domain=\"grp.isbn-international.org\";Port=\"443\""]}},"connectorGuids"=>["2b7bcd4e-3af5-4154-8153-83bb8741a83e"]}, callback )
 
-client.query({"input"=>{"keys"=>"97887"}, "additionalInput"=>{"2b7bcd4e-3af5-4154-8153-83bb8741a83e"=>{"cookies"=>["SESS75a43650f19a0a9283d3e69ac0373322=\"OLBT233wL7E8XYpmaEBxuhaQO2QrzW5dVWXpAG1wfKY\";Path=\"/\";Domain=\"grp.isbn-international.org\";Port=\"443\"",
-                "has_js=\"1\";Path=\"/\";Domain=\"grp.isbn-international.org\";Port=\"443\""]}},"connectorGuids"=>["2b7bcd4e-3af5-4154-8153-83bb8741a83e"]}, callback )
+File.readlines('data/grp_search_source.txt').each do |source|
+  source_cleaned = source.gsub /\t/, '-'
+  puts source_cleaned
+  client.query({"input"=>{"search_term"=>source_cleaned},"connectorGuids"=>["78238619-1b83-4ecd-bd67-47dc854ac65c"]}, callback )
+end
 
+#puts "Queries dispatched, now waiting for results"
+#client.join
+#puts "Join completed, all results returned"
+#client.disconnect
 
-puts "Queries dispatched, now waiting for results"
-
-# Now we have issued all of the queries, we can wait for all of the threads to complete meaning the queries are done
-client.join
-
-puts "Join completed, all results returned"
-
-# It is best practice to disconnect when you are finished sending queries and getting data - it allows us to
-# clean up resources on the client and the server
-client.disconnect
-
-# Now we can print out the data we got
 puts "All data received:"
 puts JSON.pretty_generate(data_rows)
 
-# Create a new json file unless it already exists
+
+
+# Write the results to the file
 File.new('data/grp_search_results.json', 'w') unless File.exists?('data/grp_search_results.json')
-# Open the file and write the data results to results_file.json
 File.open('data/grp_search_results.json', 'w') do |f|
   f << JSON.pretty_generate(data_rows)
 end
 
-puts "All done! See data/grp_search_results.json"
+puts "Done! The results saved to data/grp_search_results.json."
+
+json_file = JSON.parse(File.open("data/grp_search_results.json").read)
+json_page_length = json_file.length
+json_book_per_page_length = json_file[0].length
+
+
+# Convert JSON to CSV
+CSV.open("data/grp_search_results.csv", "w") do |csv|
+  # Write header
+  csv << [ "country", "publisher", "isbn_prefix" ]
+
+  # Write rows
+
+  i = 0
+  n = 0
+
+  (i...json_page_length).each do 
+    (n...json_file[i].length).each do 
+      csv << json_file[i][n].values_at( "country", "publisher", "isbn_prefix" )
+      n += 1
+    end
+    n = 0
+    i += 1
+  end
+
+end
+puts "The results saved to data/grp_search_results.csv"

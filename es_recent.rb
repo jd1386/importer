@@ -29,8 +29,14 @@ callback = lambda do |query, message|
   end
 end
 
-(501..620).each do |page|
-  client.query({"input"=>{"webpage/url"=>"http://busqueda.libros.fnac.es/n1867/Libros-infantiles?sl=-1.0&PageIndex=#{page}&ItemPerPage=15&ssi=2&sso=2"},"connectorGuids"=>["065f0956-b4fa-42c2-883d-a1a0d6d881de"]}, callback )
+# Children's books
+#(901..1000).each do |page|
+#   client.query({"input"=>{"webpage/url"=>"http://www.casadellibro.com/busqueda-libros?spellcheck=1&page=#{page}&idcategoria=117000000&ordenar=1&idtipoproducto=1&nivel=2"},"connectorGuids"=>["ab4d7094-98fd-4a60-979c-0c6cf755ecce"]}, callback )
+# end
+
+# Comics/Manga for Children
+(1..80).each do |page|
+  client.query({"input"=>{"webpage/url"=>"http://www.casadellibro.com/busqueda-libros?spellcheck=1&page=#{page}&idcategoria=412000000&ordenar=1&idtipoproducto=1&nivel=2"},"connectorGuids"=>["ab4d7094-98fd-4a60-979c-0c6cf755ecce"]}, callback )
 end
 
 
@@ -72,7 +78,7 @@ end
 # If all the books are successfully scraped, convert JSON to CSV
 CSV.open("data/es_recent_results.csv", "w") do |csv|
   # Write header
-  csv << ["cover_image", "link_to_book"]
+  csv << ["book_page_url", "book_page_url/_text"]
   
   # Write rows
   i = 0
@@ -80,7 +86,7 @@ CSV.open("data/es_recent_results.csv", "w") do |csv|
 
   (i...json_page_length).each do 
     (n...json_file[i].length).each do 
-      csv << json_file[i][n].values_at("cover_image", "link_to_book")
+      csv << json_file[i][n].values_at("book_page_url", "book_page_url/_text")
       n += 1
     end
     n = 0

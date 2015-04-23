@@ -1,5 +1,6 @@
 require "./importio.rb"
 require "json" 
+require "csv"
 
 
 client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz8b0BAsVyjebOMqgkxsEz/zmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg==", "https://query.import.io")
@@ -7,6 +8,7 @@ client = Importio::new("3f9ae37e-acfd-44f4-8157-e72adcc5b283","93CLLmP2bc/xrnSLz
 client.connect
 
 data_rows = []
+q = 1
 
 callback = lambda do |query, message|
   if message["type"] == "DISCONNECT"
@@ -24,13 +26,17 @@ callback = lambda do |query, message|
     end
   end
   if query.finished
-    puts "Query finished"
+    puts "Query #{q} finished"
+    q += 1
   end
 end
 
+# Page 1
+#client.query({"input"=>{"webpage/url"=>"http://www.mondadoristore.it/libri/ragazzi/Bambini-e-Ragazzi/genG004/?tpr=250&crc=164&gen=G004&sort=7&opnedBoxes=amtp%2Catpp%2Casgn%2Capzf%2Cascf%2Caaut%2Caedt%2Cacol%2Camtp%2Catpp%2Casgn"},"connectorGuids"=>["8982aca8-d1ad-48ca-95c8-32d77e9fbb8d"]}, callback )
+
 # Query for tile it_extract_feltrinelli
-(2..10).each do |page|
-  client.query({"input"=>{"webpage/url"=>"http://www.lafeltrinelli.it/libri-ragazzi/c-1045/0/#{page}/"},"connectorGuids"=>["508a560d-aa6c-4a39-925a-3d9b65ec26f1"]}, callback )
+(631..650).each do |page|
+  client.query({"input"=>{"webpage/url"=>"http://www.mondadoristore.it/libri/ragazzi/Bambini-e-Ragazzi/genG004/#{page}/crc=164&gen=G004&opnedBoxes=amtp%2Catpp%2Casgn%2Capzf%2Cascf%2Caaut%2Caedt%2Cacol%2Camtp%2Catpp%2Casgn&sort=7&tpr=250"},"connectorGuids"=>["8982aca8-d1ad-48ca-95c8-32d77e9fbb8d"]}, callback )
 end
 
 puts "Queries dispatched, now waiting for results"
@@ -48,8 +54,7 @@ n = 0
 
 until i == data_rows.size
   until n == data_rows[i].size
-    puts data_rows[i][n]['book_page_url']
-    isbns << data_rows[i][n]['book_page_url'].match(/978(?:-?\d){10}/)
+    isbns << data_rows[i][n]['link_to_book'].match(/978(?:-?\d){9}/)
     n += 1
   end
   i += 1

@@ -32,13 +32,13 @@ callback = lambda do |query, message|
 end
 
 # Page 1
-#client.query({"input"=>{"webpage/url"=>"http://merlin.pl/dla-dzieci/browse/search/1,393.html?sort=nowosc&offer=O&&prices=20,50,100,200,300,500,1000&carrier=18&price=%5B0%20TO%20*%5D&firm=&keywords=&rows=30"},"connectorGuids"=>["573ac3cb-6567-4e50-9400-a163934bd0ca"]}, callback )
+#client.query({"input"=>{"webpage/url"=>"http://merlin.pl/dla-dzieci/browse/search/1,393,1.html?sort=nowosc&carrier=18&firm=&price=%5B0+TO+*%5D&offer=O&category=393&section=1&keywords=&rows=30"},"connectorGuids"=>["573ac3cb-6567-4e50-9400-a163934bd0ca"]}, callback )
 
 # Page 2 and above
 # Page n params == n - 1 
 
-(101..300).each do |page|
-  client.query({"input"=>{"webpage/url"=>"http://merlin.pl/dla-dzieci/browse/search/1,393,#{page}.html;jsessionid=2D3BDD51AF9ED95CF4947509D31A2F42.LB8?sort=nowosc&offer=O&&prices=20,50,100,200,300,500,1000&carrier=18&price=%5B0%20TO%20*%5D&firm=&keywords="},"connectorGuids"=>["573ac3cb-6567-4e50-9400-a163934bd0ca"]}, callback )
+(301..350).each do |page|
+  client.query({"input"=>{"webpage/url"=>"http://merlin.pl/dla-dzieci/browse/search/1,393,#{page}.html?sort=nowosc&carrier=18&firm=&price=%5B0+TO+*%5D&offer=O&category=393&section=1&keywords=&rows=30"},"connectorGuids"=>["573ac3cb-6567-4e50-9400-a163934bd0ca"]}, callback )
 end
 
 

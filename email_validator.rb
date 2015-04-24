@@ -22,16 +22,18 @@ email_inputs.each do |email|
 	  	@content = JSON.parse(open("https://api.import.io/store/data/5d8a8c21-c2a4-4ee0-90af-1c0a9a9f2d24/_query?input/email=#{email}&_user=3f9ae37e-acfd-44f4-8157-e72adcc5b283&_apikey=3f9ae37e-acfd-44f4-8157-e72adcc5b283%3A93CLLmP2bc%2FxrnSLz8b0BAsVyjebOMqgkxsEz%2FzmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg%3D%3D").read)
 	  end
 	rescue Timeout::Error
-		puts "Connection timed out! Take care of #{email} and retry. The results of emails processed so far have been saved to the files."
+		# There's no @content
+
+		puts "CONNECTION TIMED OUT:\t#{email}."
 		break
 	end  
 
 
 
   if @content["results"].empty? || @content["results"].nil?
-  	puts "Unknown error. Maybe this email doesn't pass."
+  	puts "OK"
   	temp_hash = Hash.new
-  	temp_hash[:error_message] = "Unknown error"
+  	temp_hash[:message_3] = "E-mail address is valid"
   	
   	@content["results"] << temp_hash
   	dataset << @content["results"]
@@ -57,17 +59,14 @@ json_page_length = json_file.length
 
 # Convert JSON to CSV
 CSV.open("data/email_validator_results.csv", "w") do |csv|
-	# Write header
-	csv << [ "message_3", "error_message" ]
-
-	# Write rows
+# Write rows
 
 	i = 0
 	n = 0
 
 	(i...json_page_length).each do 
 		(n...json_file[i].length).each do
-			csv << json_file[i][n].values_at( "message_3", "error_message" )
+			csv << json_file[i][n].values_at( "message_3" )
 			n += 1
 		end
 		n = 0

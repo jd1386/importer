@@ -14,6 +14,8 @@ File.readlines('data/search_grp_source.txt').each do |line|
   isbn_prefixes << line.rstrip
 end
 
+@processed_count = 0
+
 # Loop through prefixes to look up
 isbn_prefixes.each do |prefix|
 
@@ -44,44 +46,48 @@ isbn_prefixes.each do |prefix|
     end
 
 
-
-
-#abort "STOP"
-
-
 # Save @parsed_response to CSV
 CSV.open("data/search_grp_results.csv", "a") do |csv|
-    # If multiple search records with the given isbn prefix,
-    # display it on each row
-    if @parsed_response["totalResults"] >= 2
-        i = 0        
-        (0...@parsed_response["results"][0]["company_name"].size).each do
-            
+    
+     # If no results found with the given isbn prefix
+    if @parsed_response["results"].empty?
+        csv << [
+                JSON.parse(@req.body)["input"]["isbn_prefix"],
+                "No results found"
+        ]
+    else
+        # If multiple search records with the given isbn prefix,
+        # display it on each row
+        if @parsed_response["totalResults"] >= 2
+            i = 0        
+            (0...@parsed_response["results"][0]["company_name"].size).each do
+                
+                csv << [ 
+                        JSON.parse(@req.body)["input"]["isbn_prefix"], 
+                        @parsed_response["results"][0]["country"][i], 
+                        @parsed_response["results"][0]["agency_name"][i],
+                        @parsed_response["results"][0]["company_name"][i],
+                        @parsed_response["results"][0]["isbn_prefix"][i],
+                        @parsed_response["results"][0]["meta_all"][i]
+                        ]
+                i += 1
+            end
+        else 
             csv << [ 
                     JSON.parse(@req.body)["input"]["isbn_prefix"], 
-                    @parsed_response["results"][0]["country"][i], 
-                    @parsed_response["results"][0]["agency_name"][i],
-                    @parsed_response["results"][0]["company_name"][i],
-                    @parsed_response["results"][0]["isbn_prefix"][i],
-                    @parsed_response["results"][0]["meta_all"][i]
+                    @parsed_response["results"][0]["country"], 
+                    @parsed_response["results"][0]["agency_name"],
+                    @parsed_response["results"][0]["company_name"],
+                    @parsed_response["results"][0]["isbn_prefix"],
+                    @parsed_response["results"][0]["meta_all"]
                     ]
-            i += 1
         end
-
-    else 
-        csv << [ 
-                JSON.parse(@req.body)["input"]["isbn_prefix"], 
-                @parsed_response["results"][0]["country"], 
-                @parsed_response["results"][0]["agency_name"],
-                @parsed_response["results"][0]["company_name"],
-                @parsed_response["results"][0]["isbn_prefix"],
-                @parsed_response["results"][0]["meta_all"]
-                ]
     end
 
 end # end CSV
 
-puts JSON.parse(@req.body)["input"]["isbn_prefix"] + ' done!'
+@processed_count += 1
+puts JSON.parse(@req.body)["input"]["isbn_prefix"] + " done! Processed #{@processed_count} / #{isbn_prefixes.size} prefixes"
 
 end # end isbn_prefixes.each loop
 

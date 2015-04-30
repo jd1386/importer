@@ -1,12 +1,15 @@
 require 'Vacuum'
+require 'dotenv'
 require 'awesome_print'
+
+Dotenv.load
 
 
 request = Vacuum.new('ES')
 request.configure(
-	aws_access_key_id: 'AKIAJPFH4EM4BZ74GXGA',
-	aws_secret_access_key: '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',
-	associate_tag: 'origh-20'
+	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+	associate_tag: ENV['AWS_ASSOCIATE_TAG']
 )
 
 response = request.item_lookup(
@@ -19,6 +22,5 @@ response = request.item_lookup(
 )
 
 parsed_response = response.to_h
-ap parsed_response["ItemLookupResponse"]["Items"]["Item"].keys
+ap parsed_response["ItemLookupResponse"]["Items"]["Item"]
 
-ap parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].size

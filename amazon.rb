@@ -1,4 +1,5 @@
 require 'Vacuum'
+require 'awesome_print'
 
 
 request = Vacuum.new('ES')
@@ -11,11 +12,13 @@ request.configure(
 response = request.item_lookup(
   query: {
     'IdType' => 'ISBN',
-    'ItemId' => 9788467043563,
+    'ItemId' => 9788427200388,
     'SearchIndex' => 'Books',
-    'ResponseGroup' => 'Small'
+    'ResponseGroup' => 'Large'
   }
 )
 
 parsed_response = response.to_h
-puts parsed_response["ItemLookupResponse"]["Items"]["Item"]
+ap parsed_response["ItemLookupResponse"]["Items"]["Item"].keys
+
+ap parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].size

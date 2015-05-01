@@ -7,17 +7,22 @@ meta_all = []
 File.readlines('data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
  ## Pre-process
 
-  new_line = line.gsub("AutorIn ", " || Author=> ") 
-  new_line = new_line.gsub(" Übersetzung ", " || Translator=> ") 
-
-  new_line = new_line.gsub(" Seiten ", " || Page=> ")
-  new_line = new_line.gsub(" EAN ", " || EAN=> ")
-  new_line = new_line.gsub(" Sprache ", " || Language=> ")
-  new_line = new_line.gsub(" erschienen bei ", " || Publisher=> ")
-  new_line = new_line.gsub(" Erscheinungsdatum ", " || Pub_Date=> ")
-  new_line = new_line.gsub(" Ursprungstitel ", " || Original_Title=> ")
-  new_line = new_line.gsub(" Kategorie ", " || Category=> ")
-  new_line = new_line.gsub(" Altersfreigabe ", " || Age_Group=> ")
+  new_line = line.gsub("Country ", " || Country=> ") 
+  new_line = new_line.gsub(" Agency Name ", " || Agency Name=> ") 
+  new_line = new_line.gsub(" ISBN Prefix ", " || ISBN Prefix=> ")
+  new_line = new_line.gsub(" Status ", " || Status=> ")
+  new_line = new_line.gsub(" Address ", " || Address=> ")
+  new_line = new_line.gsub(" Admin Contact Name ", " || Admin Contact Name=> ")
+  new_line = new_line.gsub(" Web Site ", " || Web Site=> ")
+  new_line = new_line.gsub(" san ", " || san=> ")
+  new_line = new_line.gsub(" Admin Phone ", " || Admin Phone=> ")
+  new_line = new_line.gsub(" Admin Fax ", " || Admin Fax=> ")
+  new_line = new_line.gsub(" Admin Email ", " || Admin Email=> ")
+  new_line = new_line.gsub(" Alternate Contact Name ", " || Alternate Contact Name=> ")
+  new_line = new_line.gsub(" Alternate Phone ", " || Alternate Phone=> ")
+  new_line = new_line.gsub(" Alternate Fax ", " || Alternate Fax=> ")
+  new_line = new_line.gsub(" Alternate Email ", " || Alternate Email=> ")
+  
   
 
   
@@ -58,13 +63,13 @@ puts "\nSuccess! Converted #{ meta_all.size } lines"
 ## Save meta_all to CSV file
 CSV.open("data/to_hash_results.csv", "w") do |csv|
 	# Write header
-  csv << [ "Author", "Translator", "Edition", "Page", "EAN", "Language", "Publisher", "Pub_Date", "Original_Title", "Category", "Age_Group" ]
+  csv << [ "Country", "Agency Name", "ISBN Prefix", "Status", "Address", "Admin Contact Name", "Web Site", "san", "Admin Phone", "Admin Fax", "Admin Email", "Alternate Contact Name", "Alternate Phone", "Alternate Fax", "Alternate Email" ]
 
   # Write rows
   i = 0
 
   (0...meta_all.length).each do 
-  	csv << meta_all[i][0].values_at( "Author", "Translator", "Edition", "Page", "EAN", "Language", "Publisher", "Pub_Date", "Original_Title", "Category", "Age_Group" ) 
+  	csv << meta_all[i][0].values_at( "Country", "Agency Name", "ISBN Prefix", "Status", "Address", "Admin Contact Name", "Web Site", "san", "Admin Phone", "Admin Fax", "Admin Email", "Alternate Contact Name", "Alternate Phone", "Alternate Fax", "Alternate Email" ) 
   	i += 1
   end
 

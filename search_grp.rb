@@ -4,6 +4,7 @@ require 'json'
 require 'csv'
 require 'awesome_print'
 require 'dotenv'
+require 'retriable'
 
 Dotenv.load
 
@@ -41,19 +42,34 @@ isbn_prefixes.each do |prefix|
     @req["content-type"] = "application/json"
 
 
-
-    Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
+    # Connect and receive and parse response. 
+    # In the case of Timeout Error, retry 3 times.
+    Retriable.retriable on: Timeout::Error do
+        
+        Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
     	response = http.request(@req).body.force_encoding('UTF-8')
     	@parsed_response = JSON.parse(response)   
 
     end
+end
 
 
 # Save @parsed_response to CSV
 CSV.open("data/search_grp_results.csv", "a") do |csv|
-    
+    # debug 
+    ap @parsed_response["results"]
+    # end debug
+
+    if @parsed_response["results"].nil?
+        csv << [
+                JSON.parse(@req.body)["input"]["isbn_prefix"],
+                "Error. Please try again"
+        ]
+        next
+
+
      # If no results found with the given isbn prefix
-    if @parsed_response["results"].empty?
+    elsif @parsed_response["results"].empty?
         csv << [
                 JSON.parse(@req.body)["input"]["isbn_prefix"],
                 "No results found"

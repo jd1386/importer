@@ -8,7 +8,7 @@ require 'retriable'
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('DE')
+@request = Vacuum.new('ES')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -42,11 +42,6 @@ isbns.each do |isbn|
 
 	parsed_response = @response.to_h
 	
-	#ap parsed_response["ItemLookupResponse"]["Items"]["Item"]
-	#ap parsed_response["ItemLookupResponse"]["Items"]["Item"].length
-	#ap parsed_response["ItemLookupResponse"]["Items"]["Item"][0]["LargeImage"]["URL"] if parsed_response["ItemLookupResponse"]["Items"]["Item"].length >= 2
-
-	#ap parsed_response["ItemLookupResponse"]["Items"]["Request"]#["Errors"]["Error"]["Message"]
 
 	if parsed_response["ItemLookupResponse"]["Items"]["Request"].has_key?("Errors")
 		@error_message = parsed_response["ItemLookupResponse"]["Items"]["Request"]["Errors"]["Error"]["Message"]
@@ -74,7 +69,6 @@ isbns.each do |isbn|
 			end
 		end
 	end
-
 
 		if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
 			# EAN

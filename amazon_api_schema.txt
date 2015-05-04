@@ -1,0 +1,25 @@
+http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
+
+ItemLookupResponse
+	Items
+		Item
+			ASIN
+			DetailPageURL
+			SalesRank
+			MediumImage
+				URL
+			ItemAttributes
+				Binding # Format
+				Creator
+					__content__
+					Role
+				EAN
+				ISBN
+				PublicationDate
+				Publisher
+				ReleaseDate
+				Edition
+				Title
+				Author
+				NumberOfPages
+				ProductGroup

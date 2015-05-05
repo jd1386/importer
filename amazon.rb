@@ -199,7 +199,7 @@ isbns.each do |isbn|
 
 		# Write the results to CSV
 		CSV.open("data/amazon_results.csv", "a") do |csv|
-			csv << [ @ean, @title, @author, @creator_and_role, @company, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url ]
+			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url ]
 		end
 
 	end

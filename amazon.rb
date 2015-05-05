@@ -23,6 +23,9 @@ File.readlines('data/amazon_isbns.txt').each do |line|
 	isbns << line.rstrip
 end
 
+@query_count = 0
+@isbns_size = isbns.size
+
 
 # Query each isbn
 isbns.each do |isbn|
@@ -38,7 +41,7 @@ isbns.each do |isbn|
 		)
 	end
 
-	puts isbn
+	print isbn
 
 	parsed_response = @response.to_h
 	
@@ -52,23 +55,31 @@ isbns.each do |isbn|
 			csv << [ isbn, @error_message ]
 		end
 
+	# No error
 	else
-	
+		
+		# Debugging
+		#ap parsed_response
+		#abort
+		# End debugging
+
 		# Parse
 
 		# Case 1. If MULTIPLE book results found with the given isbn
 		# Need to determine which one to scrape
-	if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
-			item_counts = parsed_response["ItemLookupResponse"]["Items"]["Item"].length
+		if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
+				# Number of items shown as search results
+				# Case a. Single book with two duplicate pages, one of which is not maintained
+				# Case b. Two books, hard/softcover and ebook.
+				item_counts = parsed_response["ItemLookupResponse"]["Items"]["Item"].length
 
-		
-		(0...item_counts).each do |i|
-			if parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage")
-				@item_index = i
-
-			end
+				(0...item_counts).each do |i|
+					if parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Binding"] != "Versión Kindle" 
+						
+						@item_index = i
+					end
+				end
 		end
-	end
 
 		if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
 			# EAN
@@ -76,26 +87,35 @@ isbns.each do |isbn|
 			# Title
 			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Title") ? @title = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Title"] : @title = "N/A"
 			# Author
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Author") ? @author = parsed_response["ItemLookupResponse"]["Items"]["Item"][1]["ItemAttributes"]["Author"] : @author = "N/A"
+			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Author") ? @author = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Author"] : @author = "N/A"
 			
 			# Creator
 			@creator_and_role = []
 			# creator == contributors, different from author
 			if parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].is_a? Hash
 
+				#debug
+				print " Single creator"
+				# end debug
+
 				# only one set	
 				@creator_and_role = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].values.join(' - ')
 
 			# multiple creators
 			elsif parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].is_a? Array
+
+				#debug
+				print " Multiple creator"
+				# end debug
+
 				parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].each do |hash|
 					@creator_and_role << hash.values.join(' - ')
-					@creator_and_role.join(', ')
+					
 				end
 
 			# No creators listed
-			@creator_and_role = 'None'
-			
+			else 
+				@creator_and_role = 'None'
 			end
 
 			# Company
@@ -144,19 +164,27 @@ isbns.each do |isbn|
 			# creator == contributors, different from author
 			if parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].is_a? Hash
 
+				#debug
+				print " Single creator"
+				# end debug
+
 				# only one set	
 				@creator_and_role = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].values.join(' - ')
 
 			# multiple creators
 			elsif parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].is_a? Array
+
+				#debug
+				print " Multiple creator"
+				# end debug
+				
 				parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].each do |hash|
 					@creator_and_role << hash.values.join(' - ')
-					@creator_and_role.join(', ')
 				end
 
-			# No creators listed
-			@creator_and_role = 'None'
-			
+			# otherwise, no creators listed
+			else
+				@creator_and_role = 'None'
 			end
 
 			# Company
@@ -194,17 +222,17 @@ isbns.each do |isbn|
 		end
 		
 		
-
-
+		##################################################
 
 		# Write the results to CSV
 		CSV.open("data/amazon_results.csv", "a") do |csv|
 			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url ]
 		end
-
+	@query_count += 1
+	print " ... OK \t #{@query_count} / #{@isbns_size} \n"
 	end
 
 end # End File.readlines
 
-puts "Done"
+puts "All done"
 

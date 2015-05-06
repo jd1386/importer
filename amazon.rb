@@ -116,6 +116,7 @@ isbns.each do |isbn|
 			# No creators listed
 			else 
 				@creator_and_role = 'None'
+				print " Blank creator"
 			end
 
 			# Company
@@ -185,6 +186,7 @@ isbns.each do |isbn|
 			# otherwise, no creators listed
 			else
 				@creator_and_role = 'None'
+				print " Blank creator"
 			end
 
 			# Company

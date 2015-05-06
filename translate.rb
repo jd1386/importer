@@ -33,6 +33,7 @@ CSV.open('data/translate_results.csv', 'w') do |csv|
 			@language_detected.nil? ? @language_detected = "Unknown" : @language_detected = @language_detected.capitalize
 			
 			@title_translated = EasyTranslate.translate(@title_original, :to => 'en')
+			@title_translated = @title_translated.titleize
 		end
 
 		# Write to file

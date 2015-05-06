@@ -79,8 +79,6 @@ isbns.each do |isbn|
 					@item_index = i
 				end
 			end
-			# Will use the following in the csv later
-			@item_counts = item_counts
 		end
 
 		if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
@@ -218,13 +216,16 @@ isbns.each do |isbn|
 			@item_counts = 1
 
 		end
-		
+
+		##################################################
+		# Final process to make things neat
+		@creator_and_role = @creator_and_role*", " if @creator_and_role.is_a? Array
+
 		
 		##################################################
-
 		# Write the results to CSV
 		CSV.open("data/amazon_results.csv", "a") do |csv|
-			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @item_counts ]
+			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url ]
 		end
 	@query_count += 1
 	print " ... OK \t #{@query_count} / #{@isbns_size} \n"

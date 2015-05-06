@@ -68,27 +68,28 @@ isbns.each do |isbn|
 		# Case 1. If MULTIPLE book results found with the given isbn
 		# Need to determine which one to scrape
 		if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
-				# Number of items shown as search results
-				# Case a. Single book with two duplicate pages, one of which is not maintained
-				# Case b. Two books, hard/softcover and ebook.
-				item_counts = parsed_response["ItemLookupResponse"]["Items"]["Item"].length
+			# Number of items shown as search results
+			# Case a. Single book with two duplicate pages, one of which is not maintained
+			# Case b. Two books, hard/softcover and ebook.
+			item_counts = parsed_response["ItemLookupResponse"]["Items"]["Item"].length
 
-				(0...item_counts).each do |i|
-					if parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Binding"] != "Versión Kindle" 
-						
-						@item_index = i
-					end
+			(0...item_counts).each do |i|
+				if parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Binding"] != "Versión Kindle" 
+					
+					@item_index = i
 				end
+			end
+			# Will use the following in the csv later
+			@item_counts = item_counts
 		end
 
 		if parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
 			# EAN
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("EAN") ? @ean = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["EAN"] : @ean = "N/A"
+			@ean = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("EAN", "N/A")
 			# Title
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Title") ? @title = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Title"] : @title = "N/A"
+			@title = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Title", "N/A")
 			# Author
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Author") ? @author = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Author"] : @author = "N/A"
-			
+			@author = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Author", "N/A")
 			# Creator
 			@creator_and_role = []
 			# creator == contributors, different from author
@@ -116,25 +117,21 @@ isbns.each do |isbn|
 			# No creators listed
 			else 
 				@creator_and_role = 'None'
-				print " Blank creator"
+				print " Blank  creator"
 			end
 
 			# Company
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Publisher") ? @company = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Publisher"] : @company = "N/A"
+			@company = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Publisher", "N/A")
 			# PubDate
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("PublicationDate") ? @pub_date = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["PublicationDate"] : @pub_date = "N/A"
+			@pub_date = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("PublicationDate", "N/A")
 			# Binding
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Binding") ? @binding = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Binding"] : @binding = "N/A"
+			@binding = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Binding", "N/A")
 			# Number of Pages
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("NumberOfPages") ? @number_of_pages = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["NumberOfPages"] : @number_of_pages = "N/A"
+			@number_of_pages = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("NumberOfPages", "N/A")
 			# Book page url
-			parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index].has_key?("DetailPageURL") ? @book_page_url = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["DetailPageURL"] : @book_page_url = "N/A"
+			@book_page_url = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index].fetch("DetailPageURL", "N/A")
 			# Cover image
-			if parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index].has_key?("LargeImage")
-				@cover_image_url = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["LargeImage"]["URL"]
-			else
-				@cover_image_url = "N/A"
-			end
+			@cover_image_url = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index].fetch("LargeImage", {}).fetch("URL", "N/A")
 			# Language
 			# Most of the time, it's multiple
 			if parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].has_key?("Languages")
@@ -151,15 +148,16 @@ isbns.each do |isbn|
 				@language = "N/A"
 			end
 
+		
+		#################	
 		# Case 2. SINGLE book results with the given isbn
 		else
 			# EAN
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("EAN") ? @ean = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["EAN"] : @ean = "N/A"
+			@ean = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("EAN") { "N/A" }
 			# Title
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("Title") ? @title = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"] : @title = "N/A"
+			@title = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Title") { "N/A" }
 			# Author
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("Author") ? @author = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Author"] : @author = "N/A"
-			
+			@author = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Author") { "N/A" }
 			# Creator
 			@creator_and_role = []
 			# creator == contributors, different from author
@@ -186,25 +184,21 @@ isbns.each do |isbn|
 			# otherwise, no creators listed
 			else
 				@creator_and_role = 'None'
-				print " Blank creator"
+				print " Blank  creator"
 			end
 
 			# Company
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("Publisher") ? @company = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Publisher"] : @company = "N/A"
+			@company = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Publisher") { "N/A" }
 			# PubDate
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("PublicationDate") ? @pub_date = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["PublicationDate"] : @pub_date = "N/A"
+			@pub_date = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("PublicationDate", "N/A")
 			# Binding
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("Binding") ? @binding = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Binding"] : @binding = "N/A"
+			@binding = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Binding", "N/A")
 			# Number of Pages
-			parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("NumberOfPages") ? @number_of_pages = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["NumberOfPages"] : @number_of_pages = "N/A"
+			@number_of_pages = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("NumberOfPages", "N/A")
 			# Book page url
-			parsed_response["ItemLookupResponse"]["Items"]["Item"].has_key?("DetailPageURL") ? @book_page_url = parsed_response["ItemLookupResponse"]["Items"]["Item"]["DetailPageURL"] : @book_page_url = "N/A"
+			@book_page_url = parsed_response["ItemLookupResponse"]["Items"]["Item"].fetch("DetailPageURL", "N/A")
 			# Cover image
-			if parsed_response["ItemLookupResponse"]["Items"]["Item"].has_key?("LargeImage")
-				@cover_image_url = parsed_response["ItemLookupResponse"]["Items"]["Item"]["LargeImage"]["URL"]
-			else
-				@cover_image_url = "N/A"
-			end
+			@cover_image_url = parsed_response["ItemLookupResponse"]["Items"]["Item"].fetch("LargeImage", {}).fetch("URL", "N/A")
 			# Language
 			# Most of the time, it's multiple
 			if parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].has_key?("Languages")
@@ -221,6 +215,8 @@ isbns.each do |isbn|
 				@language = "N/A"
 			end
 
+			@item_counts = 1
+
 		end
 		
 		
@@ -228,7 +224,7 @@ isbns.each do |isbn|
 
 		# Write the results to CSV
 		CSV.open("data/amazon_results.csv", "a") do |csv|
-			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url ]
+			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @item_counts ]
 		end
 	@query_count += 1
 	print " ... OK \t #{@query_count} / #{@isbns_size} \n"
@@ -237,4 +233,3 @@ isbns.each do |isbn|
 end # End File.readlines
 
 puts "All done"
-

@@ -8,7 +8,7 @@ require 'retriable'
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('ES')
+@request = Vacuum.new('FR')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -93,19 +93,11 @@ isbns.each do |isbn|
 			# creator == contributors, different from author
 			if parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].is_a? Hash
 
-				#debug
-				print " Single creator"
-				# end debug
-
 				# only one set	
 				@creator_and_role = parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].values.join(' - ')
 
 			# multiple creators
 			elsif parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].is_a? Array
-
-				#debug
-				print " Multiple creator"
-				# end debug
 
 				parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Creator"].each do |hash|
 					@creator_and_role << hash.values.join(' - ')
@@ -115,7 +107,6 @@ isbns.each do |isbn|
 			# No creators listed
 			else 
 				@creator_and_role = 'None'
-				print " Blank  creator"
 			end
 
 			# Company
@@ -161,19 +152,11 @@ isbns.each do |isbn|
 			# creator == contributors, different from author
 			if parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].is_a? Hash
 
-				#debug
-				print " Single creator"
-				# end debug
-
 				# only one set	
 				@creator_and_role = parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].values.join(' - ')
 
 			# multiple creators
 			elsif parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].is_a? Array
-
-				#debug
-				print " Multiple creator"
-				# end debug
 				
 				parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Creator"].each do |hash|
 					@creator_and_role << hash.values.join(' - ')
@@ -182,7 +165,6 @@ isbns.each do |isbn|
 			# otherwise, no creators listed
 			else
 				@creator_and_role = 'None'
-				print " Blank  creator"
 			end
 
 			# Company

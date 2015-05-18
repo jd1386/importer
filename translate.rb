@@ -37,7 +37,7 @@ CSV.open('data/translate_results.csv', 'w') do |csv|
 		end
 
 		# Write to file
-		csv << [ @title_original, @title_translated, @language_detected ]
+		csv << [ @title_translated, @language_detected ]
 
 		# Write to screen
 		processed_count += 1

@@ -1,10 +1,17 @@
-string = "4 to 6"
-puts array = string.split(" to ")
+require 'awesome_print'
 
-new_array = []
-(array.first..array.last).each do |age|
+array = []
+
+File.readlines('data/test_source.txt').each do |line|
+	new_line = line.rstrip.split(', ')
+	array << new_line.reverse
 	
-	new_array << age.to_i
 end
 
-print new_array
+ap array
+
+File.open('data/test_results.txt', 'w') do |f|
+	array.each do |categories|
+		f.puts categories.join(", ")
+	end
+end

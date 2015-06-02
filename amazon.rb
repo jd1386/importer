@@ -80,7 +80,7 @@ isbns.each do |isbn|
 				else
 				 	@browsenodes << category["Name"]
 				end
-				return @browsenodes.uniq.join(", ")
+				return @browsenodes.uniq.reverse.join(", ")
 					
 			end
 
@@ -103,7 +103,7 @@ isbns.each do |isbn|
 				else
 				 	@browsenodes << category["Name"]
 				end
-				return @browsenodes.uniq.join(", ")
+				return @browsenodes.uniq.reverse.join(", ")
 					
 			end
 		end
@@ -283,4 +283,4 @@ isbns.each do |isbn|
 end # End File.readlines
 
 puts "All done"
-system('say -v Good News "Amazon is done come back to work again" ')
+system('say -v Alex "Amazon is done come back to work again" ')

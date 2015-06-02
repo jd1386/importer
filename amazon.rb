@@ -43,8 +43,72 @@ isbns.each do |isbn|
 
 	print isbn
 
-	@parsed_response = @response.to_h
-	
+	@parsed_response = @response.to_h	
+
+	def which_item
+		if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
+			item_counts = @parsed_response["ItemLookupResponse"]["Items"]["Item"].size
+
+			(0...item_counts).each do |i|
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
+					@item_index = i
+				else
+					next
+				end
+			end
+		end
+	end
+
+	def categories
+		# multiple items
+		if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
+			which_item
+			@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].size
+			@browsenodes = []
+			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]#["BrowseNode"]
+
+			(0...@browsenodes_count).each do |i|
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].is_a? Array
+					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"][i]
+				else
+					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"]
+				end
+
+				if category.has_key?("Ancestors")
+					@browsenodes << category["Name"]
+					@browsenodes << category["Ancestors"]["BrowseNode"]["Name"]
+				else
+				 	@browsenodes << category["Name"]
+				end
+				return @browsenodes.uniq.join(", ")
+					
+			end
+
+		# single item
+		else
+			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"]
+			@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].size
+			@browsenodes = []
+			
+			(0...@browsenodes_count).each do |i|
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].is_a? Array
+					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"][i]
+				else
+					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"]
+				end
+
+				if category.has_key?("Ancestors")
+					@browsenodes << category["Name"]
+					@browsenodes << category["Ancestors"]["BrowseNode"]["Name"]
+				else
+				 	@browsenodes << category["Name"]
+				end
+				return @browsenodes.uniq.join(", ")
+					
+			end
+		end
+
+	end
 
 	if @parsed_response["ItemLookupResponse"]["Items"]["Request"].has_key?("Errors")
 		@error_message = @parsed_response["ItemLookupResponse"]["Items"]["Request"]["Errors"]["Error"]["Message"]
@@ -57,7 +121,10 @@ isbns.each do |isbn|
 
 	# No error
 	else
-		
+
+
+		#categories
+
 		# Debugging
 		
 		#abort
@@ -71,15 +138,8 @@ isbns.each do |isbn|
 			# Number of items shown as search results
 			# Case a. Single book with two duplicate pages, one of which is not maintained
 			# Case b. Two books, hard/softcover and ebook.
-			item_counts = @parsed_response["ItemLookupResponse"]["Items"]["Item"].size
-
-			(0...item_counts).each do |i|
-				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
-					@item_index = i
-				else
-					next
-				end
-			end
+			
+			which_item
 
 		end
 
@@ -139,6 +199,8 @@ isbns.each do |isbn|
 			else
 				@language = "N/A"
 			end
+			# Category
+			@categories = categories
 
 		
 		#################	
@@ -198,6 +260,8 @@ isbns.each do |isbn|
 				@language = "N/A"
 			end
 
+			@categories = categories
+
 			@item_counts = 1
 
 		end
@@ -210,7 +274,7 @@ isbns.each do |isbn|
 		##################################################
 		# Write the results to CSV
 		CSV.open("data/amazon_results.csv", "a") do |csv|
-			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url ]
+			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @categories ]
 		end
 	@query_count += 1
 	print " ... OK \t #{@query_count} / #{@isbns_size} \n"
@@ -219,3 +283,4 @@ isbns.each do |isbn|
 end # End File.readlines
 
 puts "All done"
+system('say -v Good News "Amazon is done come back to work again" ')

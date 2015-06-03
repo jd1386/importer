@@ -8,7 +8,7 @@ require 'retriable'
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('DE')
+@request = Vacuum.new('FR')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -50,7 +50,12 @@ isbns.each do |isbn|
 			item_counts = @parsed_response["ItemLookupResponse"]["Items"]["Item"].size
 
 			(0...item_counts).each do |i|
-				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
+				# The following is the logic to select an item to scrape.
+				# The following logic does not disallow ebook
+				#if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
+
+				# Disallow ebook whatsoever
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["ProductGroup"] != "eBooks" && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
 					@item_index = i
 				else
 					next
@@ -126,7 +131,7 @@ isbns.each do |isbn|
 		#categories
 
 		# Debugging
-		
+		#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]
 		#abort
 		# End debugging
 

@@ -6,6 +6,20 @@ require 'awesome_print'
 @api = '7sq28t0u'
 @apikey = 'qNE3m3lrmLG6BAKxiUdqEa0T5I3uUe7c'
 
+def job_completed?
+	response_json = RestClient.get "https://www.kimonolabs.com/api/#{@api}",
+		apikey: @apikey
+	response_json = JSON.parse(response_json)
+
+	
+	if response_json["lastrunstatus"].eql? "success"
+		true 
+	elsif response_json["lastrunstatus"].eql? "in progress"
+		false
+	end
+	
+end
+
 # Clear 'kimono_results.csv'
 File.delete('data/kimono_results.csv') if File.exists?('data/kimono_results.csv')
 
@@ -15,19 +29,21 @@ urls = []
 File.readlines('data/kimono_urls.txt').each do |line|
 	urls << line.rstrip
 end
-ap urls
 puts "Loaded #{urls.size} urls."
 
 
+puts job_completed?
+abort 'Job not completed yet. try later' if job_completed? == false
+
 
 # Settings
-# RestClient.post "https://www.kimonolabs.com/kimonoapis/#{@api}/update",
-# 	apikey: @apikey,
-# 	urls: urls
+RestClient.post "https://www.kimonolabs.com/kimonoapis/#{@api}/update",
+	apikey: @apikey,
+	urls: urls
 
-# # Run crawler
-# RestClient.post "https://www.kimonolabs.com/kimonoapis/#{@api}/startcrawl",
-# 	apikey: @apikey
+# Run crawler
+RestClient.post "https://www.kimonolabs.com/kimonoapis/#{@api}/startcrawl",
+	apikey: @apikey
 
 # Get results
 response_json = RestClient.get "https://www.kimonolabs.com/api/#{@api}",
@@ -36,11 +52,8 @@ response_json = RestClient.get "https://www.kimonolabs.com/api/#{@api}",
 
 response_json = JSON.parse(response_json)
 
-ap response_json["results"]["collection2"]
 
-if response_json["newdata"] == true
-	puts "new data!"
-end
+
 
 # Collection1
 response_json["results"]["collection1"].each do |row|

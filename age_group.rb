@@ -4,27 +4,35 @@ new_array = []
 
 File.readlines("data/age_group_source.txt").each do |line|
 	if @settings == "single"
-		new_line = line.gsub!('a', '-').scan(/\d+ . \d+/)
-		puts new_line
-		
-		splitted = new_line[0].split(" - ")
-		splitted.sort_by!(&:to_i)
-		puts splitted
+		if line.scan(/\d+ - \d+/)[0].nil?
+			puts "No integer in the given string!"
+			new_array << nil
 
-		
-		new_array << splitted
+		else
+			new_line = line.gsub!('-', '-').scan(/\d+ - \d+/)
+			puts new_line
+			
+			splitted = new_line[0].split(" - ")
+			splitted.sort_by!(&:to_i)
+
+			new_array << splitted
+		end
 		
 
 	elsif @settings == "multiple"
+		if line.scan(/\d+-\d+/)[0].nil?
+			puts "No integer in the given string!"
+			new_array << ''
 
-		new_line = line.scan(/\d+-\d+/).join("-")
-		puts new_line
-		
-		splitted = new_line.split("-")
-		splitted.sort_by!(&:to_i)
-		puts splitted
+		else
+			new_line = line.scan(/\d+-\d+/).join("-")
+			puts new_line
+			
+			splitted = new_line.split("-")
+			splitted.sort_by!(&:to_i)
 
-		new_array << splitted
+			new_array << splitted
+		end
 	end
 	
 	
@@ -37,8 +45,13 @@ puts "Extracted #{new_array.size} age group elements"
 
 File.open("data/age_group_results.txt", 'w') do |f|
 	new_array.each do |age|
-		puts "#{age.first} to #{age.last} years"
-		f.puts "#{age.first} to #{age.last}"
+		if age.nil?
+			f.puts ""
+
+		else
+			puts "#{age.first} to #{age.last} years"
+			f.puts "#{age.first} to #{age.last}"
+		end
 	end
 
 end

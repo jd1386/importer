@@ -2,8 +2,13 @@ require 'amatch'
 require 'namae'
 require 'awesome_print'
 
+names = []
+(0...ARGV.size).each do |i|
+	names << ARGV[i].rstrip
+end
 
-author_name_to_query = [ ARGV[0], ARGV[1], ARGV[2], ARGV[3] ].join(' ').rstrip!
+author_name_to_query = names.join(' ')
+
 
 authors = []
 

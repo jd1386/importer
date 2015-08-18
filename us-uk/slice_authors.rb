@@ -1,6 +1,7 @@
 require 'csv'
 require 'namae'
 
+
 @authors = []
 
 File.readlines('/Users/jungdolee/projects/importer/data/slice_authors_source.txt', encoding: 'UTF-8'). each do |line|
@@ -44,7 +45,27 @@ CSV.open('/Users/jungdolee/projects/importer/data/slice_authors_results.csv', 'w
 		else
 			title = names[0].title
 			appellation = names[0].appellation
+			
 			given_name = names[0].given
+
+			# Add dot if initials
+			# Case 1: J D Salinger => J. D. Salinger
+			if given_name && given_name.split(' ')[0].size == 1
+				dotted_given_names = []
+
+				(0...given_name.split(' ').size).each do |i|
+					
+					dotted_given_names << "#{given_name.split(' ')[i]}."
+				end
+				given_name = dotted_given_names.join(' ')
+
+			# Case 2: Jerome D Salinger => Jerome D. Salinger
+			# elsif given_name && given_name.split(' ')[1].size == 1
+				
+			# 	given_name = given_name.split(' ')[0] + "#{given_name.split(' ')[1]}." + given_name.split(' ').last
+			end
+
+
 			name_particle = names[0].particle
 			nick_name = names[0].nick
 			family_name = names[0].family

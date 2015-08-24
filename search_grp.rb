@@ -9,8 +9,6 @@ require 'retriable'
 Dotenv.load
 
 
-uri = URI.parse("https://api.import.io/store/data/92a8cd90-fd0c-4eb8-99d3-1d1dc2c7fa42/_query?_user=3f9ae37e-acfd-44f4-8157-e72adcc5b283&_apikey=3f9ae37e-acfd-44f4-8157-e72adcc5b283%3A93CLLmP2bc%2FxrnSLz8b0BAsVyjebOMqgkxsEz%2FzmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg%3D%3D ")
-
 isbn_prefixes = []
 
 # Load isbn prefixes
@@ -20,16 +18,18 @@ end
 
 @processed_count = 0
 
+uri = URI.parse("https://api.import.io/store/data/7a870b90-71d4-4ff6-9d55-bc927c6e6979/_query?_user=3f9ae37e-acfd-44f4-8157-e72adcc5b283&_apikey=3f9ae37e-acfd-44f4-8157-e72adcc5b283%3A93CLLmP2bc%2FxrnSLz8b0BAsVyjebOMqgkxsEz%2FzmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg%3D%3D")
+
 # Loop through prefixes to look up
 isbn_prefixes.each do |prefix|
 
     @req = Net::HTTP::Post.new(uri)
     @req.body = {
         "input" => {
-            "isbn_prefix" => prefix
+            "isbn_prefix" => prefix.rstrip
         },
         "additionalInput" => {
-            "92a8cd90-fd0c-4eb8-99d3-1d1dc2c7fa42" => {
+            "7a870b90-71d4-4ff6-9d55-bc927c6e6979" => {
                 "domainCredentials" => {
                     "grp.isbn-international.org" => {
                         "username" => ENV['GRP_USER_ID'],
@@ -55,13 +55,13 @@ end
 
 
 # Save @parsed_response to CSV
-CSV.open("data/search_grp_results.csv", "a") do |csv|
+CSV.open("data/search_grp_results.csv", "a") do |row|
     # debug 
     ap @parsed_response["results"]
     # end debug
 
     if @parsed_response["results"].nil?
-        csv << [
+        row << [
                 JSON.parse(@req.body)["input"]["isbn_prefix"],
                 "Error. Please try again"
         ]
@@ -70,36 +70,29 @@ CSV.open("data/search_grp_results.csv", "a") do |csv|
 
      # If no results found with the given isbn prefix
     elsif @parsed_response["results"].empty?
-        csv << [
+        row << [
                 JSON.parse(@req.body)["input"]["isbn_prefix"],
                 "No results found"
-        ]
+                ]
+    
+    # Success        
     else
-        # If multiple search records with the given isbn prefix,
-        # display it on each row
-        if @parsed_response["totalResults"] >= 2
-            i = 0        
-            (0...@parsed_response["results"][0]["company_name"].size).each do
-                
-                csv << [ 
-                        JSON.parse(@req.body)["input"]["isbn_prefix"], 
-                        @parsed_response["results"][0]["country"][i], 
-                        @parsed_response["results"][0]["agency_name"][i],
-                        @parsed_response["results"][0]["company_name"][i],
-                        @parsed_response["results"][0]["isbn_prefix"][i],
-                        @parsed_response["results"][0]["meta_all"][i]
-                        ]
-                i += 1
+        # Multiple companies found with given isbn prefix
+        if @parsed_response["results"][0]["company"].is_a? Array
+            (0...@parsed_response["results"][0]["company"].size).each do |n|
+                row << [ 
+                    JSON.parse(@req.body)["input"]["isbn_prefix"],
+                    @parsed_response["results"][0]["company"][n],
+                    @parsed_response["results"][0]["meta_all"][n]
+                ]
             end
-        else 
-            csv << [ 
-                    JSON.parse(@req.body)["input"]["isbn_prefix"], 
-                    @parsed_response["results"][0]["country"], 
-                    @parsed_response["results"][0]["agency_name"],
-                    @parsed_response["results"][0]["company_name"],
-                    @parsed_response["results"][0]["isbn_prefix"],
-                    @parsed_response["results"][0]["meta_all"]
-                    ]
+        
+        else
+            row << [ 
+                JSON.parse(@req.body)["input"]["isbn_prefix"],
+                @parsed_response["results"][0]["company"],
+                @parsed_response["results"][0]["meta_all"]
+                ]
         end
     end
 

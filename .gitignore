@@ -1,6 +1,4 @@
 
 *.DS_Store
 *.env
-data/*.json
-data/*.txt
-data/*.csv
+data/

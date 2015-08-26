@@ -5,6 +5,81 @@ require 'csv'
 require 'json'
 require 'retriable'
 
+def which_item
+		if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
+			item_counts = @parsed_response["ItemLookupResponse"]["Items"]["Item"].size
+
+			(0...item_counts).each do |i|
+				# The following is the logic to select an item to scrape.
+				# The following logic does not disallow ebook
+				#if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
+				
+				# Force Book, not Ebook
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["ProductGroup"] == "Book"
+
+				# Disallow ebook whatsoever
+				#if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["ProductGroup"] != "eBooks" && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
+					@item_index = i
+				else
+					next
+				end
+			end
+		end
+end
+
+def categories
+	# multiple items
+	if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
+		which_item
+		@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].size
+		@browsenodes = []
+		
+		#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]
+
+		(0...@browsenodes_count).each do |i|
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].is_a? Array
+				category = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"][i]
+			else
+				category = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"]
+			end
+
+			if category.has_key?("Ancestors")
+				@browsenodes << category["Name"]
+				@browsenodes << category["Ancestors"]["BrowseNode"]["Name"]
+			else
+			 	@browsenodes << category["Name"]
+			end
+			return @browsenodes.uniq.reverse.join(", ")
+				
+		end
+
+	# single item
+	else
+		#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"][0].flatten
+		@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].size
+		@browsenodes = []
+
+		
+		(0...@browsenodes_count).each do |i|
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].is_a? Array
+				category = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"][i]
+			else
+				category = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"]
+			end
+
+			if category.has_key?("Ancestors")
+				@browsenodes << category["Name"]
+				@browsenodes << category["Ancestors"]["BrowseNode"]["Name"]
+			else
+			 	@browsenodes << category["Name"]
+			end
+
+			return @browsenodes.uniq.reverse.join(", ")
+				
+		end
+	end
+end
+
 Dotenv.load
 
 # Configuration
@@ -28,7 +103,7 @@ end
 
 
 # Query each isbn
-isbns.each do |isbn|
+isbns.each_with_index do |isbn, index|
 	Retriable.retriable tries: 5, base_interval: 2 do
 		@response = @request.item_lookup(
 		  query: {
@@ -42,84 +117,11 @@ isbns.each do |isbn|
 	end
 
 	print isbn
+	
 
 	@parsed_response = @response.to_h	
 
-	def which_item
-		if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
-			item_counts = @parsed_response["ItemLookupResponse"]["Items"]["Item"].size
-
-			(0...item_counts).each do |i|
-				# The following is the logic to select an item to scrape.
-				# The following logic does not disallow ebook
-				#if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i].has_key?("LargeImage") && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
-				
-				# Force Book, not Ebook
-				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["ProductGroup"] == "Book"
-
-				# Disallow ebook whatsoever
-				#if @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["ProductGroup"] != "eBooks" && @parsed_response["ItemLookupResponse"]["Items"]["Item"][i]["ItemAttributes"]["Publisher"] != nil
-					@item_index = i
-				else
-					next
-				end
-			end
-		end
-	end
-
-	def categories
-		# multiple items
-		if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
-			which_item
-			@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].size
-			@browsenodes = []
-			
-			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]
-
-			(0...@browsenodes_count).each do |i|
-				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].is_a? Array
-					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"][i]
-				else
-					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"]
-				end
-
-				if category.has_key?("Ancestors")
-					@browsenodes << category["Name"]
-					@browsenodes << category["Ancestors"]["BrowseNode"]["Name"]
-				else
-				 	@browsenodes << category["Name"]
-				end
-				return @browsenodes.uniq.reverse.join(", ")
-					
-			end
-
-		# single item
-		else
-			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"][0].flatten
-			@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].size
-			@browsenodes = []
-
-			
-			(0...@browsenodes_count).each do |i|
-				if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].is_a? Array
-					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"][i]
-				else
-					category = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"]
-				end
-
-				if category.has_key?("Ancestors")
-					@browsenodes << category["Name"]
-					@browsenodes << category["Ancestors"]["BrowseNode"]["Name"]
-				else
-				 	@browsenodes << category["Name"]
-				end
-
-				return @browsenodes.uniq.reverse.join(", ")
-					
-			end
-		end
-
-	end
+	starting_time_per_item = Time.now.to_f
 
 	# If error
 	if @parsed_response["ItemLookupResponse"]["Items"]["Request"].has_key?("Errors")
@@ -298,11 +300,18 @@ isbns.each do |isbn|
 		CSV.open("data/amazon_results.csv", "a") do |csv|
 			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @categories ]
 		end
+
+	ending_time_per_item = Time.now.to_f
+	elapsed_time_per_item = (ending_time_per_item - starting_time_per_item) * 1000
+	remaining_items = @isbns_size - index - 1
+
+	remaining_time = elapsed_time_per_item * remaining_items
+
 	@query_count += 1
-	print " ... OK \t #{@query_count} / #{@isbns_size} \n"
+	print " ... OK \t #{@query_count} / #{@isbns_size} \t #{remaining_time.round(1)} sec remaining ... \t #{remaining_items} items remaining.\n"
 	end
 
 end # End File.readlines
 
 puts "All done"
-system('say -v Alex "Amazon is done come back to work again" ')
+system('say -v Alex "Amazon is done. Come back to work again." ')

@@ -10,6 +10,7 @@ File.readlines('data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
   new_line = line.gsub("Country ", " || Country=> ") 
   new_line = new_line.gsub(" Agency Name ", " || Agency Name=> ") 
   new_line = new_line.gsub(" ISBN Prefix ", " || ISBN Prefix=> ")
+  new_line = new_line.gsub(" ISBN ", " || ISBN=> ")
   new_line = new_line.gsub(" Status ", " || Status=> ")
   new_line = new_line.gsub(" Address ", " || Address=> ")
   new_line = new_line.gsub(" Admin Contact Name ", " || Admin Contact Name=> ")
@@ -63,13 +64,13 @@ puts "\nSuccess! Converted #{ meta_all.size } lines"
 ## Save meta_all to CSV file
 CSV.open("data/to_hash_results.csv", "w") do |csv|
 	# Write header
-  csv << [ "Country", "Agency Name", "ISBN Prefix", "Status", "Address", "Admin Contact Name", "Web Site", "san", "Admin Phone", "Admin Fax", "Admin Email", "Alternate Contact Name", "Alternate Phone", "Alternate Fax", "Alternate Email" ]
+  csv << [ "Country", "Agency Name", "ISBN", "Status", "Address", "Admin Contact Name", "Web Site", "san", "Admin Phone", "Admin Fax", "Admin Email", "Alternate Contact Name", "Alternate Phone", "Alternate Fax", "Alternate Email" ]
 
   # Write rows
   i = 0
 
   (0...meta_all.length).each do 
-  	csv << meta_all[i][0].values_at( "Country", "Agency Name", "ISBN Prefix", "Status", "Address", "Admin Contact Name", "Web Site", "san", "Admin Phone", "Admin Fax", "Admin Email", "Alternate Contact Name", "Alternate Phone", "Alternate Fax", "Alternate Email" ) 
+  	csv << meta_all[i][0].values_at( "Country", "Agency Name", "ISBN", "Status", "Address", "Admin Contact Name", "Web Site", "san", "Admin Phone", "Admin Fax", "Admin Email", "Alternate Contact Name", "Alternate Phone", "Alternate Fax", "Alternate Email" ) 
   	i += 1
   end
 

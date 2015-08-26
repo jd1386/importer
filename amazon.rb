@@ -8,7 +8,7 @@ require 'retriable'
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('DE')
+@request = Vacuum.new('US')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -29,7 +29,7 @@ end
 
 # Query each isbn
 isbns.each do |isbn|
-	Retriable.retriable do
+	Retriable.retriable tries: 5, base_interval: 2 do
 		@response = @request.item_lookup(
 		  query: {
 		    'IdType' => 'ISBN',
@@ -73,7 +73,8 @@ isbns.each do |isbn|
 			which_item
 			@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].size
 			@browsenodes = []
-			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]#["BrowseNode"]
+			
+			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]
 
 			(0...@browsenodes_count).each do |i|
 				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["BrowseNodes"]["BrowseNode"].is_a? Array
@@ -94,9 +95,10 @@ isbns.each do |isbn|
 
 		# single item
 		else
-			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"]
+			#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"][0].flatten
 			@browsenodes_count = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].size
 			@browsenodes = []
+
 			
 			(0...@browsenodes_count).each do |i|
 				if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["BrowseNodes"]["BrowseNode"].is_a? Array
@@ -111,6 +113,7 @@ isbns.each do |isbn|
 				else
 				 	@browsenodes << category["Name"]
 				end
+
 				return @browsenodes.uniq.reverse.join(", ")
 					
 			end
@@ -118,6 +121,7 @@ isbns.each do |isbn|
 
 	end
 
+	# If error
 	if @parsed_response["ItemLookupResponse"]["Items"]["Request"].has_key?("Errors")
 		@error_message = @parsed_response["ItemLookupResponse"]["Items"]["Request"]["Errors"]["Error"]["Message"]
 		ap @error_message
@@ -129,9 +133,6 @@ isbns.each do |isbn|
 
 	# No error
 	else
-
-
-		#categories
 
 		# Debugging
 		#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]
@@ -158,7 +159,14 @@ isbns.each do |isbn|
 			# Title
 			@title = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Title", "N/A")
 			# Author
-			@author = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Author", "N/A")
+			# if multiple authors, join them
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Author"].is_a? Array
+				@author = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"]["Author"].join(', ')
+			# Otherwise, print as is
+			else
+				@author = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Author", "N/A")
+			end
+			
 			# Creator
 			@creator_and_role = []
 			# creator == contributors, different from author
@@ -219,7 +227,13 @@ isbns.each do |isbn|
 			# Title
 			@title = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Title") { "N/A" }
 			# Author
-			@author = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Author") { "N/A" }
+			# if multiple authors, join them
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Author"].is_a? Array
+				@author = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Author"].join(', ')
+			# Otherwise, print as is
+			else
+				@author = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Author", "N/A")
+			end
 			# Creator
 			@creator_and_role = []
 			# creator == contributors, different from author

@@ -6,8 +6,8 @@
 File.open('/Users/jungdolee/projects/importer/data/page-generate-results.txt', 'w') do |f|
 	#f.puts first_page
 	
-	(2..450).each do |page|
-		f.puts "http://www.decitre.fr/livres/jeunesse.html?dir=desc&mode=list&order=dctr_publication_date&p=#{page}"
+	(2..150).each do |page|
+		f.puts "http://www.mondadoristore.it/libri/ragazzi/Bambini-e-Ragazzi/genG004/#{page}/crc=164&gen=G004&opnedBoxes=amtp%2Catpp%2Casgn%2Capzf%2Cascf%2Caaut%2Caedt%2Cacol%2Camtp%2Catpp%2Casgn&sort=7&tpr=250"
 	end
 end
 puts "Done! The results saved to data/page-generate-results.txt"

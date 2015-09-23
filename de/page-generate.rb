@@ -6,8 +6,8 @@
 File.open('/Users/jungdolee/projects/importer/data/page-generate-results.txt', 'w') do |f|
 	#f.puts first_page
 	
-	(2..450).each do |page|
-		f.puts "http://www.decitre.fr/livres/jeunesse.html?dir=desc&mode=list&order=dctr_publication_date&p=#{page}"
+	(2..500).each do |page|
+		f.puts "http://www.mayersche.de/buecher/kinderbuch-jugendbuch/#{page}/?sprache=ger&sortby=publicationdate&sortorder=desc"
 	end
 end
 puts "Done! The results saved to data/page-generate-results.txt"

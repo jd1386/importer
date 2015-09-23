@@ -5,9 +5,12 @@
 # Write the results to the file
 File.open('/Users/jungdolee/projects/importer/data/page-generate-results.txt', 'w') do |f|
 	#f.puts first_page
+
+	# Idioma 6 = Spanish
+	# Idioma 7 = Catalan
 	
-	(2..450).each do |page|
-		f.puts "http://www.decitre.fr/livres/jeunesse.html?dir=desc&mode=list&order=dctr_publication_date&p=#{page}"
+	(1..40).each do |page|
+		f.puts "http://www.casadellibro.com/busqueda-libros?spellcheck=1&page=#{page}&idcategoria=117000000&idioma=6&ordenar=1&idtipoproducto=1&itemxpagina=60&nivel=2"
 	end
 end
 puts "Done! The results saved to data/page-generate-results.txt"

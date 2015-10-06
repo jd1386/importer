@@ -28,16 +28,15 @@ CSV.open('data/translate_results.csv', 'w') do |csv|
 		# Make query
 		# In the case of (timeout) error, retry 3 times.
 		Retriable.retriable do
-			@language_detected = EasyTranslate::LANGUAGES[EasyTranslate.detect(@title_original)]
+			#@language_detected = EasyTranslate::LANGUAGES[EasyTranslate.detect(@title_original)]
+			#@language_detected.nil? ? @language_detected = "Unknown" : @language_detected = @language_detected.capitalize
 			
-			@language_detected.nil? ? @language_detected = "Unknown" : @language_detected = @language_detected.capitalize
-			
-			@title_translated = EasyTranslate.translate(@title_original, :to => 'en')
+			@title_translated = EasyTranslate.translate(@title_original, :from => ARGV[0], :to => 'en')
 			@title_translated = @title_translated.titleize
 		end
 
 		# Write to file
-		csv << [ @title_translated, @language_detected ]
+		csv << [ @title_translated ]
 
 		# Write to screen
 		processed_count += 1

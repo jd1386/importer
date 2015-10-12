@@ -1,4 +1,25 @@
 require "csv"
+require "titleize"
+
+
+def format_type(raw)
+  raw ||= "blank"
+
+  if raw.include? "Tapa blanda"
+    result = "Paperback"
+  elsif raw.include? "Tapa dura"
+    result = "Hardcover"
+  elsif raw == "blank"
+    result = "N/A"
+  else
+    result = "Other"
+  end
+  return result
+end
+
+def format_pages(raw)
+  result = raw.gsub(" págs.", "")
+end
 
 
 # Read source file and clean up each line
@@ -29,11 +50,16 @@ hash = Hash.new
 
 # After splitted, make a hash with key-value pairs with corresponding values
 splitted_line.each do |e|
-		k = e.split("=> ").first
-		v = e.split("=> ").last.chomp('').rstrip
-		hash[k] = v
-		puts hash
+		key = e.split("=> ").first
+		value = e.split("=> ").last.chomp('').rstrip
+		hash[key] = value
 end
+
+
+# Try to convert/clean each value if needed.
+hash["Format"] = format_type(hash["Format"]) #unless hash["Format"].nil?
+hash["Pages"] = format_pages(hash["Pages"]) unless hash["Pages"].nil?
+
 
 # Save the hash to a book_array
 book_array << hash

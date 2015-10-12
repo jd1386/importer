@@ -17,11 +17,11 @@ File.readlines('/Users/jungdolee/projects/importer/data/to_hash_source.txt', enc
 
 
   new_line = line.gsub("Dostupnost: ", " || Availability=> ")
-  new_line = new_line.gsub("Rok vydání: ", " || Pub_date=> ") 
-  new_line = new_line.gsub("Vydal: ", " || Publisher=> ") 
-  new_line = new_line.gsub("Formát: ", " || Format=> ") 
-  new_line = new_line.gsub("EAN: ", " || EAN=> ") 
-  new_line = new_line.gsub("ISBN: ", " || ISBN=> ") 
+  new_line = new_line.gsub(" Rok vydání: ", " || Pub_date=> ") 
+  new_line = new_line.gsub(" Vydal: ", " || Publisher=> ") 
+  new_line = new_line.gsub(" Formát: ", " || Format=> ") 
+  new_line = new_line.gsub(" EAN: ", " || EAN=> ") 
+  new_line = new_line.gsub(" ISBN: ", " || ISBN=> ") 
 
 
   ## Process 

@@ -83,7 +83,7 @@ end
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('US')
+@request = Vacuum.new('FR')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -137,7 +137,7 @@ isbns.each_with_index do |isbn, index|
 	else
 
 		# Debugging
-		#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]
+		ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]
 		#abort
 		# End debugging
 
@@ -192,6 +192,8 @@ isbns.each_with_index do |isbn, index|
 
 			# Company
 			@company = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Publisher", "N/A")
+			# Editorial Review
+			@book_description = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"]["EditorialReview"]["Content"]
 			# PubDate
 			@pub_date = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("PublicationDate", "N/A")
 			# Binding
@@ -258,6 +260,12 @@ isbns.each_with_index do |isbn, index|
 
 			# Company
 			@company = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Publisher") { "N/A" }
+			# Editorial Review
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"].present?
+				@book_description = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"]["EditorialReview"]["Content"]
+			else
+				@book_description = ''
+			end
 			# PubDate
 			@pub_date = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("PublicationDate", "N/A")
 			# Binding
@@ -298,7 +306,7 @@ isbns.each_with_index do |isbn, index|
 		##################################################
 		# Write the results to CSV
 		CSV.open("data/amazon_results.csv", "a") do |csv|
-			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @categories ]
+			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @categories, @book_description ]
 		end
 
 	ending_time_per_item = Time.now.to_f
@@ -314,4 +322,4 @@ isbns.each_with_index do |isbn, index|
 end # End File.readlines
 
 puts "All done"
-system('say -v Alex "Amazon is done. Come back to work again." ')
+#system('say -v Alex "Amazon is done. Come back to work again." ')

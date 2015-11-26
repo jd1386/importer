@@ -83,7 +83,7 @@ end
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('FR')
+@request = Vacuum.new('US')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -193,7 +193,13 @@ isbns.each_with_index do |isbn, index|
 			# Company
 			@company = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("Publisher", "N/A")
 			# Editorial Review
-			@book_description = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"]["EditorialReview"]["Content"]
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index].has_key?("EditorialReviews")
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["EditorialReviews"]["EditorialReview"].is_a? Array
+					@book_description = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["EditorialReviews"]["EditorialReview"][0]["Content"]
+				end
+			else
+				@book_description = ''
+			end
 			# PubDate
 			@pub_date = @parsed_response["ItemLookupResponse"]["Items"]["Item"][@item_index]["ItemAttributes"].fetch("PublicationDate", "N/A")
 			# Binding
@@ -261,8 +267,10 @@ isbns.each_with_index do |isbn, index|
 			# Company
 			@company = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"].fetch("Publisher") { "N/A" }
 			# Editorial Review
-			if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"].present?
-				@book_description = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"]["EditorialReview"]["Content"]
+			if @parsed_response["ItemLookupResponse"]["Items"]["Item"].has_key?("EditorialReviews")
+				if @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"]["EditorialReview"].is_a? Array
+					@book_description = @parsed_response["ItemLookupResponse"]["Items"]["Item"]["EditorialReviews"]["EditorialReview"][0]["Content"]
+				end
 			else
 				@book_description = ''
 			end

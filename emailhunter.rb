@@ -1,6 +1,7 @@
 require 'emailhunter'
 require 'awesome_print'
 require 'dotenv'
+require 'retriable'
 require 'csv'
 require 'colorize'
 Dotenv.load
@@ -15,7 +16,9 @@ def load_emails
 end
 
 def verify(email, index)
-  @result = @client.verify(email)
+  Retriable.retriable tries: 3, base_interval: 2 do
+    @result = @client.verify(email)
+  end
 
   if @result
     @container << [ email, @result.result, Time.now, index ]
@@ -45,6 +48,7 @@ load_emails
   @threads = []
   @threads << Thread.new {
     verify(email, index)
+    sleep 1
   }
 
 end

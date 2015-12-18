@@ -10,7 +10,7 @@ Dotenv.load
 def load_emails
   @email_inputs = []
   File.readlines('data/emailhunter_source.txt').each do |line|
-    @email_inputs << line.rstrip
+    @email_inputs << line.strip!
   end
   puts "Loaded #{@email_inputs.size} emails.".blue
 end
@@ -20,6 +20,10 @@ def verify(email, index)
     @result = @client.verify(email)
   end
 
+  save_to_array(email, index)
+end
+
+def save_to_array(email, index)
   if @result
     @container << [ email, @result.result, Time.now, index ]
     puts "#{index}: OK".white
@@ -48,7 +52,6 @@ load_emails
   @threads = []
   @threads << Thread.new {
     verify(email, index)
-    sleep 1
   }
 
 end

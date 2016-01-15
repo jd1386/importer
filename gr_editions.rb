@@ -186,7 +186,7 @@ end
 
 ### CONTROLLER 
 
-gr_search = GoodreadsApi.new.book_by_isbn('9780545169172')
+gr_search = GoodreadsApi.new.book_by_isbn('9780545123266')
 
 
 ap link_to_other_editions = ImportIoApi.new.get_link_to_other_editions(gr_search["url"])

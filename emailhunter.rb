@@ -50,9 +50,7 @@ load_emails
   puts "#{index + 1} of #{@email_inputs.size}: Queried #{email} ... "
 
   @threads = []
-  @threads << Thread.new {
-    verify(email, index)
-  }
+  @threads << Thread.new { verify(email, index) }
 
 end
 

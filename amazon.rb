@@ -83,7 +83,7 @@ end
 Dotenv.load
 
 # Configuration
-@request = Vacuum.new('FR')
+@request = Vacuum.new('ES')
 @request.configure(
 	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
 	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -112,7 +112,8 @@ isbns.each_with_index do |isbn, index|
 		    'SearchIndex' => 'Books',
 		    'ResponseGroup' => 'Large',
 		    'MerchantId' => 'Amazon'
-		  }
+		  },
+		  persistent: true
 		)
 	end
 
@@ -137,7 +138,7 @@ isbns.each_with_index do |isbn, index|
 	else
 
 		# Debugging
-		ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]
+		#ap @parsed_response["ItemLookupResponse"]["Items"]["Item"]
 		#abort
 		# End debugging
 

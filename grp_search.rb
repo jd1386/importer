@@ -12,8 +12,8 @@ Dotenv.load
 isbn_prefixes = []
 
 # Load isbn prefixes
-File.readlines('data/search_grp_source.txt').each do |line|
-  isbn_prefixes << line.rstrip
+File.open('data/search_grp_source.txt').each do |line|
+  isbn_prefixes << line.rstrip 
 end
 
 @processed_count = 0
@@ -21,7 +21,7 @@ end
 uri = URI.parse("https://api.import.io/store/data/7a870b90-71d4-4ff6-9d55-bc927c6e6979/_query?_user=3f9ae37e-acfd-44f4-8157-e72adcc5b283&_apikey=3f9ae37e-acfd-44f4-8157-e72adcc5b283%3A93CLLmP2bc%2FxrnSLz8b0BAsVyjebOMqgkxsEz%2FzmojXOtNoPd383KfJLaLXJqaaUzDY8bxZpfM5sDQKi4yUAxg%3D%3D")
 
 # Loop through prefixes to look up
-isbn_prefixes.each do |prefix|
+isbn_prefixes.uniq.each do |prefix|
 
     @req = Net::HTTP::Post.new(uri)
     @req.body = {
@@ -45,13 +45,11 @@ isbn_prefixes.each do |prefix|
     # Connect and receive and parse response. 
     # In the case of Timeout Error, retry 3 times.
     Retriable.retriable on: Timeout::Error do
-        
-        Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
-    	response = http.request(@req).body.force_encoding('UTF-8')
-    	@parsed_response = JSON.parse(response)   
-
+      Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
+    	 response = http.request(@req).body.force_encoding('UTF-8')
+    	 @parsed_response = JSON.parse(response)   
+      end
     end
-end
 
 
 # Save @parsed_response to CSV
@@ -99,7 +97,7 @@ CSV.open("data/search_grp_results.csv", "a") do |row|
 end # end CSV
 
 @processed_count += 1
-puts JSON.parse(@req.body)["input"]["isbn_prefix"] + " done! Processed #{@processed_count} / #{isbn_prefixes.size} prefixes"
+puts JSON.parse(@req.body)["input"]["isbn_prefix"] + " done! Processed #{@processed_count} / #{isbn_prefixes.uniq.size} prefixes"
 
 end # end isbn_prefixes.each loop
 

@@ -235,4 +235,4 @@ end
 
 ### NEW CONTROLLER USING HTTPARTY AND NOKOGIRI
 
-ap GoodreadsApi.new.book_by_isbn('9789633106099')
+ap GoodreadsApi.new.book_by_isbn('9783314200250')

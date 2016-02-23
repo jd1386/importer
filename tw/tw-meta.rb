@@ -101,37 +101,30 @@ pages.each_with_index do |page, index|
 	agent = Mechanize.new
 	agent.user_agent_alias = 'Windows Edge'
 	page = agent.get(page)
-	page.encoding = "euc-kr"
+	page.encoding = "utf-8"
 
 
 	@current_page = page.uri.to_s
-	title_subtitle_and_series = page.search("td.pwrap_bgtit").search("table[1]").text.strip
-	@title_and_subtitle = title_subtitle_and_series.split(" l ")[0]
-	@series = title_subtitle_and_series.split(" l ")[1]
-	@meta_1 = page.search("td.pwrap_bgtit/table[2]").search("tr/td[1]").text.strip
-	meta_1_cleaned = clean_meta_1(@meta_1)
-	# meta_2 includes authors, publisher, and pub_date
-	if page.search("div.p_goodstd03").first
-		@meta_2 = page.search("div.p_goodstd03").first.text.strip
-		meta_2_cleaned = clean_meta_2(@meta_2)
-	else
-		meta_2_cleaned = clean_meta_2("")
-	end
+	@title_primary = page.search("div.mod.type02_p002.clearfix").search("h1").text.strip
+	@title_secondary = page.search("div.mod.type02_p002.clearfix").search("h2").text.strip
+	@authors = page.search("//div[@class='type02_p003 clearfix']/ul/li[1]/a[1]").text.strip
+	@meta_1 = page.search("//div[@class='type02_p003 clearfix']/ul").text.strip.gsub('已追蹤作者：[ 修改 ]
 
 
-	@cover_image = page.image_with(src: /cover/)
+
+確定
+取消
+    ', '')
+	@description = page.search("//div[@class='bd']/div[@class='content']").text.strip
+	@meta_2 = page.search("//div[@class='mod_b type02_m058 clearfix']/div[@class='bd']").text.strip
+	
+
+	@cover_image = page.search("img.cover.M201106_0_getTakelook_P00a400020052_image_wrap")[0]['src']
 
 
-	puts @current_page, @title_and_subtitle, @series, @authors, @publisher, @pub_date, @original_title
-	puts @binding, @dimension, @weight, @isbn
+	puts @current_page, @title_primary, @title_secondary, @authors, @meta_1, @meta_2, @description
 	puts @cover_image
 	puts "===================================="
-
-	if results_returned? == true
-		write_to_csv('success')
-	else
-		write_to_csv('error')
-	end
 
 end
 

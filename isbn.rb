@@ -1,6 +1,6 @@
+require 'bundler/setup' # Need this since we want to refer lisbn gem from gemfile
 require 'lisbn'
 require 'isbn/tools'
-require 'json'
 require 'csv'
 
 @dataset = []

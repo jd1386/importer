@@ -1,8 +1,9 @@
 <<-COMMENT
 
 Aladin:
-	어린이: CID=1108
 	유아: CID=13789
+	어린이: CID=1108
+	청소년: CID=1137
 
 COMMENT
 
@@ -30,7 +31,7 @@ def clean_meta_1(meta_1)
 		end
 	else
 		puts "ERROR FOUND! - Meta 1".red
-		return nil
+		return "error"
 	end
 
 
@@ -53,20 +54,21 @@ def clean_meta_2(meta_2)
 		@isbn = splitted[size - 1].gsub("ISBN : ", "")
 	else
 		puts "ERROR FOUND! - Meta 2".red
-		return nil
+		return "error"
 	end
 end
 
 def results_returned?
-	!clean_meta_1(@meta_1).nil? && !clean_meta_2(@meta_2).nil?
-
+	true if clean_meta_1(@meta_1) != 'error' && clean_meta_2(@meta_2) != 'error'
 end
 
 def write_to_csv(results)
-	CSV.open("meta_results.csv", "a") do |csv|
-		if results == 'error'
+	if results == 'error'
+		CSV.open("meta_results.csv", "a") do |csv|
 			csv << ['ERROR']
-		else
+		end
+	else
+		CSV.open("meta_results.csv", "a") do |csv|
 			csv << [
 				@current_page,
 				@isbn,
@@ -106,23 +108,16 @@ pages.each_with_index do |page, index|
 	title_subtitle_and_series = page.search("td.pwrap_bgtit").search("table[1]").text.strip
 	@title_and_subtitle = title_subtitle_and_series.split(" l ")[0]
 	@series = title_subtitle_and_series.split(" l ")[1]
-
-
 	@meta_1 = page.search("td.pwrap_bgtit/table[2]").search("tr/td[1]").text.strip
 	meta_1_cleaned = clean_meta_1(@meta_1)
-
-	if meta_1_cleaned.nil?
-		next
-	end
-
-
 	# meta_2 includes authors, publisher, and pub_date
-	@meta_2 = page.search("div.p_goodstd03").first.text.strip
-	meta_2_cleaned = clean_meta_2(@meta_2)
-
-	if meta_2_cleaned.nil?
-		next
+	if page.search("div.p_goodstd03").first
+		@meta_2 = page.search("div.p_goodstd03").first.text.strip
+		meta_2_cleaned = clean_meta_2(@meta_2)
+	else
+		meta_2_cleaned = clean_meta_2("")
 	end
+
 
 	@cover_image = page.image_with(src: /cover/)
 
@@ -130,9 +125,9 @@ pages.each_with_index do |page, index|
 	puts @current_page, @title_and_subtitle, @series, @authors, @publisher, @pub_date, @original_title
 	puts @binding, @dimension, @weight, @isbn
 	puts @cover_image
-	puts "========="
+	puts "===================================="
 
-	if results_returned?
+	if results_returned? == true
 		write_to_csv('success')
 	else
 		write_to_csv('error')

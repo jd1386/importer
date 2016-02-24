@@ -58,7 +58,6 @@ def join_related_companies
 
 		pair_all.each do |key, value|
 			row << [key, value.join(', ')]
-			puts row
 		end
 
 	end

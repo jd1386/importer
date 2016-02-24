@@ -11,51 +11,31 @@ require 'mechanize'
 require 'awesome_print'
 require 'csv'
 require 'colorize'
+require 'chronic'
 
 
 def clean_meta_1(meta_1)
-	splitted = meta_1.split(" | ")
-	size = splitted.size
+	# meta_1 is now an array
 
-	if splitted.any?
-		if splitted[size - 1].include? '원제'
-			@original_title = splitted[size - 1].gsub('원제 ', '')
-			@pub_date = splitted[size - 2]
-			@publisher = splitted[size - 3]
-			@authors = splitted[0..size-4].join(', ')
-		else
-			@original_title = ''
-			@pub_date = splitted[size - 1]
-			@publisher = splitted[size - 2]
-			@authors = splitted[0..size-3].join(', ')
-		end
-	else
-		puts "ERROR FOUND! - Meta 1".red
-		return "error"
-	end
+	# clean up
+	meta_1 = meta_1.delete_if { |e| e == "" }.delete_if { |e| !e.include? "：" }
 
+	meta_1.each {|e| e.split }.slice(1...4).join(" ").gsub(/\s+/, ' ')
+	# ap meta_1
+	# ap meta_1.size
 
-	return @authors, @publisher, @pub_date, @original_title
+	# pub_date_and_language = meta_1.last
+	# ap @pub_date = pub_date_and_language.split("語言")[0].gsub("出版日期：", "")
+	# ap @language = pub_date_and_language.split("語言")[1].gsub('：', '')
+
 end
 
 def clean_meta_2(meta_2)
-	splitted = meta_2.split(" | ")
-	size = splitted.size
+	meta_2.gsub!("：", ": ")
+end
 
-	if splitted.any?
-		if size == 4
-			@binding = ''
-		elsif size == 5
-			@binding = splitted[0]
-		end
-		@pages = splitted[size - 4]
-		@dimension = splitted[size - 3]
-		@weight = splitted[size - 2]
-		@isbn = splitted[size - 1].gsub("ISBN : ", "")
-	else
-		puts "ERROR FOUND! - Meta 2".red
-		return "error"
-	end
+def clean_authors(raw_authors)
+	raw_authors.gsub('已追蹤作者：[ 修改 ] 確定 取消 ', '').gsub('    新功能介紹','').gsub('作者： ', '')
 end
 
 def results_returned?
@@ -70,18 +50,17 @@ def write_to_csv(results)
 	else
 		CSV.open("meta_results.csv", "a") do |csv|
 			csv << [
-				@current_page,
+				@current_page, 
 				@isbn,
-				@title_and_subtitle,
+				@title_primary, 
+				@title_secondary, 
 				@authors,
-				@publisher,
-				@pub_date,
-				@original_title,
+				@description,
 				@cover_image,
-				@series,
-				@binding,
-				@dimension,
-				@weight
+				@meta_1, 
+				@meta_2,
+				@pub_date,
+				@language
 			]
 		end
 	end
@@ -106,24 +85,35 @@ pages.each_with_index do |page, index|
 
 	@current_page = page.uri.to_s
 	@title_primary = page.search("div.mod.type02_p002.clearfix").search("h1").text.strip
-	@title_secondary = page.search("div.mod.type02_p002.clearfix").search("h2").text.strip
-	@authors = page.search("//div[@class='type02_p003 clearfix']/ul/li[1]/a[1]").text.strip
-	@meta_1 = page.search("//div[@class='type02_p003 clearfix']/ul").text.strip.gsub('已追蹤作者：[ 修改 ]
+	@title_secondary = page.search("div.mod.type02_p002.clearfix").search("h2").text.strip.gsub("\n", "")
 
+	@authors = page.at("//div[@class='type02_p003 clearfix']/ul/li[1]").text.strip.gsub(/\s+/, ' ')
+	@authors = clean_authors(@authors)
 
+	@meta_1 = page.search("//div[@class='type02_p003 clearfix']//li").text.strip.split("\n")
+	@meta_1 = clean_meta_1(@meta_1)
 
-確定
-取消
-    ', '')
-	@description = page.search("//div[@class='bd']/div[@class='content']").text.strip
-	@meta_2 = page.search("//div[@class='mod_b type02_m058 clearfix']/div[@class='bd']").text.strip
-	
+	@meta_2 = page.search("//div[@class='mod_b type02_m058 clearfix']/div[@class='bd']").text.strip.gsub(/\s+/, ' ')
+	@meta_2 = clean_meta_2(@meta_2)
 
+	@isbn = page.search("//div[@class='mod_b type02_m058 clearfix']/div[@class='bd']/ul[1]/li[1]").text.strip.match(/978\d{10}/)
+
+	@description = page.search("//div[@class='bd']/div[@class='content']").text.strip.gsub(/\s+/, ' ')
 	@cover_image = page.search("img.cover.M201106_0_getTakelook_P00a400020052_image_wrap")[0]['src']
 
 
-	puts @current_page, @title_primary, @title_secondary, @authors, @meta_1, @meta_2, @description
-	puts @cover_image
+	puts @current_page
+	puts @isbn
+	#puts @title_primary 
+	#puts @title_secondary 
+	#puts @authors
+	#puts @meta_1
+	#puts @meta_2
+	#puts @description
+	#puts @cover_image
+
+	write_to_csv('success')
+
 	puts "===================================="
 
 end

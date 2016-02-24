@@ -23,8 +23,8 @@ CATEGORIES
 File.open('/Users/jungdolee/projects/importer/data/page-generate-results.txt', 'w') do |f|
 	#f.puts first_page
 
-	(1..620).each do |page|
-		f.puts "http://www.books.com.tw/web/books_bmidm_#{category_num}/?o=1&v=1&page=1"
+	(1..9).each do |page|
+		f.puts "http://www.books.com.tw/web/books_bmidm_1413/?o=1&v=1&page=#{page}"
 	end
 end
 puts "Done! The results saved to data/page-generate-results.txt"

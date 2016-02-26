@@ -50,14 +50,14 @@ def write_to_csv(results)
 	else
 		CSV.open("meta_results.csv", "a") do |csv|
 			csv << [
-				@current_page, 
+				@current_page,
 				@isbn,
-				@title_primary, 
-				@title_secondary, 
+				@title_primary,
+				@title_secondary,
 				@authors,
 				@description,
 				@cover_image,
-				@meta_1, 
+				@meta_1,
 				@meta_2,
 				@pub_date,
 				@language
@@ -104,8 +104,8 @@ pages.each_with_index do |page, index|
 
 	puts @current_page
 	puts @isbn
-	#puts @title_primary 
-	#puts @title_secondary 
+	#puts @title_primary
+	#puts @title_secondary
 	#puts @authors
 	#puts @meta_1
 	#puts @meta_2

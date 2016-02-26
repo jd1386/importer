@@ -51,7 +51,7 @@ def handle_results(page, index)
 	begin
 		connect_and_parse(page, index)
 	rescue Mechanize::ChunkedTerminationError => e
-		puts "ERROR OCCURRED: Mechanize::ChunkedTerminationError".red
+		#puts "ERROR OCCURRED: Mechanize::ChunkedTerminationError".red
 		connect_and_parse(page, index)
 	end
 end

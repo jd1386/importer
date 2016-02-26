@@ -20,11 +20,16 @@ pages.each do |page|
 	# divs.each do |div|
 	# 	ap div.find_elements(:css, 'li').map(&:text)
 	# end
-	divs = driver.find_elements(:class, 'div.a-row.a-spacing-small')
+	
+	links =	driver.find_elements(:css, 'a.a-link-normal.s-access-detail-page.a-text-normal')
+	
 	# titles = driver.find_elements(:class, 'a-size-medium')
-	# links = driver.find_elements(:class, 'a-link-normal')
+	links.each do |link|
+		puts link.attribute('href')
+	end
 
-	ap divs.map(&:text)
+	ap links.map(&:text)
+
 
 
 end

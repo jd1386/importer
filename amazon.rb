@@ -4,6 +4,7 @@ require 'awesome_print'
 require 'csv'
 require 'json'
 require 'retriable'
+require 'colorize'
 
 def which_item
 		if @parsed_response["ItemLookupResponse"]["Items"]["Item"].is_a? Array
@@ -80,49 +81,9 @@ def categories
 	end
 end
 
-Dotenv.load
+def parse(isbn, index, response)
+	@parsed_response = response.to_h	
 
-# Configuration
-@request = Vacuum.new('JP')
-@request.configure(
-	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-	associate_tag: ENV['AWS_ASSOCIATE_TAG']
-)
-
-
-# Load isbns to look up
-isbns = []
-
-File.readlines('data/amazon_isbns.txt').each do |line|
-	isbns << line.rstrip
-end
-
-@query_count = 0
-@isbns_size = isbns.size
-
-
-# Query each isbn
-isbns.each_with_index do |isbn, index|
-	Retriable.retriable tries: 5, base_interval: 2 do
-		@response = @request.item_lookup(
-		  query: {
-		    'IdType' => 'ISBN',
-		    'ItemId' => isbn,
-		    'SearchIndex' => 'Books',
-		    'ResponseGroup' => 'Large',
-		    'MerchantId' => 'Amazon'
-		  },
-		  persistent: true
-		)
-	end
-
-	print isbn
-	
-
-	@parsed_response = @response.to_h	
-
-	starting_time_per_item = Time.now.to_f
 
 	# If error
 	if @parsed_response["ItemLookupResponse"]["Items"]["Request"].has_key?("Errors")
@@ -318,16 +279,61 @@ isbns.each_with_index do |isbn, index|
 			csv << [ @ean, @title, @company, @author, @creator_and_role, @pub_date, @binding, @number_of_pages, @language, @book_page_url, @cover_image_url, @categories, @book_description ]
 		end
 
-	ending_time_per_item = Time.now.to_f
-	elapsed_time_per_item = (ending_time_per_item - starting_time_per_item) * 1000
 	remaining_items = @isbns_size - index - 1
 
-	remaining_time = elapsed_time_per_item * remaining_items
-
 	@query_count += 1
-	print " ... OK \t #{@query_count} / #{@isbns_size} \t #{remaining_time.round(1)} sec remaining ... \t #{remaining_items} items remaining.\n"
+	print " ... OK \t #{@query_count} / #{@isbns_size} \t #{remaining_items} items remaining.\n"
 	end
+end
 
+Dotenv.load
+
+# Configuration
+@request = Vacuum.new('CN')
+@request.configure(
+	aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+	aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+	associate_tag: ENV['AWS_ASSOCIATE_TAG']
+)
+
+
+# Load isbns to look up
+isbns = []
+
+File.readlines('data/amazon_isbns.txt').each do |line|
+	isbns << line.rstrip
+end
+
+@query_count = 0
+@isbns_size = isbns.size
+
+
+# Query each isbn
+isbns.each_with_index do |isbn, index|
+	begin
+		Retriable.retriable on: Excon::Errors::ServiceUnavailable, tries: 3, base_interval: 1 do
+			response = @request.item_lookup(
+			  query: {
+			    'IdType' => 'ISBN',
+			    'ItemId' => isbn,
+			    'SearchIndex' => 'Books',
+			    'ResponseGroup' => 'Large',
+			    'MerchantId' => 'Amazon'
+			  },
+			  persistent: true
+			)
+			print isbn
+			parse(isbn, index, response)
+			sleep 1
+		end
+	rescue
+		CSV.open("data/amazon_results.csv", "a") do |csv|
+			csv << [ isbn, 'Error' ]
+		end
+		print "#{isbn} ... ERROR\n".red
+		next
+	end
+	
 end # End File.readlines
 
 puts "All done"

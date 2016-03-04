@@ -79,9 +79,9 @@ pages.each_slice(10).with_index do |batch, batch_index|
 	end
 
 	# Join threads
-		Thread.list.each do |t|
-  		t.join if t != Thread.current
-		end
+	Thread.list.each do |t|
+		t.join if t != Thread.current
+	end
 
 	# Sort container by index value, otherwise it'll mess up order
 	@container.sort_by! { |e| e[0] }

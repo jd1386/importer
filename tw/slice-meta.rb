@@ -72,24 +72,13 @@ meta_all = []
 File.readlines('/Users/jungdolee/projects/importer/data/to_hash_source.txt', encoding: 'UTF-8').each do |line|
  ## Pre-process
 
-  new_line = line.gsub("作者 : ", " || Title=> ")
-  new_line = new_line.gsub("Subtítulo : ", " || Subtitle=> ") 
-  new_line = new_line.gsub("Autor : ", " || Authors=> ") 
-  new_line = new_line.gsub("Ilustração : ", " || Illustrator=> ") 
-  new_line = new_line.gsub("Adaptação : ", " || Adaptation=> ") 
-  new_line = new_line.gsub("Organizador : ", " || Organizor=> ") 
-  new_line = new_line.gsub("Seleção : ", " || Selection=> ") 
-  new_line = new_line.gsub("  Editora : ", " || Publisher=> ") 
-  new_line = new_line.gsub("Tradução : ", " || Translator=> ") 
-  new_line = new_line.gsub("Edição : ", " || Edition=> ") 
-  new_line = new_line.gsub("Ano : ", " || Pub_year=> ") 
-  new_line = new_line.gsub("Idioma : ", " || Language=> ") 
-  new_line = new_line.gsub("Especificações : ", " || Binding=> ") 
-  new_line = new_line.gsub(" | ", " || Pages=> ") 
-  new_line = new_line.gsub("ISBN : ", " || ISBN=> ") 
-  new_line = new_line.gsub("Peso : ", " || Weight=> ") 
-  new_line = new_line.gsub("Dimensões : ", " || Dimension=> ") 
-  new_line = new_line.gsub("Coleção :", " || Collection=> ") 
+  new_line = line.gsub(" 作者： ", " || Author:")
+  new_line = new_line.gsub("原文作者：", " || Original_Author:") 
+  new_line = new_line.gsub("譯者：", " || Translator:") 
+  new_line = new_line.gsub("繪者：", " || Illustrator:") 
+  new_line = new_line.gsub("出版社：", " || Publisher:") 
+  new_line = new_line.gsub("出版日期：", " || Pub_date:") 
+  new_line = new_line.gsub("語言：", " || Language:") 
 
   ## Process 
 
@@ -104,14 +93,14 @@ File.readlines('/Users/jungdolee/projects/importer/data/to_hash_source.txt', enc
 
   # After splitted, make a hash with key-value pairs with corresponding values
   splitted_line.each do |e|
-    key = e.split("=> ").first
-    value = e.split("=> ").last.chomp('').rstrip
+    key = e.split(":").first
+    value = e.split(":").last.strip.gsub("   ", "")
     hash[key] = value
   end
 
   # Try to convert/clean each value if needed.
-  hash["Pub_date"] = format_pub_date(hash["Pub_date"]) unless hash["Pub_date"].nil?
-  hash["Pub_date"] = reformat_pub_date(hash["Pub_date"]) unless hash["Pub_date"].nil?
+  # hash["Pub_date"] = format_pub_date(hash["Pub_date"]) unless hash["Pub_date"].nil?
+  # hash["Pub_date"] = reformat_pub_date(hash["Pub_date"]) unless hash["Pub_date"].nil?
 
 
 
@@ -132,13 +121,13 @@ puts "\nSuccess! Converted #{ meta_all.size } lines"
 ## Save meta_all to CSV file
 CSV.open("/Users/jungdolee/projects/importer/data/to_hash_results.csv", "w") do |csv|
   # Write header
-  csv << [ "Title", "Subtitle", "Authors", "Illustrator", "Adaptation", "Organizor", "Selection", "Publisher", "Translator", "Edition", "Pub_year", "Language", "ISBN", "Pages", "Binding", "Weight", "Dimension", "Collection" ]
+  csv << [ "Author", "Original_Author", "Translator", "Illustrator", "Publisher", "Pub_date", "Language" ]
 
   # Write rows
   i = 0
 
   (0...meta_all.length).each do 
-    csv << meta_all[i][0].values_at( "Title", "Subtitle", "Authors", "Illustrator", "Adaptation", "Organizor", "Selection", "Publisher", "Translator", "Edition", "Pub_year", "Language", "ISBN", "Pages", "Binding", "Weight", "Dimension", "Collection" )
+    csv << meta_all[i][0].values_at( "Author", "Original_Author", "Translator", "Illustrator", "Publisher", "Pub_date", "Language" )
     i += 1
   end
 
